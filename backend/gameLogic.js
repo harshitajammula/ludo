@@ -20,12 +20,12 @@ class LudoGame {
         this.HOME_STRETCH_LENGTH = 5; // Safe zone squares (5 per player)
 
         // Safe positions on the board (where tokens can't be captured) - Star positions
-        this.SAFE_POSITIONS = [0, 14, 22, 27, 35, 40, 48];
+        this.SAFE_POSITIONS = [0, 13, 21, 26, 34, 39, 47];
 
         // Starting positions for each color
         this.START_POSITIONS = {
             red: 0,      // Pink player
-            green: 14,
+            green: 13,   // Green player - corrected
             yellow: 27,
             blue: 40
         };
@@ -33,7 +33,7 @@ class LudoGame {
         // Home entrance positions (position before entering home stretch)
         this.HOME_ENTRANCE = {
             red: 51,     // After 51, enters home stretch at 52
-            green: 13,   // After 13, enters home stretch at 58
+            green: 12,   // After 12, enters home stretch at 57
             yellow: 26,  // After 26, enters home stretch at 63
             blue: 39     // After 39, enters home stretch at 68
         };

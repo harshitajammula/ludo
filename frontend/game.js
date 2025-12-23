@@ -30,7 +30,7 @@ const BOARD_CONFIG = {
     pathBorder: '#34495E',
     safeColor: '#ECF0F1',
     homeColor: '#FFFFFF',
-    debugMode: true // Show position numbers on squares
+    debugMode: false // Hide position numbers for clean gameplay
 };
 
 /**
@@ -100,14 +100,14 @@ function getPathPositions(cellSize) {
     pathPositions[55] = { x: cellSize * 7.5, y: cellSize * 9.5 };  // Red home 4
     pathPositions[56] = { x: cellSize * 7.5, y: cellSize * 8.5 };  // Red home 5 (last before center)
 
-    pathPositions[57] = { x: cellSize * 6.5, y: cellSize * 14.5 }; // Not used
+    pathPositions[57] = { x: cellSize * 1.5, y: cellSize * 7.5 }; // Green home 1
 
     // GREEN HOME STRETCH (58-62) - Positions after 13, going toward center
-    pathPositions[58] = { x: cellSize * 1.5, y: cellSize * 7.5 }; // Green home 1
-    pathPositions[59] = { x: cellSize * 2.5, y: cellSize * 7.5 }; // Green home 2
-    pathPositions[60] = { x: cellSize * 3.5, y: cellSize * 7.5 }; // Green home 3
-    pathPositions[61] = { x: cellSize * 4.5, y: cellSize * 7.5 }; // Green home 4
-    pathPositions[62] = { x: cellSize * 5.5, y: cellSize * 7.5 }; // Green home 5 (last before center)
+    pathPositions[58] = { x: cellSize * 2.5, y: cellSize * 7.5 }; // Green home 2
+    pathPositions[59] = { x: cellSize * 3.5, y: cellSize * 7.5 }; // Green home 3
+    pathPositions[60] = { x: cellSize * 4.5, y: cellSize * 7.5 }; // Green home 4
+    pathPositions[61] = { x: cellSize * 5.5, y: cellSize * 7.5 }; // Green home 5 (last before center)
+    pathPositions[62] = { x: cellSize * 6.5, y: cellSize * 7.5 }; // Not used
 
     // YELLOW HOME STRETCH (63-67) - Positions after 26, going toward center
     pathPositions[63] = { x: cellSize * 7.5, y: cellSize * 1.5 }; // Yellow home 1
@@ -204,11 +204,14 @@ function drawClassicBoard(scale) {
     drawHomeStretch(scale, 'red', 'bottom');
     drawHomeStretch(scale, 'blue', 'left');
     drawCenterTriangle(scale);
-    drawSafeZones(scale);
 
+    // Draw position numbers first (if debug mode)
     if (BOARD_CONFIG.debugMode) {
         drawPositionNumbers(scale);
     }
+
+    // Draw stars AFTER position numbers so they appear on top
+    drawSafeZones(scale);
 }
 
 /**
@@ -332,11 +335,11 @@ function drawHomeStretch(scale, color, direction) {
             { x: cellSize * 7.5, y: cellSize * 8.5 }   // 56
         ],
         green: [
-            { x: cellSize * 1.5, y: cellSize * 7.5 }, // 58
-            { x: cellSize * 2.5, y: cellSize * 7.5 }, // 59
-            { x: cellSize * 3.5, y: cellSize * 7.5 }, // 60
-            { x: cellSize * 4.5, y: cellSize * 7.5 }, // 61
-            { x: cellSize * 5.5, y: cellSize * 7.5 }  // 62
+            { x: cellSize * 1.5, y: cellSize * 7.5 }, // 57
+            { x: cellSize * 2.5, y: cellSize * 7.5 }, // 58
+            { x: cellSize * 3.5, y: cellSize * 7.5 }, // 59
+            { x: cellSize * 4.5, y: cellSize * 7.5 }, // 60
+            { x: cellSize * 5.5, y: cellSize * 7.5 }  // 61
         ],
         yellow: [
             { x: cellSize * 7.5, y: cellSize * 1.5 }, // 63
@@ -415,14 +418,14 @@ function drawCenterTriangle(scale) {
 /**
  * Draw safe zones (stars)
  * Stars mark safe positions where tokens cannot be captured
- * Safe positions: 0, 14, 22, 27, 35, 40, 48
+ * Safe positions: 0, 13, 21, 26, 34, 39, 47
  */
 function drawSafeZones(scale) {
     const cellSize = BOARD_CONFIG.cellSize * scale;
     const pathPositions = getPathPositions(cellSize);
 
     // Safe positions based on user's board layout
-    const safePositionIndices = [0, 14, 22, 27, 35, 40, 48];
+    const safePositionIndices = [0, 13, 21, 26, 34, 39, 47];
 
     safePositionIndices.forEach(position => {
         const pos = pathPositions[position];

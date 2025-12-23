@@ -4,7 +4,7 @@
  */
 
 // DEBUG MODE - Set to false for production
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 /**
  * Initialize the application
