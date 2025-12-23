@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description"
+    content="Play Ludo online with friends in real-time. Multiplayer Ludo game for phone, tablet, and desktop.">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>🎲 Ludo Game - Play with Friends Online</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Main Container -->
+  <div id="app">
+
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="screen active">
+      <div class="welcome-container">
+        <div class="logo-section">
+          <div class="logo">🎲</div>
+          <h1 class="game-title">Ludo Online</h1>
+          <p class="game-subtitle">Play with friends in real-time</p>
+        </div>
+
+        <div class="welcome-form">
+          <div class="input-group">
+            <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off">
+          </div>
+
+          <div class="button-group">
+            <button id="createRoomBtn" class="btn btn-primary">
+              <span class="btn-icon">➕</span>
+              Create Room
+            </button>
+            <button id="joinRoomBtn" class="btn btn-secondary">
+              <span class="btn-icon">🚪</span>
+              Join Room
+            </button>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <span class="feature-icon">⚡</span>
+            <span>Real-time Multiplayer</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">💬</span>
+            <span>Live Chat</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">📱</span>
+            <span>Mobile Friendly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Join Room Modal -->
+    <div id="joinRoomModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Join Room</h2>
+          <button class="close-btn" id="closeJoinModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" id="roomCodeInput" placeholder="Enter room code" maxlength="6" autocomplete="off">
+          </div>
+          <button id="confirmJoinBtn" class="btn btn-primary btn-block">Join Game</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lobby Screen -->
+    <div id="lobbyScreen" class="screen">
+      <div class="lobby-container">
+        <div class="lobby-header">
+          <h2>Game Lobby</h2>
+          <button id="leaveLobbyBtn" class="btn btn-danger btn-sm">Leave</button>
+        </div>
+
+        <div class="room-info">
+          <div class="room-code-display">
+            <span class="label">Room Code:</span>
+            <span id="roomCodeDisplay" class="room-code">------</span>
+            <button id="copyRoomCodeBtn" class="btn btn-icon-only" title="Copy room code">📋</button>
+          </div>
+          <p class="room-hint">Share this code with your friends!</p>
+        </div>
+
+        <div class="players-section">
+          <h3>Players (<span id="playerCount">0</span>/4)</h3>
+          <div id="playersList" class="players-list"></div>
+        </div>
+
+        <button id="startGameBtn" class="btn btn-primary btn-block" disabled>
+          Start Game
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+      <div class="game-layout">
+
+        <!-- Game Header -->
+        <div class="game-header">
+          <div class="current-player-info">
+            <span id="currentPlayerName">Waiting...</span>
+            <span id="currentPlayerIndicator" class="turn-indicator"></span>
+          </div>
+          <button id="leaveGameBtn" class="btn btn-danger btn-sm">Leave Game</button>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-main">
+
+          <!-- Game Board -->
+          <div class="game-board-container">
+            <canvas id="gameBoard" width="600" height="600"></canvas>
+
+            <!-- Dice Section -->
+            <div class="dice-section">
+              <div id="diceDisplay" class="dice">
+                <span id="diceValue">?</span>
+              </div>
+              <button id="rollDiceBtn" class="btn btn-primary" disabled>Roll Dice</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Floating Action Buttons -->
+        <div class="floating-buttons">
+          <button id="chatBtn" class="fab" title="Chat">💬</button>
+          <button id="emojiBtn" class="fab" title="Send Emoji">😊</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>🎉 Game Over!</h2>
+        </div>
+        <div class="modal-body game-over-body">
+          <div class="winner-display">
+            <div id="winnerAvatar" class="winner-avatar"></div>
+            <h3 id="winnerName">Winner</h3>
+            <p>Congratulations! 🏆</p>
+          </div>
+          <button id="backToLobbyBtn" class="btn btn-primary btn-block">Back to Lobby</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>💬 Chat</h2>
+          <button class="close-btn" id="closeChatModal">&times;</button>
+        </div>
+        <div class="modal-body chat-modal-body">
+          <div id="chatMessages" class="chat-messages"></div>
+          <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="Type a message..." maxlength="200" autocomplete="off">
+            <button id="sendChatBtn" class="btn btn-icon-only">📤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emoji Modal -->
+    <div id="emojiModal" class="modal">
+      <div class="modal-content emoji-modal-content">
+        <div class="modal-header">
+          <h2>😊 Send Emoji</h2>
+          <button class="close-btn" id="closeEmojiModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="emoji-picker">
+            <button class="emoji-btn" data-emoji="😀">😀</button>
+            <button class="emoji-btn" data-emoji="😂">😂</button>
+            <button class="emoji-btn" data-emoji="😎">😎</button>
+            <button class="emoji-btn" data-emoji="🎉">🎉</button>
+            <button class="emoji-btn" data-emoji="👍">👍</button>
+            <button class="emoji-btn" data-emoji="❤️">❤️</button>
+            <button class="emoji-btn" data-emoji="🔥">🔥</button>
+            <button class="emoji-btn" data-emoji="😱">😱</button>
+            <button class="emoji-btn" data-emoji="😍">😍</button>
+            <button class="emoji-btn" data-emoji="🤔">🤔</button>
+            <button class="emoji-btn" data-emoji="😢">😢</button>
+            <button class="emoji-btn" data-emoji="😡">😡</button>
+            <button class="emoji-btn" data-emoji="🎮">🎮</button>
+            <button class="emoji-btn" data-emoji="🎲">🎲</button>
+            <button class="emoji-btn" data-emoji="⭐">⭐</button>
+            <button class="emoji-btn" data-emoji="💯">💯</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="toast"></div>
+
+    <!-- Emoji Animation Container -->
+    <div id="emojiAnimations" class="emoji-animations"></div>
+
+  </div>
+
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Game Scripts -->
+  <script src="socket-client.js"></script>
+  <script src="ui.js"></script>
+  <script src="game.js"></script>
+
+  <script>
+    // Initialize the app
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('🎲 Ludo Game Loaded!');
+      initializeApp();
+    });
+  </script>
+</body>
+
+</html>

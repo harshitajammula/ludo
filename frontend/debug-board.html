@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludo Board - Position Editor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .board-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(15, 50px);
+            grid-template-rows: repeat(15, 50px);
+            gap: 2px;
+            background: #2c3e50;
+            padding: 2px;
+        }
+
+        .cell {
+            background: white;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .home-red {
+            background: #ffcccc;
+        }
+
+        .home-blue {
+            background: #cce5ff;
+        }
+
+        .home-green {
+            background: #ccffcc;
+        }
+
+        .home-yellow {
+            background: #ffffcc;
+        }
+
+        .path {
+            background: #f0f0f0;
+        }
+
+        .center {
+            background: linear-gradient(45deg, #e74c3c 25%, #27ae60 25%, #27ae60 50%, #f1c40f 50%, #f1c40f 75%, #3498db 75%);
+        }
+
+        .empty {
+            background: #ecf0f1;
+            border: none;
+        }
+
+        input {
+            width: 40px;
+            height: 30px;
+            border: 2px solid #2c3e50;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            background: #ffffcc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #27ae60;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #229954;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #2c3e50;
+            color: #00ff00;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="board-container">
+        <h1>🎲 Ludo Board - Position Editor</h1>
+
+        <div class="controls">
+            <button class="btn" onclick="exportCode()">📋 Export JavaScript Code</button>
+        </div>
+
+        <div id="board" class="board"></div>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const inputs = {};
+
+        for (let row = 0; row < 15; row++) {
+            for (let col = 0; col < 15; col++) {
+                const cell = document.createElement('div');
+                const cellType = getCellType(row, col);
+                cell.className = 'cell ' + cellType.class;
+
+                if (cellType.editable) {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 2;
+                    input.dataset.row = row;
+                    input.dataset.col = col;
+                    inputs[`${row},${col}`] = input;
+                    cell.appendChild(input);
+                }
+
+                board.appendChild(cell);
+            }
+        }
+
+        function getCellType(row, col) {
+            // Home bases
+            if (row >= 0 && row < 6 && col >= 0 && col < 6) return { class: 'home-green', editable: false };
+            if (row >= 0 && row < 6 && col >= 9 && col < 15) return { class: 'home-yellow', editable: false };
+            if (row >= 9 && row < 15 && col >= 0 && col < 6) return { class: 'home-red', editable: false };
+            if (row >= 9 && row < 15 && col >= 9 && col < 15) return { class: 'home-blue', editable: false };
+            if (row >= 6 && row < 9 && col >= 6 && col < 9) return { class: 'center', editable: false };
+
+            // All other cells are editable path cells
+            if ((row >= 6 && row < 9) || (col >= 6 && col < 9)) {
+                return { class: 'path', editable: true };
+            }
+
+            return { class: 'empty', editable: false };
+        }
+
+        function exportCode() {
+            const positions = [];
+
+            for (const key in inputs) {
+                const input = inputs[key];
+                const value = input.value.trim();
+                if (value !== '') {
+                    const [row, col] = key.split(',');
+                    positions.push({ row: parseInt(row), col: parseInt(col), pos: parseInt(value) });
+                }
+            }
+
+            positions.sort((a, b) => a.pos - b.pos);
+
+            let code = '// Position mapping for getBoardPosition function\n';
+            code += '// Copy this into game.js\n\n';
+            code += 'const pathPositions = [];\n\n';
+
+            positions.forEach(({ row, col, pos }) => {
+                code += `pathPositions[${pos}] = { x: cellSize * ${col + 0.5}, y: cellSize * ${row + 0.5} }; // row ${row}, col ${col}\n`;
+            });
+
+            code += '\n// Total positions mapped: ' + positions.length;
+
+            const output = document.getElementById('output');
+            output.textContent = code;
+            output.style.display = 'block';
+
+            console.log('Code exported!', positions.length, 'positions');
+        }
+
+        console.log('✅ Position editor loaded! Fill in the numbers and click Export.');
+    </script>
+</body>
+
+</html>
