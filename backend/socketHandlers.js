@@ -12,10 +12,10 @@ function setupSocketHandlers(io) {
         /**
          * Create a new game room
          */
-        socket.on('createRoom', ({ playerName }, callback) => {
+        socket.on('createRoom', ({ playerName, roomName }, callback) => {
             try {
                 const playerId = socket.id;
-                const { success, roomId, game } = gameStateManager.createRoom();
+                const { success, roomId, game } = gameStateManager.createRoom(roomName || `${playerName}'s Room`);
 
                 if (success) {
                     const joinResult = gameStateManager.joinRoom(roomId, playerId, playerName, socket.id);
@@ -36,6 +36,9 @@ function setupSocketHandlers(io) {
                             player: joinResult.player,
                             gameState: game.getGameState()
                         });
+
+                        // Broadcast updated rooms list to all clients
+                        io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
                     } else {
                         callback(joinResult);
                     }
@@ -59,30 +62,81 @@ function setupSocketHandlers(io) {
                     return callback({ success: false, error: 'Room not found' });
                 }
 
-                const result = gameStateManager.joinRoom(roomId, playerId, playerName, socket.id);
+                const game = gameStateManager.getRoom(roomId);
 
-                if (result.success) {
-                    socket.join(roomId);
-                    const game = gameStateManager.getRoom(roomId);
+                // If game has started or room is full, join as spectator
+                if (game.gameStarted || game.players.length >= 4) {
+                    const spectatorResult = gameStateManager.addSpectator(roomId, playerId, playerName, socket.id);
 
-                    callback({
-                        success: true,
-                        roomId,
-                        playerId,
-                        player: result.player,
-                        gameState: game.getGameState()
-                    });
+                    if (spectatorResult.success) {
+                        socket.join(roomId);
 
-                    // Notify all players in room
-                    io.to(roomId).emit('playerJoined', {
-                        player: result.player,
-                        gameState: game.getGameState()
-                    });
+                        callback({
+                            success: true,
+                            roomId,
+                            playerId,
+                            isSpectator: true,
+                            spectatorName: playerName,
+                            gameState: game.getGameState()
+                        });
+
+                        // Notify room about new spectator
+                        io.to(roomId).emit('spectatorJoined', {
+                            spectatorName: playerName,
+                            spectatorCount: gameStateManager.getRoomSpectators(roomId).length
+                        });
+
+                        // Broadcast updated rooms list
+                        io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
+                    } else {
+                        callback(spectatorResult);
+                    }
                 } else {
-                    callback(result);
+                    // Join as player
+                    const result = gameStateManager.joinRoom(roomId, playerId, playerName, socket.id);
+
+                    if (result.success) {
+                        socket.join(roomId);
+
+                        callback({
+                            success: true,
+                            roomId,
+                            playerId,
+                            isSpectator: false,
+                            player: result.player,
+                            gameState: game.getGameState()
+                        });
+
+                        // Notify all players in room
+                        io.to(roomId).emit('playerJoined', {
+                            player: result.player,
+                            gameState: game.getGameState()
+                        });
+
+                        // Broadcast updated rooms list
+                        io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
+                    } else {
+                        callback(result);
+                    }
                 }
             } catch (error) {
                 console.error('Error joining room:', error);
+                callback({ success: false, error: 'Server error' });
+            }
+        });
+
+        /**
+         * Get list of active rooms
+         */
+        socket.on('getRooms', (callback) => {
+            try {
+                const activeRooms = gameStateManager.getActiveRooms();
+                callback({
+                    success: true,
+                    rooms: activeRooms
+                });
+            } catch (error) {
+                console.error('Error getting rooms:', error);
                 callback({ success: false, error: 'Server error' });
             }
         });
@@ -103,12 +157,18 @@ function setupSocketHandlers(io) {
                 const result = game.startGame();
 
                 if (result.success) {
+                    // Update room status
+                    gameStateManager.updateRoomStatus(roomId, 'in_progress');
+
                     callback({ success: true });
 
                     // Notify all players that game has started
                     io.to(roomId).emit('gameStarted', {
                         gameState: game.getGameState()
                     });
+
+                    // Broadcast updated rooms list
+                    io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
                 } else {
                     callback(result);
                 }

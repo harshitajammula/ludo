@@ -39,10 +39,17 @@
               <span class="btn-icon">➕</span>
               Create Room
             </button>
-            <button id="joinRoomBtn" class="btn btn-secondary">
-              <span class="btn-icon">🚪</span>
-              Join Room
-            </button>
+          </div>
+        </div>
+
+        <!-- Active Rooms List -->
+        <div class="active-rooms-section">
+          <h3 class="rooms-title">🎮 Active Games</h3>
+          <div id="roomsList" class="rooms-list">
+            <div class="loading-rooms">
+              <div class="spinner"></div>
+              <p>Loading rooms...</p>
+            </div>
           </div>
         </div>
 
@@ -59,25 +66,14 @@
             <span class="feature-icon">📱</span>
             <span>Mobile Friendly</span>
           </div>
+          <div class="feature">
+            <span class="feature-icon">👁️</span>
+            <span>Spectator Mode</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Join Room Modal -->
-    <div id="joinRoomModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Join Room</h2>
-          <button class="close-btn" id="closeJoinModal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="input-group">
-            <input type="text" id="roomCodeInput" placeholder="Enter room code" maxlength="6" autocomplete="off">
-          </div>
-          <button id="confirmJoinBtn" class="btn btn-primary btn-block">Join Game</button>
-        </div>
-      </div>
-    </div>
 
     <!-- Lobby Screen -->
     <div id="lobbyScreen" class="screen">
