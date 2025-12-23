@@ -43,6 +43,17 @@ function initializeSocket() {
     socket.on('gameOver', handleGameOver);
     socket.on('chatMessage', handleChatMessage);
     socket.on('emojiReceived', handleEmojiReceived);
+
+    // Rooms list events
+    socket.on('roomsListUpdate', (rooms) => {
+        updateRoomsList(rooms);
+    });
+
+    // Spectator events
+    socket.on('spectatorJoined', (data) => {
+        console.log('Spectator joined:', data);
+        showNotification(`${data.spectatorName} is now spectating`);
+    });
 }
 
 /**
@@ -161,6 +172,14 @@ function joinRoom(roomId, playerName) {
                 currentPlayerId = response.playerId;
                 currentRoomId = response.roomId;
                 currentPlayerName = playerName;
+
+                // Check if joined as spectator
+                if (response.isSpectator) {
+                    window.isSpectator = true;
+                    console.log('Joined as spectator');
+                } else {
+                    window.isSpectator = false;
+                }
 
                 // Save session
                 saveSession(response.roomId, response.playerId, playerName);
@@ -293,6 +312,13 @@ function handleGameStarted(data) {
     showScreen('gameScreen');
     updateGameState(data.gameState);
     showNotification('Game started! 🎮');
+
+    // Show spectator badge if user is spectating
+    if (window.isSpectator) {
+        document.getElementById('spectatorBadge').style.display = 'flex';
+        document.getElementById('rollDiceBtn').disabled = true;
+        document.getElementById('rollDiceBtn').textContent = 'Spectating';
+    }
 }
 
 /**

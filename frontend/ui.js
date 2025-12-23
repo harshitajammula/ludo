@@ -18,6 +18,8 @@ function initializeApp() {
         loadDebugGameState();
     } else {
         showScreen('welcomeScreen');
+        // Fetch active rooms list
+        fetchActiveRooms();
     }
 }
 
@@ -27,27 +29,6 @@ function initializeApp() {
 function setupEventListeners() {
     // Welcome screen
     document.getElementById('createRoomBtn').addEventListener('click', handleCreateRoom);
-    document.getElementById('joinRoomBtn').addEventListener('click', () => {
-        const playerName = document.getElementById('playerNameInput').value.trim();
-        if (!playerName) {
-            showNotification('Please enter your name', 'error');
-            return;
-        }
-        showModal('joinRoomModal');
-    });
-
-    // Join room modal
-    document.getElementById('closeJoinModal').addEventListener('click', () => {
-        hideModal('joinRoomModal');
-    });
-    document.getElementById('confirmJoinBtn').addEventListener('click', handleJoinRoom);
-
-    // Allow Enter key in room code input
-    document.getElementById('roomCodeInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleJoinRoom();
-        }
-    });
 
     // Lobby screen
     document.getElementById('leaveLobbyBtn').addEventListener('click', handleLeaveLobby);
@@ -113,6 +94,124 @@ function showScreen(screenId) {
         screen.classList.remove('active');
     });
     document.getElementById(screenId).classList.add('active');
+}
+
+// ==================== Active Rooms List ====================
+
+/**
+ * Fetch active rooms from server
+ */
+function fetchActiveRooms() {
+    if (!socket) return;
+
+    socket.emit('getRooms', (response) => {
+        if (response.success) {
+            displayRoomsList(response.rooms);
+        } else {
+            showNotification('Failed to load rooms', 'error');
+        }
+    });
+}
+
+/**
+ * Display rooms list
+ */
+function displayRoomsList(rooms) {
+    const roomsList = document.getElementById('roomsList');
+
+    if (!rooms || rooms.length === 0) {
+        roomsList.innerHTML = `
+            <div class="no-rooms">
+                <div class="no-rooms-icon">🎲</div>
+                <p>No active games</p>
+                <p style="font-size: 0.875rem; margin-top: 0.5rem;">Create a room to start playing!</p>
+            </div>
+        `;
+        return;
+    }
+
+    roomsList.innerHTML = rooms.map(room => createRoomCard(room)).join('');
+
+    // Add click handlers to all room cards
+    document.querySelectorAll('.room-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const roomId = card.dataset.roomId;
+            const room = rooms.find(r => r.roomId === roomId);
+            handleRoomClick(room);
+        });
+    });
+}
+
+/**
+ * Create HTML for a room card
+ */
+function createRoomCard(room) {
+    const statusClass = room.status === 'waiting' ? 'waiting' : 'in-progress';
+    const statusText = room.status === 'waiting' ? 'Waiting' : 'In Progress';
+    const buttonText = room.status === 'waiting' ? '🎮 Join Game' : '👁️ Spectate';
+    const buttonClass = room.status === 'waiting' ? '' : 'spectate';
+
+    const playerDots = room.players.map(p =>
+        `<div class="player-dot ${p.color}"></div>`
+    ).join('');
+
+    return `
+        <div class="room-card" data-room-id="${room.roomId}">
+            <div class="room-card-header">
+                <h4 class="room-name">${escapeHtml(room.roomName)}</h4>
+                <span class="room-status-badge ${statusClass}">${statusText}</span>
+            </div>
+            <div class="room-info">
+                <div class="room-info-item">
+                    <span class="room-info-icon">👥</span>
+                    <span>${room.playerCount}/4 Players</span>
+                </div>
+                ${room.spectatorCount > 0 ? `
+                    <div class="room-info-item">
+                        <span class="room-info-icon">👁️</span>
+                        <span>${room.spectatorCount} Spectator${room.spectatorCount > 1 ? 's' : ''}</span>
+                    </div>
+                ` : ''}
+                ${room.players.length > 0 ? `
+                    <div class="room-info-item">
+                        <div class="room-players-list">${playerDots}</div>
+                    </div>
+                ` : ''}
+            </div>
+            <button class="room-join-btn ${buttonClass}">${buttonText}</button>
+        </div>
+    `;
+}
+
+/**
+ * Handle room card click
+ */
+function handleRoomClick(room) {
+    const playerName = document.getElementById('playerNameInput').value.trim();
+
+    if (!playerName) {
+        showNotification('Please enter your name first', 'error');
+        return;
+    }
+
+    // Join the room (backend will determine if player or spectator)
+    joinRoom(room.roomId, playerName);
+}
+
+/**
+ * Update rooms list (called when receiving roomsListUpdate event)
+ */
+function updateRoomsList(rooms) {
+    displayRoomsList(rooms);
+}
+
+/**
+ * Escape HTML to prevent XSS
+ */
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 /**
