@@ -14,6 +14,7 @@ class GameStateManager {
         this.spectators = new Map(); // roomId -> Set of spectator IDs
         this.spectatorSockets = new Map(); // spectatorId -> socketId
         this.roomMetadata = new Map(); // roomId -> {name, createdAt, status}
+        this.roomTimers = new Map(); // roomId -> {timerId, intervalId}
     }
 
     /**
@@ -273,12 +274,78 @@ class GameStateManager {
         }
 
         finishedRooms.forEach(roomId => {
+            this.clearRoomTimer(roomId);
             this.rooms.delete(roomId);
             this.spectators.delete(roomId);
             this.roomMetadata.delete(roomId);
         });
 
         return finishedRooms.length;
+    }
+
+    // ==================== Timer Management ====================
+
+    /**
+     * Start turn timer for a room
+     */
+    startRoomTimer(roomId, io, onTimeout) {
+        // Clear any existing timer
+        this.clearRoomTimer(roomId);
+
+        const game = this.rooms.get(roomId);
+        if (!game) return;
+
+        // Start the turn timer in the game
+        game.startTurnTimer();
+
+        // Emit timer tick every second
+        const intervalId = setInterval(() => {
+            const remainingTime = game.getRemainingTime();
+
+            // Emit to all players in the room
+            io.to(roomId).emit('timerTick', {
+                remainingTime,
+                currentPlayer: game.players[game.currentPlayerIndex]
+            });
+
+            // Send warning at 20 seconds of inactivity (10s remaining)
+            if (remainingTime === 10) {
+                const currentPlayer = game.players[game.currentPlayerIndex];
+                io.to(roomId).emit('inactivityWarning', {
+                    playerName: currentPlayer.name,
+                    playerId: currentPlayer.id
+                });
+            }
+
+            // Check if time expired
+            if (remainingTime <= 0) {
+                this.clearRoomTimer(roomId);
+                if (onTimeout) {
+                    onTimeout(roomId, game);
+                }
+            }
+        }, 1000);
+
+        // Store the interval ID
+        this.roomTimers.set(roomId, { intervalId });
+    }
+
+    /**
+     * Clear room timer
+     */
+    clearRoomTimer(roomId) {
+        const timer = this.roomTimers.get(roomId);
+        if (timer) {
+            clearInterval(timer.intervalId);
+            this.roomTimers.delete(roomId);
+        }
+    }
+
+    /**
+     * Clear all timers for a room (on cleanup)
+     */
+    clearAllRoomTimers(roomId) {
+        this.clearRoomTimer(roomId);
     }
 }
 

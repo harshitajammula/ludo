@@ -4,12 +4,15 @@ A real-time multiplayer Ludo game that allows friends to play together online ac
 
 ## ✨ Features
 
+- 🔐 **Google OAuth Authentication**: Secure login with your Google account
+- 👤 **User Profiles**: Track your stats and game history
 - 🎮 **Real-time Multiplayer**: Play with 2-4 friends simultaneously
 - 💬 **Live Chat**: Communicate with other players during the game
 - 😊 **Emoji Support**: Express yourself with emojis
 - 📱 **Responsive Design**: Works seamlessly on mobile, tablet, and desktop
 - 🎨 **Modern UI**: Beautiful, vibrant design with smooth animations
 - 🔄 **Auto-reconnect**: Handles disconnections gracefully
+- 📊 **Game Statistics**: View your wins, games played, and win rate
 
 ## 🎯 Game Rules
 
@@ -42,13 +45,19 @@ A real-time multiplayer Ludo game that allows friends to play together online ac
    npm install
    ```
 
-3. **Start the server**
+3. **Set up Google OAuth 2.0**
+   - Follow the detailed guide in [OAUTH_SETUP.md](OAUTH_SETUP.md)
+   - Create a `.env` file in the backend directory
+   - Add your Google OAuth credentials
+
+4. **Start the server**
    ```bash
    npm start
    ```
 
-4. **Open the game**
+5. **Open the game**
    - Open your browser and navigate to `http://localhost:3000`
+   - Sign in with your Google account
    - Share the room code with friends to play together!
 
 ## 🛠️ Tech Stack
@@ -130,12 +139,15 @@ Simply deploy the backend folder and ensure the PORT environment variable is set
 ## 🤝 Future Enhancements
 
 - [ ] AI opponent for single-player mode
-- [ ] User accounts and authentication
-- [ ] Game history and statistics
+- [x] User accounts and authentication (Google OAuth implemented!)
+- [x] Game history and statistics (Basic stats implemented!)
+- [ ] Advanced statistics dashboard
+- [ ] Friend system and friend invites
 - [ ] Tournaments and leaderboards
 - [ ] Custom game rules
 - [ ] Voice chat
-- [ ] Spectator mode
+- [ ] Multiple authentication providers (Facebook, Twitter, etc.)
+- [ ] Achievements and badges
 
 ## 📄 License
 

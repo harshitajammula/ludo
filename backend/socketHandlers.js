@@ -4,6 +4,7 @@
  */
 
 const gameStateManager = require('./gameState');
+const { coinManager } = require('./coinManager');
 
 function setupSocketHandlers(io) {
     io.on('connection', (socket) => {
@@ -167,6 +168,9 @@ function setupSocketHandlers(io) {
                         gameState: game.getGameState()
                     });
 
+                    // Start turn timer for first player
+                    gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+
                     // Broadcast updated rooms list
                     io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
                 } else {
@@ -191,9 +195,16 @@ function setupSocketHandlers(io) {
                 }
 
                 const game = gameStateManager.getRoom(roomId);
+
+                // Reset missed turns on manual action
+                game.resetMissedTurns(playerId);
+
                 const result = game.rollDice(playerId);
 
                 if (result.success) {
+                    // Clear timer (player took action)
+                    gameStateManager.clearRoomTimer(roomId);
+
                     callback(result);
 
                     // Notify all players about dice roll
@@ -238,15 +249,44 @@ function setupSocketHandlers(io) {
                         token: result.token,
                         captured: result.captured,
                         anotherTurn: result.anotherTurn,
+                        playerFinished: result.playerFinished,
+                        teamVictory: result.teamVictory,
+                        autoPlay: result.autoPlay,
                         gameState: game.getGameState()
                     });
 
+                    // If player finished, notify about teammate control
+                    if (result.playerFinished && game.teamMode) {
+                        const player = game.players.find(p => p.id === playerId);
+                        const teammateColor = game.getTeammateColor(player.color);
+                        if (teammateColor) {
+                            io.to(roomId).emit('playerFinished', {
+                                playerId,
+                                playerColor: player.color,
+                                teammateColor
+                            });
+                        }
+                    }
+
                     // If game is over, notify about winner
                     if (result.gameOver) {
+                        // Clear timer
+                        gameStateManager.clearRoomTimer(roomId);
+
                         io.to(roomId).emit('gameOver', {
                             winner: result.winner,
+                            teamVictory: result.teamVictory,
                             gameState: game.getGameState()
                         });
+
+                        // Update room status
+                        gameStateManager.updateRoomStatus(roomId, 'finished');
+
+                        // Broadcast updated rooms list
+                        io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
+                    } else if (!result.anotherTurn) {
+                        // Start timer for next player
+                        gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
                     }
                 } else {
                     callback(result);
@@ -390,6 +430,100 @@ function setupSocketHandlers(io) {
             console.log(`Cleaned up ${cleaned} empty rooms`);
         }
     }, 5 * 60 * 1000);
+
+    /**
+     * Handle timer timeout - Auto-play for inactive player
+     */
+    function handleTimerTimeout(roomId, game) {
+        try {
+            const currentPlayer = game.players[game.currentPlayerIndex];
+
+            // Check if player is already eliminated
+            if (game.isPlayerEliminated(currentPlayer.id)) {
+                game.nextTurn();
+                gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                return;
+            }
+
+            console.log(`Timer expired for player ${currentPlayer.name} in room ${roomId}`);
+
+            // Auto-roll dice
+            const rollResult = game.autoRollDice(currentPlayer.id);
+
+            // Emit auto-roll event
+            io.to(roomId).emit('diceRolled', {
+                playerId: currentPlayer.id,
+                diceValue: rollResult.diceValue,
+                canMove: rollResult.canMove,
+                autoPlay: true,
+                gameState: game.getGameState()
+            });
+
+            // Auto-move token if possible
+            if (rollResult.canMove) {
+                const moveResult = game.autoMoveToken(currentPlayer.id);
+
+                if (moveResult.success && !moveResult.noMove) {
+                    // Emit auto-move event
+                    io.to(roomId).emit('tokenMoved', {
+                        playerId: currentPlayer.id,
+                        tokenIndex: moveResult.token?.index,
+                        token: moveResult.token,
+                        captured: moveResult.captured,
+                        anotherTurn: moveResult.anotherTurn,
+                        autoPlay: true,
+                        gameState: game.getGameState()
+                    });
+
+                    // Check for game over
+                    if (moveResult.gameOver) {
+                        io.to(roomId).emit('gameOver', {
+                            winner: moveResult.winner,
+                            teamVictory: moveResult.teamVictory,
+                            gameState: game.getGameState()
+                        });
+                        gameStateManager.updateRoomStatus(roomId, 'finished');
+                        return;
+                    }
+
+                    // If player gets another turn, restart timer
+                    if (moveResult.anotherTurn) {
+                        gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                        return;
+                    }
+                }
+            }
+
+            // Increment missed turns
+            const eliminated = game.incrementMissedTurns(currentPlayer.id);
+
+            // Emit missed turn event
+            io.to(roomId).emit('playerMissedTurn', {
+                playerId: currentPlayer.id,
+                missedTurns: game.playerMissedTurns[currentPlayer.id],
+                eliminated,
+                gameState: game.getGameState()
+            });
+
+            // If player was eliminated
+            if (eliminated) {
+                io.to(roomId).emit('playerEliminated', {
+                    playerId: currentPlayer.id,
+                    playerName: currentPlayer.name,
+                    gameState: game.getGameState()
+                });
+            }
+
+            // Start timer for next player
+            gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+
+        } catch (error) {
+            console.error('Error in timer timeout handler:', error);
+            // Try to recover by moving to next turn
+            game.nextTurn();
+            gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+        }
+    }
 }
 
 module.exports = setupSocketHandlers;

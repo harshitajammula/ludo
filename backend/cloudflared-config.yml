@@ -1,0 +1,9 @@
+tunnel: ef80e369-6212-432d-ba7b-7b7f6c3d27d0
+credentials-file: C:\Users\vamsi\.cloudflared\ef80e369-6212-432d-ba7b-7b7f6c3d27d0.json
+
+ingress:
+  - hostname: www.ludokitimeayyindhi.com
+    service: http://localhost:3000
+  - hostname: ludokitimeayyindhi.com
+    service: http://localhost:3000
+  - service: http_status:404

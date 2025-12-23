@@ -37,7 +37,9 @@ function setupEventListeners() {
 
     // Game screen
     document.getElementById('leaveGameBtn').addEventListener('click', handleLeaveGame);
-    document.getElementById('rollDiceBtn').addEventListener('click', handleRollDice);
+
+    // Setup player dice buttons (will be initialized when game starts)
+    setupPlayerDiceButtons();
 
     // Chat
     document.getElementById('sendChatBtn').addEventListener('click', handleSendChat);
@@ -82,6 +84,18 @@ function setupEventListeners() {
 
     // Game board click
     document.getElementById('gameBoard').addEventListener('click', handleBoardClick);
+}
+
+/**
+ * Setup central dice roll button
+ */
+function setupPlayerDiceButtons() {
+    const rollBtn = document.getElementById('centralRollBtn');
+    if (rollBtn) {
+        rollBtn.addEventListener('click', async () => {
+            await handleRollDice();
+        });
+    }
 }
 
 // ==================== Screen Management ====================
@@ -238,6 +252,7 @@ function loadDebugGameState() {
     window.currentPlayerId = 'debug-player-1';
     window.currentRoomId = 'debug-room';
     window.currentPlayerName = 'Debug Player';
+    window.isSpectator = false;
 
     // Create mock game state
     const mockGameState = {
@@ -256,12 +271,36 @@ function loadDebugGameState() {
                 finishedTokens: 0
             },
             {
+                id: 'debug-player-3',
+                name: 'Green Player',
+                color: 'green',
+                tokens: [
+                    { id: 0, position: 26, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 1, position: 10, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 2, position: -1, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 3, position: -1, inHomeStretch: false, homeStretchPosition: -1, finished: false }
+                ],
+                finishedTokens: 0
+            },
+            {
+                id: 'debug-player-4',
+                name: 'Yellow Player',
+                color: 'yellow',
+                tokens: [
+                    { id: 0, position: 39, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 1, position: 23, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 2, position: -1, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 3, position: -1, inHomeStretch: false, homeStretchPosition: -1, finished: false }
+                ],
+                finishedTokens: 0
+            },
+            {
                 id: 'debug-player-2',
                 name: 'Blue Player',
                 color: 'blue',
                 tokens: [
-                    { id: 0, position: 13, inHomeStretch: false, homeStretchPosition: -1, finished: false },
-                    { id: 1, position: 20, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 0, position: 0, inHomeStretch: false, homeStretchPosition: -1, finished: false },
+                    { id: 1, position: 36, inHomeStretch: false, homeStretchPosition: -1, finished: false },
                     { id: 2, position: -1, inHomeStretch: false, homeStretchPosition: -1, finished: false },
                     { id: 3, position: -1, inHomeStretch: false, homeStretchPosition: -1, finished: false }
                 ],
@@ -282,8 +321,8 @@ function loadDebugGameState() {
     // Update game state
     updateGameState(mockGameState);
 
-    // Enable roll dice button
-    document.getElementById('rollDiceBtn').disabled = false;
+    // Enable central roll dice button
+    document.getElementById('centralRollBtn').disabled = false;
 
     console.log('✅ Debug game loaded - Board should be visible with position numbers');
 }
@@ -413,13 +452,15 @@ function handleLeaveGame() {
  */
 async function handleRollDice() {
     try {
-        document.getElementById('rollDiceBtn').disabled = true;
+        const rollBtn = document.getElementById('centralRollBtn');
+        if (rollBtn) rollBtn.disabled = true;
         await rollDice();
         // Dice rolled event will be received via socket
     } catch (error) {
         console.error('Error rolling dice:', error);
         showNotification(error || 'Failed to roll dice', 'error');
-        document.getElementById('rollDiceBtn').disabled = false;
+        const rollBtn = document.getElementById('centralRollBtn');
+        if (rollBtn) rollBtn.disabled = false;
     }
 }
 
@@ -512,6 +553,7 @@ function updateGamePlayers(gameState) {
 
         const playerItem = document.createElement('div');
         playerItem.className = `game-player-item ${isCurrentPlayer ? 'active' : ''}`;
+        playerItem.dataset.playerId = player.id;
 
         playerItem.innerHTML = `
       <div class="player-color-dot ${player.color}"></div>
@@ -532,21 +574,18 @@ function updateGamePlayers(gameState) {
  * Update game state
  */
 function updateGameState(gameState) {
-    // Update current player indicator
+    // Update current player indicator in header
     const currentPlayer = gameState.currentPlayer;
     const currentPlayerName = document.getElementById('currentPlayerName');
     const currentPlayerIndicator = document.getElementById('currentPlayerIndicator');
-    const rollDiceBtn = document.getElementById('rollDiceBtn');
 
     if (currentPlayer) {
         currentPlayerName.textContent = `${currentPlayer.name}'s Turn`;
         currentPlayerIndicator.style.background = `var(--color-${currentPlayer.color})`;
-
-        // Enable roll button only if it's the current player's turn and they haven't rolled yet
-        const isMyTurn = currentPlayer.id === currentPlayerId;
-        const hasRolled = gameState.lastDiceRoll !== null;
-        rollDiceBtn.disabled = !isMyTurn || hasRolled;
     }
+
+    // Update player dice displays
+    updatePlayerDice(gameState);
 
     // Update players list
     updateGamePlayers(gameState);
@@ -554,6 +593,41 @@ function updateGameState(gameState) {
     // Render game board
     if (window.renderGameBoard) {
         window.renderGameBoard(gameState);
+    }
+}
+
+/**
+ * Update central dice and timer based on current turn
+ */
+function updatePlayerDice(gameState) {
+    const rollBtn = document.getElementById('centralRollBtn');
+    const diceValue = document.getElementById('centralDiceValue');
+    const diceDisplay = document.querySelector('.dice-display');
+
+    if (!rollBtn) return;
+
+    // Check if it's our turn
+    const isOurTurn = gameState.currentPlayer && gameState.currentPlayer.id === currentPlayerId;
+    const hasRolled = gameState.lastDiceRoll !== null;
+
+    // Update dice display
+    if (diceValue) {
+        if (gameState.lastDiceRoll) {
+            diceValue.textContent = gameState.lastDiceRoll;
+        } else {
+            diceValue.textContent = '?';
+        }
+    }
+
+    // Update button state (only active for current player and if not rolled yet)
+    rollBtn.disabled = !isOurTurn || hasRolled || window.isSpectator;
+
+    // Update button color/feel based on current player
+    if (gameState.currentPlayer) {
+        rollBtn.style.background = `var(--color-${gameState.currentPlayer.color})`;
+        if (diceDisplay) {
+            diceDisplay.style.borderColor = `var(--color-${gameState.currentPlayer.color})`;
+        }
     }
 }
 
@@ -587,23 +661,74 @@ function addChatMessage(data) {
 /**
  * Show emoji animation
  */
-function showEmojiAnimation(emoji) {
+function showEmojiAnimation(emoji, playerName = '') {
     const container = document.getElementById('emojiAnimations');
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'emoji-float-container';
 
     const emojiElement = document.createElement('div');
     emojiElement.className = 'emoji-float';
     emojiElement.textContent = emoji;
 
-    // Random position
-    emojiElement.style.left = `${Math.random() * 80 + 10}%`;
-    emojiElement.style.top = '80%';
+    wrapper.appendChild(emojiElement);
 
-    container.appendChild(emojiElement);
+    if (playerName) {
+        const nameElement = document.createElement('div');
+        nameElement.className = 'emoji-float-name';
+        nameElement.textContent = playerName;
+        wrapper.appendChild(nameElement);
+    }
+
+    // Random position
+    wrapper.style.left = `${Math.random() * 80 + 10}%`;
+    wrapper.style.top = '80%';
+
+    container.appendChild(wrapper);
 
     // Remove after animation
     setTimeout(() => {
-        emojiElement.remove();
+        wrapper.remove();
     }, 3000);
+}
+
+/**
+ * Show a small chat popup near the chat button
+ */
+function showChatPopup(data) {
+    const chatBtn = document.getElementById('chatBtn');
+    if (!chatBtn || document.getElementById('chatModal').classList.contains('active')) return;
+
+    // Remove existing popups if any
+    const existingPopup = document.querySelector('.chat-popup');
+    if (existingPopup) existingPopup.remove();
+
+    const popup = document.createElement('div');
+    popup.className = 'chat-popup';
+
+    popup.innerHTML = `
+        <span class="chat-popup-name">${data.playerName}</span>
+        <span class="chat-popup-msg">${data.message}</span>
+    `;
+
+    // Position it relative to the chat button
+    const floatingButtons = document.querySelector('.floating-buttons');
+    floatingButtons.appendChild(popup);
+
+    // Position it specifically next to the chat button inside the flex container
+    // The chat-popup has absolute positioning so it will be relative to .floating-buttons
+    // Since #chatBtn is likely the first child (if it's the top one), we might need to adjust
+    // But CSS 'right: 75px' should place it to the left of the vertical column of FABs.
+
+    // Remove after a few seconds
+    setTimeout(() => {
+        if (popup && popup.parentElement) {
+            popup.style.opacity = '0';
+            popup.style.transform = 'translateX(20px)';
+            popup.style.transition = 'all 0.3s ease';
+            setTimeout(() => popup.remove(), 300);
+        }
+    }, 4000);
 }
 
 /**

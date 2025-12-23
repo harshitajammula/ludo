@@ -44,6 +44,13 @@ function initializeSocket() {
     socket.on('chatMessage', handleChatMessage);
     socket.on('emojiReceived', handleEmojiReceived);
 
+    // Timer events
+    socket.on('timerTick', handleTimerTick);
+    socket.on('inactivityWarning', handleInactivityWarning);
+    socket.on('playerMissedTurn', handlePlayerMissedTurn);
+    socket.on('playerEliminated', handlePlayerEliminated);
+    socket.on('playerFinished', handlePlayerFinished);
+
     // Rooms list events
     socket.on('roomsListUpdate', (rooms) => {
         updateRoomsList(rooms);
@@ -328,8 +335,8 @@ function handleDiceRolled(data) {
     console.log('Dice rolled:', data.diceValue);
 
     // Animate dice
-    const diceElement = document.getElementById('diceDisplay');
-    const diceValueElement = document.getElementById('diceValue');
+    const diceElement = document.getElementById('centralGameControls').querySelector('.dice-display');
+    const diceValueElement = document.getElementById('centralDiceValue');
 
     diceElement.classList.add('rolling');
 
@@ -385,13 +392,14 @@ function handleGameOver(data) {
  */
 function handleChatMessage(data) {
     addChatMessage(data);
+    showChatPopup(data);
 }
 
 /**
  * Handle emoji received event
  */
 function handleEmojiReceived(data) {
-    showEmojiAnimation(data.emoji);
+    showEmojiAnimation(data.emoji, data.playerName);
     addChatMessage({
         playerName: data.playerName,
         playerColor: data.playerColor,
@@ -399,3 +407,136 @@ function handleEmojiReceived(data) {
         timestamp: data.timestamp
     });
 }
+
+// ==================== Timer Event Handlers ====================
+
+/**
+ * Handle timer tick event
+ */
+function handleTimerTick(data) {
+    const { remainingTime, currentPlayer } = data;
+
+    if (!currentPlayer) return;
+
+    // Timer display removed from UI as per requirements
+    // Keeping logic here for potential background processing or debugging
+    if (remainingTime <= 5) {
+        // Subtle background warning or sound could go here
+    }
+}
+
+/**
+ * Handle inactivity warning (20 seconds passed)
+ */
+function handleInactivityWarning(data) {
+    const { playerName, playerId } = data;
+    if (playerId === currentPlayerId) {
+        showNotification('Hurry up! ⚠️ Only 10 seconds left to move.', 'warning');
+    } else {
+        showNotification(`${playerName} is inactive. Turn will auto-pass in 10s.`, 'info');
+    }
+}
+
+/**
+ * Handle player missed turn event
+ */
+function handlePlayerMissedTurn(data) {
+    const { playerId, missedTurns, eliminated, gameState } = data;
+
+    const player = gameState.players.find(p => p.id === playerId);
+    if (!player) return;
+
+    // Update central missed turns badge (Strikes)
+    const badge = document.getElementById('centralMissedTurnsBadge');
+    if (badge && player.id === data.gameState.currentPlayer?.id) {
+        badge.textContent = `Strikes: ${missedTurns}/3`;
+        badge.style.display = 'block';
+    } else if (badge) {
+        badge.style.display = 'none';
+    }
+
+    // Show notification
+    if (playerId === currentPlayerId) {
+        showNotification(`You missed your turn! (${missedTurns}/3)`, 'error');
+    } else {
+        showNotification(`${player.name} missed their turn (${missedTurns}/3)`);
+    }
+
+    updateGameState(gameState);
+}
+
+/**
+ * Handle player eliminated event
+ */
+function handlePlayerEliminated(data) {
+    const { playerId, playerName, gameState } = data;
+
+    const player = gameState.players.find(p => p.id === playerId);
+    if (!player) return;
+
+    // Mark as eliminated in the game players list
+    const playerItem = document.querySelector(`.game-player-item[data-player-id="${playerId}"]`);
+    if (playerItem) {
+        playerItem.classList.add('eliminated');
+    }
+
+    // Show notification
+    if (playerId === currentPlayerId) {
+        showNotification('You have been eliminated from the game! 💀', 'error');
+    } else {
+        showNotification(`${playerName} has been eliminated!`);
+    }
+
+    updateGameState(gameState);
+}
+
+/**
+ * Handle player finished event (team play)
+ */
+function handlePlayerFinished(data) {
+    const { playerId, playerColor, teammateColor } = data;
+
+    const player = currentGameState?.players.find(p => p.id === playerId);
+    if (!player) return;
+
+    showNotification(`${player.name} finished all tokens! 🎉`);
+
+    // If this is the current player, show they can help teammate
+    if (playerId === currentPlayerId) {
+        showNotification(`You can now help your teammate!`, 'info');
+    }
+}
+
+/**
+ * Update dice rolled handler to show auto-play notification
+ */
+const originalHandleDiceRolled = handleDiceRolled;
+handleDiceRolled = function (data) {
+    // Show auto-play notification
+    if (data.autoPlay) {
+        const player = data.gameState.players.find(p => p.id === data.playerId);
+        if (player) {
+            showNotification(`⏱️ AUTO-PLAY: ${player.name} rolled ${data.diceValue}`, 'info');
+        }
+    }
+
+    // Call original handler
+    originalHandleDiceRolled(data);
+};
+
+/**
+ * Update token moved handler to show auto-play notification
+ */
+const originalHandleTokenMoved = handleTokenMoved;
+handleTokenMoved = function (data) {
+    // Show auto-play notification
+    if (data.autoPlay) {
+        const player = data.gameState.players.find(p => p.id === data.playerId);
+        if (player) {
+            showNotification(`⏱️ AUTO-PLAY: ${player.name}'s token moved`, 'info');
+        }
+    }
+
+    // Call original handler
+    originalHandleTokenMoved(data);
+};

@@ -30,3 +30,6 @@ build/
 # Temporary files
 tmp/
 temp/
+
+# User data
+backend/data/

@@ -29,6 +29,32 @@
           <p class="game-subtitle">Play with friends in real-time</p>
         </div>
 
+        <!-- User Profile Section -->
+        <div id="userProfileSection" class="user-profile-section" style="display: none;">
+          <div class="user-profile-card">
+            <img id="userAvatar" class="user-avatar" src="" alt="User Avatar">
+            <div class="user-info">
+              <h3 id="userName" class="user-name">Loading...</h3>
+              <p id="userEmail" class="user-email">Loading...</p>
+            </div>
+            <button id="logoutBtn" class="btn btn-sm btn-outline">Logout</button>
+          </div>
+          <div class="user-stats">
+            <div class="stat-item">
+              <span class="stat-value" id="gamesPlayed">0</span>
+              <span class="stat-label">Games Played</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="gamesWon">0</span>
+              <span class="stat-label">Games Won</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="winRate">0%</span>
+              <span class="stat-label">Win Rate</span>
+            </div>
+          </div>
+        </div>
+
         <div class="welcome-form">
           <div class="input-group">
             <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off">
@@ -129,12 +155,20 @@
           <div class="game-board-container">
             <canvas id="gameBoard" width="600" height="600"></canvas>
 
-            <!-- Dice Section -->
-            <div class="dice-section">
-              <div id="diceDisplay" class="dice">
-                <span id="diceValue">?</span>
+            <!-- Central Game Controls (Timer & Dice) -->
+            <div id="centralGameControls" class="central-game-controls">
+              <!-- Dice Display & Roll Button -->
+              <div class="central-dice-section">
+                <div class="dice-display">
+                  <div class="dice-value" id="centralDiceValue">?</div>
+                </div>
+                <button id="centralRollBtn" class="roll-dice-btn" disabled>
+                  🎲 Roll Dice
+                </button>
               </div>
-              <button id="rollDiceBtn" class="btn btn-primary" disabled>Roll Dice</button>
+
+              <!-- Missed Turns Badge -->
+              <div class="central-missed-turns-badge" id="centralMissedTurnsBadge" style="display: none;">0/3</div>
             </div>
           </div>
 
@@ -224,6 +258,9 @@
   <!-- Socket.IO Client -->
   <script src="/socket.io/socket.io.js"></script>
 
+  <!-- Authentication Client -->
+  <script src="auth-client.js"></script>
+
   <!-- Game Scripts -->
   <script src="socket-client.js"></script>
   <script src="ui.js"></script>
@@ -231,10 +268,60 @@
 
   <script>
     // Initialize the app
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       console.log('🎲 Ludo Game Loaded!');
+
+      // Load user authentication status
+      await loadUserProfile();
+
+      // Initialize the game
       initializeApp();
     });
+
+    // Load and display user profile
+    async function loadUserProfile() {
+      try {
+        const authStatus = await authClient.checkAuth();
+
+        if (authStatus.authenticated && authStatus.user) {
+          const user = authStatus.user;
+
+          // Show user profile section
+          const profileSection = document.getElementById('userProfileSection');
+          if (profileSection) {
+            profileSection.style.display = 'block';
+
+            // Update profile information
+            document.getElementById('userAvatar').src = user.picture || '';
+            document.getElementById('userName').textContent = user.name || 'User';
+            document.getElementById('userEmail').textContent = user.email || '';
+
+            // Update stats
+            document.getElementById('gamesPlayed').textContent = user.gamesPlayed || 0;
+            document.getElementById('gamesWon').textContent = user.gamesWon || 0;
+            document.getElementById('winRate').textContent = user.winRate ? user.winRate + '%' : '0%';
+
+            // Pre-fill player name input with user's name
+            const playerNameInput = document.getElementById('playerNameInput');
+            if (playerNameInput && !playerNameInput.value) {
+              playerNameInput.value = user.name.split(' ')[0]; // Use first name
+            }
+          }
+
+          // Setup logout button
+          const logoutBtn = document.getElementById('logoutBtn');
+          if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+              if (confirm('Are you sure you want to logout?')) {
+                authClient.logout();
+              }
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load user profile:', error);
+      }
+    }
   </script>
 </body>
 
