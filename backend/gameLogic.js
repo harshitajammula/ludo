@@ -296,19 +296,31 @@ class LudoGame {
 
     /**
      * Check if token will enter home stretch
-     * Token enters home stretch when it passes the home entrance position
+     * Token enters home stretch when it lands on or passes the home entrance position
      */
     willEnterHomeStretch(currentPos, diceValue, homeEntrance) {
-        // Check if we're currently at or will pass the home entrance
+        // Check each step of the move
         for (let i = 1; i <= diceValue; i++) {
             const nextPos = (currentPos + i) % this.BOARD_SIZE;
-            // If we land on or pass the position after home entrance, we enter home stretch
-            if (currentPos <= homeEntrance && nextPos > homeEntrance) {
+
+            // If we land exactly on the home entrance, we enter
+            if (nextPos === homeEntrance) {
                 return true;
             }
-            // Handle wrap-around case
-            if (currentPos > homeEntrance && nextPos <= homeEntrance) {
-                return false; // We've already passed it, don't enter again
+
+            // If we pass through the home entrance
+            // Need to handle wrap-around carefully
+            if (currentPos < homeEntrance) {
+                // Normal case: moving forward without wrap
+                if (nextPos > currentPos && nextPos >= homeEntrance) {
+                    return true;
+                }
+            } else {
+                // Wrap-around case: currentPos > homeEntrance
+                // We enter if we've wrapped around and reached/passed entrance
+                if (nextPos < currentPos && nextPos >= homeEntrance) {
+                    return true;
+                }
             }
         }
         return false;
@@ -319,20 +331,20 @@ class LudoGame {
      * Returns how far into the home stretch the token should be
      */
     calculateHomeStretchSteps(currentPos, diceValue, homeEntrance) {
-        // Calculate how many steps past the home entrance
-        let stepsToEntrance = 0;
-
-        // Find how many steps to reach just past the entrance
+        // Find how many steps it takes to reach the home entrance
         for (let i = 1; i <= diceValue; i++) {
             const nextPos = (currentPos + i) % this.BOARD_SIZE;
-            if (currentPos <= homeEntrance && nextPos > homeEntrance) {
-                stepsToEntrance = i;
-                break;
+
+            // If we land on or pass the home entrance
+            if (nextPos === homeEntrance ||
+                (currentPos < homeEntrance && nextPos >= homeEntrance) ||
+                (currentPos > homeEntrance && nextPos < currentPos && nextPos >= homeEntrance)) {
+                // Remaining steps go into home stretch
+                return diceValue - i;
             }
         }
 
-        // Remaining steps go into home stretch
-        return diceValue - stepsToEntrance;
+        return 0;
     }
 
     /**
