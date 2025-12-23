@@ -221,52 +221,17 @@ function drawHomeBase(x, y, color, scale) {
     const cellSize = BOARD_CONFIG.cellSize * scale;
     const baseSize = cellSize * 6;
 
-    // Create gradient background
-    const gradient = ctx.createLinearGradient(x, y, x + baseSize, y + baseSize);
-    gradient.addColorStop(0, BOARD_CONFIG.colors[color] + '40'); // 25% opacity
-    gradient.addColorStop(1, BOARD_CONFIG.colors[color] + '20'); // 12% opacity
-
-    ctx.fillStyle = gradient;
+    // Draw white background
+    ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(x, y, baseSize, baseSize);
 
-    // Draw border with shadow
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
-    ctx.shadowBlur = 5 * scale;
+    // Draw colored border
     ctx.strokeStyle = BOARD_CONFIG.colors[color];
-    ctx.lineWidth = 3 * scale;
+    ctx.lineWidth = 4 * scale;
     ctx.strokeRect(x, y, baseSize, baseSize);
-    ctx.shadowBlur = 0;
 
-    // Draw inner white area
-    const innerPadding = cellSize * 0.5;
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(x + innerPadding, y + innerPadding, baseSize - innerPadding * 2, baseSize - innerPadding * 2);
-
-    // Draw token spots with gradients
-    const spotRadius = cellSize * 0.7;
-    const spots = [
-        [x + cellSize * 1.5, y + cellSize * 1.5],
-        [x + cellSize * 4.5, y + cellSize * 1.5],
-        [x + cellSize * 1.5, y + cellSize * 4.5],
-        [x + cellSize * 4.5, y + cellSize * 4.5]
-    ];
-
-    spots.forEach(([sx, sy]) => {
-        // Spot gradient
-        const spotGradient = ctx.createRadialGradient(sx, sy, 0, sx, sy, spotRadius);
-        spotGradient.addColorStop(0, BOARD_CONFIG.gradients[color][0]);
-        spotGradient.addColorStop(1, BOARD_CONFIG.gradients[color][1]);
-
-        ctx.fillStyle = spotGradient;
-        ctx.beginPath();
-        ctx.arc(sx, sy, spotRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Spot border
-        ctx.strokeStyle = BOARD_CONFIG.colors[color];
-        ctx.lineWidth = 2 * scale;
-        ctx.stroke();
-    });
+    // No token circles - tokens will be placed directly in the white space
+    // Token positions will be calculated in getStartingAreaPosition
 }
 
 /**
@@ -604,30 +569,32 @@ function getTokenPosition(color, token, cellSize) {
  * Get starting area position
  */
 function getStartingAreaPosition(color, tokenId, cellSize) {
+    // Evenly space tokens in the 6x6 home base
+    // Using 2 columns and 2 rows with better spacing
     const positions = {
         green: [
-            [cellSize * 2.5, cellSize * 2.5],
-            [cellSize * 5.5, cellSize * 2.5],
-            [cellSize * 2.5, cellSize * 5.5],
-            [cellSize * 5.5, cellSize * 5.5]
+            [cellSize * 2, cellSize * 2],
+            [cellSize * 4, cellSize * 2],
+            [cellSize * 2, cellSize * 4],
+            [cellSize * 4, cellSize * 4]
         ],
         yellow: [
-            [canvas.width - cellSize * 5.5, cellSize * 2.5],
-            [canvas.width - cellSize * 2.5, cellSize * 2.5],
-            [canvas.width - cellSize * 5.5, cellSize * 5.5],
-            [canvas.width - cellSize * 2.5, cellSize * 5.5]
+            [canvas.width - cellSize * 4, cellSize * 2],
+            [canvas.width - cellSize * 2, cellSize * 2],
+            [canvas.width - cellSize * 4, cellSize * 4],
+            [canvas.width - cellSize * 2, cellSize * 4]
         ],
         red: [
-            [cellSize * 2.5, canvas.height - cellSize * 5.5],
-            [cellSize * 5.5, canvas.height - cellSize * 5.5],
-            [cellSize * 2.5, canvas.height - cellSize * 2.5],
-            [cellSize * 5.5, canvas.height - cellSize * 2.5]
+            [cellSize * 2, canvas.height - cellSize * 4],
+            [cellSize * 4, canvas.height - cellSize * 4],
+            [cellSize * 2, canvas.height - cellSize * 2],
+            [cellSize * 4, canvas.height - cellSize * 2]
         ],
         blue: [
-            [canvas.width - cellSize * 5.5, canvas.height - cellSize * 5.5],
-            [canvas.width - cellSize * 2.5, canvas.height - cellSize * 5.5],
-            [canvas.width - cellSize * 5.5, canvas.height - cellSize * 2.5],
-            [canvas.width - cellSize * 2.5, canvas.height - cellSize * 2.5]
+            [canvas.width - cellSize * 4, canvas.height - cellSize * 4],
+            [canvas.width - cellSize * 2, canvas.height - cellSize * 4],
+            [canvas.width - cellSize * 4, canvas.height - cellSize * 2],
+            [canvas.width - cellSize * 2, canvas.height - cellSize * 2]
         ]
     };
 
