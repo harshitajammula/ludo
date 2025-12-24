@@ -22,11 +22,13 @@ const server = http.createServer(app);
 // Trust proxy (required for secure cookies through ngrok/proxies)
 app.set('trust proxy', 1);
 
-require('dotenv').config();
+// Configuration debug logs
 console.log('--- SERVER AUTH DEBUG ---');
-console.log('Client ID from .env:', process.env.GOOGLE_CLIENT_ID);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Client ID:', process.env.GOOGLE_CLIENT_ID ? 'Set' : 'Missing');
 console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
 console.log('-------------------------');
+
 // Socket.IO setup with CORS
 const io = new Server(server, {
     cors: {

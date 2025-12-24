@@ -349,19 +349,12 @@ function handleDiceRolled(data) {
 
     if (data.playerId === currentPlayerId) {
         if (data.canMove) {
-            showNotification(`You rolled a ${data.diceValue}! Click a token to move.`);
+            // Notification removed as per user request (too frequent)
         } else {
-            if (data.turnSkipped) {
-                showNotification(`You rolled a ${data.diceValue}. No valid moves - turn passed! ⏭️`);
-            } else {
-                showNotification(`You rolled a ${data.diceValue}. No valid moves.`);
-            }
+            // Notification removed as per user request (too frequent)
         }
     } else if (data.turnSkipped) {
-        const player = data.gameState.players.find(p => p.id === data.playerId);
-        if (player) {
-            showNotification(`${player.name} rolled ${data.diceValue} - no moves, turn skipped`);
-        }
+        // Notification removed as per user request (too frequent)
     }
 }
 
