@@ -47,7 +47,8 @@ router.get('/google/callback', (req, res, next) => {
                 });
 
                 // Redirect to the custom app scheme with the token
-                return res.redirect(`ludo-game://auth?token=${tempToken}`);
+                // Using 'login' as the host makes it easier for the App to catch
+                return res.redirect(`ludo-game://login?token=${tempToken}`);
             }
 
             res.redirect('/');
