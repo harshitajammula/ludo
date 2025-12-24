@@ -29,9 +29,11 @@ router.get('/google', (req, res, next) => {
  */
 router.get('/google/callback', (req, res, next) => {
     const platform = req.query.state;
+    console.log(`[AUTH] callback: platform=${platform}`);
 
     passport.authenticate('google', (err, user, info) => {
         if (err || !user) {
+            console.error('[AUTH] Google Auth error:', err);
             return res.redirect('/login?error=auth_failed');
         }
 
@@ -39,15 +41,12 @@ router.get('/google/callback', (req, res, next) => {
             if (err) return res.redirect('/login?error=auth_failed');
 
             if (platform === 'mobile') {
-                // Generate a one-time verification token
                 const tempToken = require('crypto').randomBytes(16).toString('hex');
                 mobileTokens.set(tempToken, {
                     userId: user.id,
-                    expires: Date.now() + 60000 // 1 minute
+                    expires: Date.now() + 60000
                 });
-
-                // Redirect to the custom app scheme with the token
-                // Using 'login' as the host makes it easier for the App to catch
+                console.log(`[AUTH] Mobile token issued: ${tempToken}`);
                 return res.redirect(`ludo-game://login?token=${tempToken}`);
             }
 
@@ -61,12 +60,14 @@ router.get('/google/callback', (req, res, next) => {
  */
 router.get('/token-login', async (req, res) => {
     const { token } = req.query;
+    console.log(`[AUTH] Token-login request for: ${token}`);
     const tokenData = mobileTokens.get(token);
 
     if (tokenData && tokenData.expires > Date.now()) {
         const user = await UserService.getUserById(tokenData.userId);
         if (user) {
-            mobileTokens.delete(token); // Use once
+            console.log(`[AUTH] Token-login SUCCESS for user: ${user.id}`);
+            mobileTokens.delete(token);
             req.logIn(user, (err) => {
                 if (err) return res.status(500).json({ success: false });
                 return res.json({ success: true, user: UserService.getUserProfile(user) });
@@ -75,6 +76,7 @@ router.get('/token-login', async (req, res) => {
         }
     }
 
+    console.warn(`[AUTH] Token-login FAILED for token: ${token}`);
     res.status(401).json({ success: false, error: 'Invalid or expired token' });
 });
 
