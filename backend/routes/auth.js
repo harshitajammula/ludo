@@ -9,46 +9,73 @@ const { isAuthenticated, isNotAuthenticated } = require('../middleware/auth');
 
 const router = express.Router();
 
+// Temporary store for mobile auth tokens
+const mobileTokens = new Map();
+
 /**
  * GET /auth/google
- * Initiate Google OAuth flow
  */
-router.get('/google',
-    isNotAuthenticated,
-    (req, res, next) => {
-        // Save platform in session to know where to redirect after callback
-        if (req.query.platform === 'mobile') {
-            req.session.platform = 'mobile';
-        } else {
-            req.session.platform = 'web';
-        }
-        next();
-    },
+router.get('/google', (req, res, next) => {
+    // Pass the platform into the state parameter
+    const platform = req.query.platform === 'mobile' ? 'mobile' : 'web';
     passport.authenticate('google', {
-        scope: ['profile', 'email']
-    })
-);
+        scope: ['profile', 'email'],
+        state: platform
+    })(req, res, next);
+});
 
 /**
  * GET /auth/google/callback
- * Google OAuth callback
  */
-router.get('/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: '/login?error=auth_failed'
-    }),
-    (req, res) => {
-        // If it was a mobile request, redirect to the app via custom scheme
-        if (req.session.platform === 'mobile') {
-            // Clean up session platform flag
-            delete req.session.platform;
-            return res.redirect('ludo-game://home');
+router.get('/google/callback', (req, res, next) => {
+    const platform = req.query.state;
+
+    passport.authenticate('google', (err, user, info) => {
+        if (err || !user) {
+            return res.redirect('/login?error=auth_failed');
         }
 
-        // Otherwise redirect to web home
-        res.redirect('/');
+        req.logIn(user, async (err) => {
+            if (err) return res.redirect('/login?error=auth_failed');
+
+            if (platform === 'mobile') {
+                // Generate a one-time verification token
+                const tempToken = require('crypto').randomBytes(16).toString('hex');
+                mobileTokens.set(tempToken, {
+                    userId: user.id,
+                    expires: Date.now() + 60000 // 1 minute
+                });
+
+                // Redirect to the custom app scheme with the token
+                return res.redirect(`ludo-game://auth?token=${tempToken}`);
+            }
+
+            res.redirect('/');
+        });
+    })(req, res, next);
+});
+
+/**
+ * GET /auth/token-login
+ */
+router.get('/token-login', async (req, res) => {
+    const { token } = req.query;
+    const tokenData = mobileTokens.get(token);
+
+    if (tokenData && tokenData.expires > Date.now()) {
+        const user = await UserService.getUserById(tokenData.userId);
+        if (user) {
+            mobileTokens.delete(token); // Use once
+            req.logIn(user, (err) => {
+                if (err) return res.status(500).json({ success: false });
+                return res.json({ success: true, user: UserService.getUserProfile(user) });
+            });
+            return;
+        }
     }
-);
+
+    res.status(401).json({ success: false, error: 'Invalid or expired token' });
+});
 
 /**
  * GET /auth/logout
