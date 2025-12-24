@@ -1,0 +1,9 @@
+{
+  "appId": "com.ludo.game",
+  "appName": "Ludo Game",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "server": {
+    "cleartext": true
+  }
+}

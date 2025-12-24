@@ -1,0 +1,17 @@
+{
+    "name": "ludo-frontend",
+    "version": "1.0.0",
+    "description": "Ludo game frontend",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@capacitor/android": "^7.4.4",
+        "@capacitor/cli": "^7.4.4",
+        "@capacitor/core": "^7.4.4"
+    }
+}

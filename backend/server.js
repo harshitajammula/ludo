@@ -29,20 +29,34 @@ console.log('Client ID:', process.env.GOOGLE_CLIENT_ID ? 'Set' : 'Missing');
 console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
 console.log('-------------------------');
 
+// CORS configuration
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    'https://localhost',
+    'capacitor://localhost',
+    'http://localhost'
+].filter(Boolean);
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1 || origin.startsWith('http://localhost:')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+};
+
 // Socket.IO setup with CORS
 const io = new Server(server, {
-    cors: {
-        origin: process.env.FRONTEND_URL || '*',
-        methods: ['GET', 'POST'],
-        credentials: true
-    }
+    cors: corsOptions
 });
 
 // Middleware
-app.use(cors({
-    origin: process.env.FRONTEND_URL || '*',
-    credentials: true
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -52,8 +66,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+        secure: true, // Required for sameSite: 'none'
         httpOnly: true,
+        sameSite: 'none', // Allow cross-site cookies for the mobile app
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
 }));
