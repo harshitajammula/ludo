@@ -39,13 +39,25 @@ const allowedOrigins = [
 
 const corsOptions = {
     origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl)
+        // 1. Allow mobile apps (no origin)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || origin.startsWith('http://localhost:')) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
+
+        // 2. Allow localhost (standard for Capacitor)
+        if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+            return callback(null, true);
         }
+
+        // 3. Allow specified frontend URL
+        if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
+            return callback(null, true);
+        }
+
+        // 4. Allow Capacitor specific schemes
+        if (origin.startsWith('capacitor://') || origin.startsWith('http://localhost')) {
+            return callback(null, true);
+        }
+
+        callback(new Error('Not allowed by CORS'));
     },
     credentials: true
 };
