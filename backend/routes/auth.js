@@ -15,6 +15,15 @@ const router = express.Router();
  */
 router.get('/google',
     isNotAuthenticated,
+    (req, res, next) => {
+        // Save platform in session to know where to redirect after callback
+        if (req.query.platform === 'mobile') {
+            req.session.platform = 'mobile';
+        } else {
+            req.session.platform = 'web';
+        }
+        next();
+    },
     passport.authenticate('google', {
         scope: ['profile', 'email']
     })
@@ -26,9 +35,19 @@ router.get('/google',
  */
 router.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: '/login?error=auth_failed',
-        successRedirect: '/'
-    })
+        failureRedirect: '/login?error=auth_failed'
+    }),
+    (req, res) => {
+        // If it was a mobile request, redirect to the app via custom scheme
+        if (req.session.platform === 'mobile') {
+            // Clean up session platform flag
+            delete req.session.platform;
+            return res.redirect('ludo-game://home');
+        }
+
+        // Otherwise redirect to web home
+        res.redirect('/');
+    }
 );
 
 /**
