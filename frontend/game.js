@@ -612,8 +612,13 @@ function drawPlayerTokens(player, scale) {
 
             drawPin(visualPos.x, visualPos.y, pinWidth, pinHeight, player.color, scale);
 
-            // Highlight if movable
-            if (player.id === currentPlayerId && canMoveToken(player, index)) {
+            // Highlight if movable (own or teammate's if finished)
+            const isOurTurn = currentGameState.currentPlayer && currentGameState.currentPlayer.id === currentPlayerId;
+            const myColor = currentGameState.players.find(p => p.id === currentPlayerId)?.color;
+            const isTeammate = isTeammateOf(player.color, myColor, currentGameState);
+            const canPlayerControl = player.id === currentPlayerId || (isTeammate && isPlayerFinished(currentPlayerId, currentGameState));
+
+            if (isOurTurn && canPlayerControl && canMoveToken(player, index)) {
                 ctx.shadowColor = '#FFD700';
                 ctx.shadowBlur = 15 * scale;
                 ctx.strokeStyle = '#FFD700';
@@ -890,7 +895,13 @@ function getBoardPosition(position, cellSize) {
  */
 function canMoveToken(player, tokenIndex) {
     if (!currentGameState || !currentGameState.lastDiceRoll) return false;
-    if (currentGameState.currentPlayer.id !== player.id) return false;
+
+    // In team mode, current player can move teammate's token if they are finished
+    const currentPlayer = currentGameState.currentPlayer;
+    const isTeammate = isTeammateOf(player.color, currentPlayer.color, currentGameState);
+    const canControl = player.id === currentPlayer.id || (isTeammate && isPlayerFinished(currentPlayer.id, currentGameState));
+
+    if (!canControl) return false;
 
     const token = player.tokens[tokenIndex];
     const diceValue = currentGameState.lastDiceRoll;
@@ -928,23 +939,49 @@ window.handleTokenClick = function (event) {
     const scale = canvas.width / BOARD_CONFIG.size;
     const tokenRadius = BOARD_CONFIG.tokenRadius * scale;
 
-    const currentPlayer = currentGameState.players.find(p => p.id === currentPlayerId);
-    if (!currentPlayer) return;
+    // Check all players we can control
+    const victims = currentGameState.players.filter(p => {
+        const isSelf = p.id === currentPlayerId;
+        const myColor = currentGameState.players.find(pl => pl.id === currentPlayerId)?.color;
+        const isTeammate = isTeammateOf(p.color, myColor, currentGameState);
+        return isSelf || (isTeammate && isPlayerFinished(currentPlayerId, currentGameState));
+    });
 
-    for (let i = 0; i < currentPlayer.tokens.length; i++) {
-        const token = currentPlayer.tokens[i];
-        const visualPos = getVisualPosition(currentPlayer.color, i, currentGameState, BOARD_CONFIG.cellSize * scale);
-
-        if (visualPos) {
-            const distance = Math.sqrt(Math.pow(x - visualPos.x, 2) + Math.pow(y - visualPos.y, 2));
-
-            if (distance <= tokenRadius + 5) {
-                handleTokenSelection(i);
-                return;
+    for (let player of victims) {
+        for (let i = 0; i < player.tokens.length; i++) {
+            const visualPos = getVisualPosition(player.color, i, currentGameState, BOARD_CONFIG.cellSize * scale);
+            if (visualPos) {
+                const distance = Math.sqrt(Math.pow(x - visualPos.x, 2) + Math.pow(y - visualPos.y, 2));
+                if (distance <= tokenRadius + 5) {
+                    handleTokenSelection(i);
+                    return;
+                }
             }
         }
     }
 };
+
+/**
+ * Check if color1 and color2 are teammates
+ */
+function isTeammateOf(color1, color2, gameState) {
+    if (!gameState || !gameState.teamMode || !gameState.teams) return false;
+    if (!color1 || !color2 || color1 === color2) return false;
+
+    const { team1, team2 } = gameState.teams;
+    if (team1.includes(color1) && team1.includes(color2)) return true;
+    if (team2.includes(color1) && team2.includes(color2)) return true;
+
+    return false;
+}
+
+/**
+ * Check if player is finished
+ */
+function isPlayerFinished(playerId, gameState) {
+    const player = gameState.players.find(p => p.id === playerId);
+    return player && player.finishedTokens === 4;
+}
 
 /**
  * Handle token selection

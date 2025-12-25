@@ -1,0 +1,4708 @@
+{
+  "metadata": {
+    "device": {
+      "emulatorDevice": {
+        "serialNumber": "emulator-5554",
+        "isOnline": true,
+        "release": "16",
+        "apiLevel": {
+          "majorVersion": 36,
+          "minorVersion": 1
+        },
+        "featureLevel": 36,
+        "avdName": "Medium Phone API 36.1",
+        "avdPath": "C:\\Users\\vamsi\\.android\\avd\\Medium_Phone.avd",
+        "type": "HANDHELD"
+      }
+    },
+    "filter": "",
+    "projectApplicationIds": [
+      "com.ludo.game",
+      "com.ludo.game.test",
+      "com.getcapacitor.android.test",
+      "capacitor.cordova.android.plugins.test"
+    ]
+  },
+  "logcatMessages": [
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 1232,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "HalDevMgr",
+        "timestamp": {
+          "seconds": 1766603392,
+          "nanos": 524355700
+        }
+      },
+      "message": "bestIfaceCreationProposal is null, requestIface\u003dSTA, existingIface\u003d[name\u003dwlan0 type\u003dSTA]"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 349250300
+        }
+      },
+      "message": "readlink(/proc/self/fd/71) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 349394700
+        }
+      },
+      "message": "readlink(/proc/self/fd/113) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 430565900
+        }
+      },
+      "message": "readlink(/proc/self/fd/112) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 434419000
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 0 task\u003dnull activity\u003dnull display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 task null, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 434518600
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d0 task\u003dnull activity\u003dnull display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "GrammaticalInflectionUtils",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 435516000
+        }
+      },
+      "message": "AttributionSource: android.content.AttributionSource@cf341870 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission."
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 436254600
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 0 task\u003dnull activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 task null, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 436323100
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d0 task\u003dnull activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 436418600
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 436482200
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 437461200
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 437711800
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 438146800
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 438229500
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{52401012 u0 com.android.chrome/com.google.android.apps.chrome.IntentDispatcher t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 656,
+        "tid": 1687,
+        "applicationId": "surfaceflinger",
+        "processName": "surfaceflinger",
+        "tag": "libbinder.BpBinder",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 441174800
+        }
+      },
+      "message": "onLastStrongRef automatically unlinking death recipients for descriptor: \u0027(not cached)\u0027"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityTaskManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 443684400
+        }
+      },
+      "message": "START u0 {act\u003dandroid.intent.action.VIEW dat\u003dhttps://ludo-vvmt.onrender.com/... xflg\u003d0x4 cmp\u003dcom.android.chrome/com.google.android.apps.chrome.IntentDispatcher} with LAUNCH_MULTIPLE from uid 10219 (com.ludo.game) (sr\u003d42154597) (BAL_ALLOW_VISIBLE_WINDOW) result code\u003d0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 444474300
+        }
+      },
+      "message": "Transition requested (#101): android.os.BinderProxy@41b80ce TransitionRequestInfo { type \u003d OPEN, triggerTask \u003d TaskInfo{userId\u003d0 taskId\u003d27 effectiveUid\u003d10219 displayId\u003d0 isRunning\u003dtrue baseIntent\u003dIntent { act\u003dandroid.intent.action.MAIN cat\u003d[android.intent.category.LAUNCHER] flg\u003d0x10000000 cmp\u003dcom.ludo.game/.MainActivity } baseActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} topActivity\u003dComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} origActivity\u003dnull realActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} numActivities\u003d2 lastActiveTime\u003d11904050 supportsMultiWindow\u003dtrue resizeMode\u003d1 isResizeable\u003dtrue minWidth\u003d-1 minHeight\u003d-1 defaultMinSize\u003d220 token\u003dWCT{android.os.BinderProxy@81e1fb4} topActivityType\u003d1 pictureInPictureParams\u003dnull shouldDockBigOverlays\u003dfalse launchIntoPipHostTaskId\u003d-1 lastParentTaskIdBeforePip\u003d-1 displayCutoutSafeInsets\u003dRect(0, 0 - 0, 0) topActivityInfo\u003dActivityInfo{e48cbef com.google.android.apps.chrome.IntentDispatcher} launchCookies\u003d[] positionInParent\u003dPoint(0, 0) parentTaskId\u003d-1 isFocused\u003dtrue isVisible\u003dtrue isVisibleRequested\u003dtrue isTopActivityNoDisplay\u003dtrue isSleeping\u003dfalse locusId\u003dnull displayAreaFeatureId\u003d1 isTopActivityTransparent\u003dtrue isActivityStackTransparent\u003dfalse lastNonFullscreenBounds\u003dnull capturedLink\u003dhttps://ludo-vvmt.onrender.com/auth/google?platform\u003dmobile capturedLinkTimestamp\u003d0 requestedVisibleTypes\u003d503 topActivityRequestOpenInBrowserEducationTimestamp\u003d0 appCompatTaskInfo\u003dAppCompatTaskInfo { topActivityInSizeCompat\u003dfalse isLeafTask\u003d true eligibleForLetterboxEducation\u003d false isLetterboxEducationEnabled\u003d true isLetterboxDoubleTapEnabled\u003d false eligibleForUserAspectRatioButton\u003d false topActivityBoundsLetterboxed\u003d false isFromLetterboxDoubleTap\u003d false topActivityLetterboxVerticalPosition\u003d -1 topActivityLetterboxHorizontalPosition\u003d -1 topActivityLetterboxWidth\u003d-1 topActivityLetterboxHeight\u003d-1 topActivityAppBounds\u003dRect(0, 0 - 1080, 2337) isUserFullscreenOverrideEnabled\u003dfalse isSystemFullscreenOverrideEnabled\u003dfalse hasMinAspectRatioOverride\u003dfalse topActivityLetterboxBounds\u003dnull cameraCompatTaskInfo\u003dCameraCompatTaskInfo { cameraCompatMode\u003dinactive0} topNonResizableActivityAspectRatio\u003d-1.0} topActivityMainWindowFrame\u003dnull isAppBubble\u003dfalse}, pipChange \u003d null, remoteTransition \u003d null, displayChange \u003d null, requestedLocation \u003d null, userChange \u003d null, windowingLayerChange \u003d null, flags \u003d 0, debugId \u003d 101 }"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "ShellSplitScreen",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 444577400
+        }
+      },
+      "message": "logExit: no-op, mLoggerSessionId is null"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "Capacitor",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 448379300
+        }
+      },
+      "message": "App paused"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 451119100
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 451892700
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 453449100
+        }
+      },
+      "message": "quick sync unfreeze 14977 for 1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 456949800
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 457851400
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 458031800
+        }
+      },
+      "message": "sync unfroze 14977 com.android.chrome for 1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 459499600
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14995,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "GFXSTREAM",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 463784800
+        }
+      },
+      "message": "[eglDisplay.cpp(297)] Opening libGLESv1_CM_emulation.so"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14995,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "GFXSTREAM",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 465088300
+        }
+      },
+      "message": "[eglDisplay.cpp(297)] Opening libGLESv2_emulation.so"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 504488400
+        }
+      },
+      "message": "sync unfroze 11968 com.google.android.adservices.api for 1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 505782300
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14995,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "HWUI",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 506122300
+        }
+      },
+      "message": "Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without..."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14995,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "HWUI",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 506685300
+        }
+      },
+      "message": "Failed to initialize 101010-2 format, error \u003d EGL_SUCCESS"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 507641100
+        }
+      },
+      "message": "sync unfroze 12698 com.android.vending for 1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 508597000
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 509575900
+        }
+      },
+      "message": "sync unfroze 15060 com.android.chrome:privileged_process0 for 1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 511145500
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 792,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 516695900
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 792,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 516725000
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ConnectivityService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 541706700
+        }
+      },
+      "message": "requestNetwork for uid/pid:10154/14977 activeRequest: null callbackRequest: 441 [NetworkRequest [ REQUEST id\u003d442, [ Capabilities: INTERNET\u0026NOT_RESTRICTED\u0026TRUSTED\u0026NOT_VCN_MANAGED\u0026NOT_BANDWIDTH_CONSTRAINED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.android.chrome UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647 isUidTracked: false declaredMethods: AVAIL|LOST|NC|LP"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1232,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "OemPaidWifiNetworkFactory",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 543540800
+        }
+      },
+      "message": "got request NetworkRequest [ REQUEST id\u003d442, [ Capabilities: INTERNET\u0026NOT_RESTRICTED\u0026TRUSTED\u0026NOT_VCN_MANAGED\u0026NOT_BANDWIDTH_CONSTRAINED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.android.chrome UnderlyingNetworks: Null] ]"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1240,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ConnectivityService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 543578200
+        }
+      },
+      "message": "NetReassign [442 : null → 100] [c 0] [a 1] [i 0]"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1232,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "MultiInternetWifiNetworkFactory",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 543725800
+        }
+      },
+      "message": "got request NetworkRequest [ REQUEST id\u003d442, [ Capabilities: INTERNET\u0026NOT_RESTRICTED\u0026TRUSTED\u0026NOT_VCN_MANAGED\u0026NOT_BANDWIDTH_CONSTRAINED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.android.chrome UnderlyingNetworks: Null] ]"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1232,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WifiNetworkFactory",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 543749000
+        }
+      },
+      "message": "got request NetworkRequest [ REQUEST id\u003d442, [ Capabilities: INTERNET\u0026NOT_RESTRICTED\u0026TRUSTED\u0026NOT_VCN_MANAGED\u0026NOT_BANDWIDTH_CONSTRAINED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.android.chrome UnderlyingNetworks: Null] ]"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1232,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "UntrustedWifiNetworkFactory",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 543797400
+        }
+      },
+      "message": "got request NetworkRequest [ REQUEST id\u003d442, [ Capabilities: INTERNET\u0026NOT_RESTRICTED\u0026TRUSTED\u0026NOT_VCN_MANAGED\u0026NOT_BANDWIDTH_CONSTRAINED Uid: 10154 RequestorUid: 10154 RequestorPkg: com.android.chrome UnderlyingNetworks: Null] ]"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1240,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ConnectivityService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 547809800
+        }
+      },
+      "message": "NetReassign [no changes] [c 1] [a 0] [i 0]"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_OfflineDetector",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 556040700
+        }
+      },
+      "message": "Running updateState mConnectivityDetectorInitialized: true, mTimeWhenLastForegrounded: 11904165, getElapsedTime: 11904165, mTimeWhenLastOfflineNotificationReceived: 0, mTimeWhenLastOnline: 11098505, mTimeWhenAirplaneModeToggledOff: 0 mApplicationState: 1, mIsOfflineLastReportedByConnectivityDetector: false, mInAirplaneMode: false mIsEffectivelyOffline: false"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_OfflineDetector",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 556160800
+        }
+      },
+      "message": "updateState(): timeSinceLastForeground: 0, timeSinceOfflineNotificationReceived: 11904165, timeSinceLastOnline: 805660, timeNeededForForeground: 2000, timeNeededForOffline: -11902165 timeSinceAirplaneModeToggledOff: 11904165 timeNeededAfterConnectionChangeFromOnlineToOffline: -795660 timeNeededAfterConnectionChangeFromAirplaneToOffline: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1569,
+        "tid": 1569,
+        "applicationId": "com.google.android.apps.nexuslauncher",
+        "processName": "com.google.android.apps.nexuslauncher",
+        "tag": "b/417220811",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 560322500
+        }
+      },
+      "message": "invalidateLoadedTasks - previous requestLoadId: -1"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_ActivityDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 575715900
+        }
+      },
+      "message": "CustomTabsIntent#shouldAlwaysUseBrowserUI() \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 15034,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_PartnerCustomize",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 576732900
+        }
+      },
+      "message": "Partner homepage must be HTTP(S) or NewTabPage. Got invalid URL \"\""
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_ActivityDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 577153100
+        }
+      },
+      "message": "CustomTabsIntent#shouldAlwaysUseBrowserUI() \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 584872000
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 0 task\u003dnull activity\u003dnull display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 task null, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 584967500
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d0 task\u003dnull activity\u003dnull display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "GrammaticalInflectionUtils",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 586176300
+        }
+      },
+      "message": "AttributionSource: android.content.AttributionSource@cf341870 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission."
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 587281100
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 0 task\u003dnull activity\u003dActivityRecord{165337865 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 task null, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 587429500
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d0 task\u003dnull activity\u003dActivityRecord{165337865 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 587912200
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome} activity\u003dActivityRecord{165337865 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 587968500
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome} activity\u003dActivityRecord{165337865 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 588281600
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome} activity\u003dActivityRecord{165337865 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 588488400
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome} activity\u003dActivityRecord{165337865 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityTaskManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 593265900
+        }
+      },
+      "message": "START u0 {act\u003dandroid.intent.action.VIEW dat\u003dhttps://ludo-vvmt.onrender.com/... flg\u003d0x14002000 xflg\u003d0x4 cmp\u003dcom.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity (has extras)} with LAUNCH_SINGLE_INSTANCE_PER_TASK from uid 10154 (com.android.chrome) (sr\u003d52401012) (BAL_ALLOW_VISIBLE_WINDOW) result code\u003d2"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1569,
+        "tid": 1569,
+        "applicationId": "com.google.android.apps.nexuslauncher",
+        "processName": "com.google.android.apps.nexuslauncher",
+        "tag": "b/417220811",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 595784600
+        }
+      },
+      "message": "invalidateLoadedTasks - previous requestLoadId: -1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 596320800
+        }
+      },
+      "message": "onActivityRestartAttempt: topActivity\u003dComponentInfo{com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}, wasVisible\u003dfalse, displayId\u003d0, pipDisplayLayoutState#displayId\u003d0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 791,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 598379500
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 791,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 598457700
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 610249500
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 611566700
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ProcessStats",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 611794700
+        }
+      },
+      "message": "Tracking association SourceState{430405a com.android.chrome/10154 BTop #19759} whose proc state 2 is better than process ProcessState{a4fb8af com.android.vending/10145 pkg\u003dcom.android.vending} proc state 13 (14 skipped)"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 612400700
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "ViewRootImpl",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 615134800
+        }
+      },
+      "message": "Skipping stats log for color mode"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 618729700
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1462,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "VRI[chrome]",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 621256900
+        }
+      },
+      "message": "visibilityChanged oldVisibility\u003dfalse newVisibility\u003dtrue"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 631554600
+        }
+      },
+      "message": "readlink(/proc/self/fd/115) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "JobInfo",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 632269600
+        }
+      },
+      "message": "Job \u0027com.android.chrome/org.chromium.components.background_task_scheduler.internal.BackgroundTaskJobService#112\u0027 has a deadline with no functional constraints. The deadline won\u0027t improve job execution latency. Consider removing the deadline."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_ActivityDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 633920800
+        }
+      },
+      "message": "CustomTabsIntent#shouldAlwaysUseBrowserUI() \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 15034,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_PartnerCustomize",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 634982500
+        }
+      },
+      "message": "Partner homepage must be HTTP(S) or NewTabPage. Got invalid URL \"\""
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_ChromeActivity",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 637430200
+        }
+      },
+      "message": "onNewIntentWithNative: exiting picture in picture if needed"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 637506600
+        }
+      },
+      "message": "Framework exited picture in picture"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 637524300
+        }
+      },
+      "message": "Exited picture in picture with reason: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 646881900
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 646958800
+        }
+      },
+      "message": "sync unfroze 6536 com.google.android.gms for 6"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 648380900
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 6536,
+        "tid": 6536,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "BoundBrokerSvc",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 663909100
+        }
+      },
+      "message": "onBind: Intent { act\u003dcom.google.android.gms.chromesync.service.firstparty.START dat\u003dchimera-action:/... xflg\u003d0x4 cmp\u003dcom.google.android.gms/.chimera.GmsApiService }"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 6536,
+        "tid": 6536,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "BoundBrokerSvc",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 663966000
+        }
+      },
+      "message": "Loading bound service for intent: Intent { act\u003dcom.google.android.gms.chromesync.service.firstparty.START dat\u003dchimera-action:/... xflg\u003d0x4 cmp\u003dcom.google.android.gms/.chimera.GmsApiService }"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_ActivityDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 668788300
+        }
+      },
+      "message": "CustomTabsIntent#shouldAlwaysUseBrowserUI() \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1635,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 683456100
+        }
+      },
+      "message": "onTransitionReady(transaction\u003d3474628551151)"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 6536,
+        "tid": 6536,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "BoundBrokerSvc",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 684671400
+        }
+      },
+      "message": "onUnbind: Intent { act\u003dcom.google.android.gms.common.BIND_SHARED_PREFS xflg\u003d0x4 pkg\u003dcom.google.android.gms }"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 685656800
+        }
+      },
+      "message": "onTransitionReady (#101) android.os.BinderProxy@41b80ce: {id\u003d101 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[\n        {m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d23#936)/@0x2642b00 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},\n        {m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d27#1204)/@0xbc07f39 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}\n    ]}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 686411700
+        }
+      },
+      "message": "Playing animation for (#101) android.os.BinderProxy@41b80ce@0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "ShellRecents",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 688113000
+        }
+      },
+      "message": "RecentsTransitionHandler.startAnimation: no controller found"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689367700
+        }
+      },
+      "message": "Transition doesn\u0027t have explicit remote, search filters for match for {id\u003d101 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[{m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d23#936)/@0x2642b00 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},{m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d27#1204)/@0xbc07f39 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}]}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689433800
+        }
+      },
+      "message": " Checking filter Pair{{types\u003d[] flags\u003d0x0] notFlags\u003d0x0 checks\u003d[{atype\u003dundefined independent\u003dtrue modes\u003d[CLOSE,TO_BACK] flags\u003dIN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull taskFragmentToken\u003dandroid.os.BinderProxy@d812586 windowingMode\u003dundefined isCrossDisplayMove\u003dfalse}]} RemoteTransition { remoteTransition \u003d android.window.IRemoteTransition$Stub$Proxy@50ffe47, appThread \u003d android.app.IApplicationThread$Stub$Proxy@9331674, debugName \u003d overlayBackTransition }}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689491000
+        }
+      },
+      "message": " Checking filter Pair{{types\u003d[] flags\u003d0x0] notFlags\u003d0x0 checks\u003d[{atype\u003ddream independent\u003dtrue modes\u003d[OPEN,TO_FRONT] flags\u003dNONE mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse},{atype\u003dhome independent\u003dtrue modes\u003d[CLOSE,TO_BACK] flags\u003dNONE mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse}]} RemoteTransition { remoteTransition \u003d android.window.IRemoteTransition$Stub$Proxy@d50179d, appThread \u003d android.app.IApplicationThread$Stub$Proxy@2ba1412, debugName \u003d LauncherToDream }}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689557500
+        }
+      },
+      "message": " Checking filter Pair{{types\u003d[] flags\u003d0x0] notFlags\u003d0x100 checks\u003d[{atype\u003dhome independent\u003dtrue modes\u003d[OPEN,TO_FRONT] flags\u003dNONE mustBeTask\u003dfalse order\u003dTOP topActivity\u003dComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse},{atype\u003dstandard independent\u003dtrue modes\u003d[CLOSE,TO_BACK] flags\u003dNONE mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse},{NOT atype\u003dundefined independent\u003dtrue modes\u003d[] flags\u003dNONE mustBeTask\u003dtrue order\u003dANY topActivity\u003dnull launchCookie\u003dnull customAnim\u003dtrue windowingMode\u003dundefined isCrossDisplayMove\u003dfalse}]} RemoteTransition { remoteTransition \u003d android.window.IRemoteTransition$Stub$Proxy@34437e3, appThread \u003d android.app.IApplicationThread$Stub$Proxy@9a525e0, debugName \u003d QuickstepLaunchHome }}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689580300
+        }
+      },
+      "message": " Delegate animation for (#101) to null"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689625500
+        }
+      },
+      "message": "start default transition animation, info \u003d {id\u003d101 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[{m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d23#936)/@0x2642b00 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},{m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d27#1204)/@0xbc07f39 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}]}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689818200
+        }
+      },
+      "message": "loadAnimation: anim\u003dandroid.view.animation.AnimationSet@66a8edf animAttr\u003d0x9 type\u003dOPEN isEntrance\u003dfalse"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 689983100
+        }
+      },
+      "message": "loadAnimation: anim\u003dandroid.view.animation.AnimationSet@260f72c animAttr\u003d0x8 type\u003dOPEN isEntrance\u003dtrue"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 694147400
+        }
+      },
+      "message": " animated by com.android.wm.shell.transition.DefaultTransitionHandler@eb94072"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 695838200
+        }
+      },
+      "message": "Sent Transition (#101) createdAt\u003d12-24 14:09:53.436 via request\u003dTransitionRequestInfo { type \u003d OPEN, triggerTask \u003d TaskInfo{userId\u003d0 taskId\u003d27 effectiveUid\u003d10219 displayId\u003d0 isRunning\u003dtrue baseIntent\u003dIntent { act\u003dandroid.intent.action.MAIN cat\u003d[android.intent.category.LAUNCHER] flg\u003d0x10000000 cmp\u003dcom.ludo.game/.MainActivity } baseActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} topActivity\u003dComponentInfo{com.android.chrome/org.chromium.chrome.browser.document.ChromeLauncherActivity} origActivity\u003dnull realActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} numActivities\u003d2 lastActiveTime\u003d11904050 supportsMultiWindow\u003dtrue resizeMode\u003d1 isResizeable\u003dtrue minWidth\u003d-1 minHeight\u003d-1 defaultMinSize\u003d220 token\u003dWCT{RemoteToken{67973af Task{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game}}} topActivityType\u003d1 pictureInPictureParams\u003dnull shouldDockBigOverlays\u003dfalse launchIntoPipHostTaskId\u003d-1 lastParentTaskIdBeforePip\u003d-1 displayCutoutSafeInsets\u003dRect(0, 0 - 0, 0) topActivityInfo\u003dActivityInfo{87844c3 com.google.android.apps.chrome.IntentDispatcher} launchCookies\u003d[] positionInParent\u003dPoint(0, 0) parentTaskId\u003d-1 isFocused\u003dtrue isVisible\u003dtrue isVisibleRequested\u003dtrue isTopActivityNoDisplay\u003dtrue isSleeping\u003dfalse locusId\u003dnull displayAreaFeatureId\u003d1 isTopActivityTransparent\u003dtrue isActivityStackTransparent\u003dfalse lastNonFullscreenBounds\u003dnull capturedLink\u003dhttps://ludo-vvmt.onrender.com/auth/google?platform\u003dmobile capturedLinkTimestamp\u003d0 requestedVisibleTypes\u003d503 topActivityRequestOpenInBrowserEducationTimestamp\u003d0 appCompatTaskInfo\u003dAppCompatTaskInfo { topActivityInSizeCompat\u003dfalse isLeafTask\u003d true eligibleForLetterboxEducation\u003d false isLetterboxEducationEnabled\u003d true isLetterboxDoubleTapEnabled\u003d false eligibleForUserAspectRatioButton\u003d false topActivityBoundsLetterboxed\u003d false isFromLetterboxDoubleTap\u003d false topActivityLetterboxVerticalPosition\u003d -1 topActivityLetterboxHorizontalPosition\u003d -1 topActivityLetterboxWidth\u003d-1 topActivityLetterboxHeight\u003d-1 topActivityAppBounds\u003dRect(0, 0 - 1080, 2337) isUserFullscreenOverrideEnabled\u003dfalse isSystemFullscreenOverrideEnabled\u003dfalse hasMinAspectRatioOverride\u003dfalse topActivityLetterboxBounds\u003dnull cameraCompatTaskInfo\u003dCameraCompatTaskInfo { cameraCompatMode\u003dinactive0} topNonResizableActivityAspectRatio\u003d-1.0} topActivityMainWindowFrame\u003dnull isAppBubble\u003dfalse}, pipChange \u003d null, remoteTransition \u003d null, displayChange \u003d null, requestedLocation \u003d null, userChange \u003d null, windowingLayerChange \u003d null, flags \u003d 0, debugId \u003d 101 }"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 695859700
+        }
+      },
+      "message": "    startWCT\u003dWindowContainerTransaction { changes\u003d {} hops\u003d [] errorCallbackToken\u003dnull taskFragmentOrganizer\u003dnull }"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 695904500
+        }
+      },
+      "message": "    info\u003d{id\u003d101 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[\n        {WCT{RemoteToken{d23609a Task{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome}}} m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d23#936)/@0x9e2a9b6 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},\n        {WCT{RemoteToken{67973af Task{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game}}} m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d27#1204)/@0x840d553 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}\n    ]}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2349,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "GrammaticalInflectionUtils",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 699583500
+        }
+      },
+      "message": "AttributionSource: android.content.AttributionSource@ad7e04a does not have READ_SYSTEM_GRAMMATICAL_GENDER permission."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 580,
+        "tid": 580,
+        "applicationId": "zygote64",
+        "processName": "zygote64",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 702686800
+        }
+      },
+      "message": "Resorting to Java fork code; multipleOK \u003d true"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 703872800
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 6536,
+        "tid": 6536,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "BoundBrokerSvc",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 704955800
+        }
+      },
+      "message": "onBind: Intent { act\u003dcom.google.android.gms.safebrowsing.SafeBrowsingService.START dat\u003dchimera-action:/... xflg\u003d0x4 cmp\u003dcom.google.android.gms/.chimera.GmsBoundBrokerService }"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 6536,
+        "tid": 6536,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "BoundBrokerSvc",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 705095100
+        }
+      },
+      "message": "Loading bound service for intent: Intent { act\u003dcom.google.android.gms.safebrowsing.SafeBrowsingService.START dat\u003dchimera-action:/... xflg\u003d0x4 cmp\u003dcom.google.android.gms/.chimera.GmsBoundBrokerService }"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 710285300
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): Fz3@5ad490"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 710978000
+        }
+      },
+      "message": "Window{cd4f78f u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@1d28296, mPriority\u003d0, mIsAnimationCallback\u003dtrue, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 713627300
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): android.app.Activity$$ExternalSyntheticLambda0@d6f8f8e"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 714018300
+        }
+      },
+      "message": "Window{cd4f78f u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@6f7e17, mPriority\u003d-1, mIsAnimationCallback\u003dfalse, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 580,
+        "tid": 580,
+        "applicationId": "zygote64",
+        "processName": "zygote64",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 715657400
+        }
+      },
+      "message": "Forked child process 16397"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1569,
+        "tid": 1569,
+        "applicationId": "com.google.android.apps.nexuslauncher",
+        "processName": "com.google.android.apps.nexuslauncher",
+        "tag": "b/417220811",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 715711700
+        }
+      },
+      "message": "invalidateLoadedTasks - previous requestLoadId: -1"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 845,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ZygoteProcess",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 719212600
+        }
+      },
+      "message": "Got error connecting to zygote, retrying. msg\u003d Connection refused"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 733458200
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): Fz3@5ad490"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 733761100
+        }
+      },
+      "message": "Window{cd4f78f u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@ad61b07, mPriority\u003d0, mIsAnimationCallback\u003dtrue, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 734786100
+        }
+      },
+      "message": "Dismiss activity with reason 4"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_BotControlsStacker",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 735398500
+        }
+      },
+      "message": "Height mismatch observed. [HeightFromSetter] expectedHeight\u003d 0 expectedMinHeight\u003d 0 [onBottomControlsHeightChanged] actualHeight \u003d 63 actualMinHeight\u003d 0"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_A11yState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 745389700
+        }
+      },
+      "message": "Enabled accessibility services list updated. []"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "zygote64",
+        "processName": "zygote64",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 747660900
+        }
+      },
+      "message": "Process 16397 created for com.android.chrome_zygote"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_A11yState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 747924600
+        }
+      },
+      "message": "Informing listeners of changes."
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_A11yState",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 747979100
+        }
+      },
+      "message": "New AccessibilityState: State{isScreenReaderEnabled\u003dfalse, isTouchExplorationEnabled\u003dfalse, isPerformGesturesEnabled\u003dfalse, isAnyAccessibilityServiceEnabled\u003dfalse, isAccessibilityToolPresent\u003dfalse, isSpokenFeedbackServicePresent\u003dfalse, isTextShowPasswordEnabled\u003dtrue, isOnlyPasswordManagersEnabled\u003dfalse}"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "zygote64",
+        "processName": "zygote64",
+        "tag": "d.chrome_zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 748131700
+        }
+      },
+      "message": "Using CollectorTypeCMC GC."
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_InactivityTracker",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 754927800
+        }
+      },
+      "message": "Last background time read from the SharedPreference is:1766603317726."
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_ChromeActivity",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 760138000
+        }
+      },
+      "message": "onResumeWithNative: exiting picture in picture if needed"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 761012600
+        }
+      },
+      "message": "Dismiss activity with reason 0"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_InactivityTracker",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 763161700
+        }
+      },
+      "message": "Last visible time read from the SharedPreference is:1766603317014."
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 845,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "AppZygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 770289700
+        }
+      },
+      "message": "Starting application preload."
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "AppZygoteInit",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 771516900
+        }
+      },
+      "message": "Beginning application preload for com.android.chrome"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "d.chrome_zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 772197500
+        }
+      },
+      "message": "Failed to find entry \u0027classes.dex\u0027: Entry not found"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "nativeloader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 772725200
+        }
+      },
+      "message": "Configuring clns-9 for other apk /data/app/~~ETKtdXBp0CCYCP5B8jj9oA\u003d\u003d/com.google.android.trichromelibrary_699813538-V0Er_ZASvedzUU3F48SMJA\u003d\u003d/TrichromeLibrary.apk. target_sdk_version\u003d35, uses_libraries\u003dALL, library_path\u003d/data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/lib/x86_64:/data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk!/lib/x86_64:/data/app/~~ETKtdXBp0CCYCP5B8jj9oA\u003d\u003d/com.google.android.trichromelibrary_699813538-V0Er_ZASvedzUU3F48SMJA\u003d\u003d/TrichromeLibrary.apk!/lib/x86_64, permitted_path\u003d/data:/mnt/expand"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "nativeloader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 782062800
+        }
+      },
+      "message": "Configuring clns-10 for other apk /data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk. target_sdk_version\u003d35, uses_libraries\u003d, library_path\u003d/data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/lib/x86_64:/data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk!/lib/x86_64:/data/app/~~ETKtdXBp0CCYCP5B8jj9oA\u003d\u003d/com.google.android.trichromelibrary_699813538-V0Er_ZASvedzUU3F48SMJA\u003d\u003d/TrichromeLibrary.apk!/lib/x86_64, permitted_path\u003d/data:/mnt/expand"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_ZygotePreload",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 783956300
+        }
+      },
+      "message": "version\u003d134.0.6998.135 (699813538) minSdkVersion\u003d29 isBundle\u003dfalse"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "nativeloader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 785947500
+        }
+      },
+      "message": "Load /data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk!/lib/x86_64/libchromium_android_linker.so using class loader ns clns-10 (caller\u003d/data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk): ok"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_LibraryLoader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 786945100
+        }
+      },
+      "message": "Loading monochrome_64 from within /data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_Linker",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 787120200
+        }
+      },
+      "message": "loadLibraryImplLocked: monochrome_64, relroMode\u003d1"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_CompositorSurfaceMgr",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 797341700
+        }
+      },
+      "message": "surfaceCreated format: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "nativeloader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 807163900
+        }
+      },
+      "message": "Load /data/app/~~ETKtdXBp0CCYCP5B8jj9oA\u003d\u003d/com.google.android.trichromelibrary_699813538-V0Er_ZASvedzUU3F48SMJA\u003d\u003d/TrichromeLibrary.apk!/lib/x86_64/libmonochrome_64.so using class loader ns clns-10 (caller\u003d/data/app/~~8AxvfW-quoEf3SRaSZ0CdA\u003d\u003d/com.android.chrome-__lZB45HLeiJZ-qvNbof0w\u003d\u003d/Chrome.apk): ok"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "AppZygoteInit",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 808194900
+        }
+      },
+      "message": "Application preload done"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 845,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "AppZygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 808443700
+        }
+      },
+      "message": "Application preload done."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 16397,
+        "tid": 16403,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "d.chrome_zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 817711100
+        }
+      },
+      "message": "userfaultfd: MOVE ioctl seems unsupported: Success"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 16397,
+        "tid": 16403,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "d.chrome_zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 818624700
+        }
+      },
+      "message": "Reducing the number of considered missed Gc histogram windows from 1187 to 100"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 829270600
+        }
+      },
+      "message": "Entering forkRepeatedly native zygote loop"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 830556200
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 835383800
+        }
+      },
+      "message": "Forked child process 16410"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 840295500
+        }
+      },
+      "message": "Process 16410 created for com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ocessService0:7",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 840500400
+        }
+      },
+      "message": "Using CollectorTypeCMC GC."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ocessService0:7",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 841404600
+        }
+      },
+      "message": "Unexpected CPU variant for x86: x86_64.\nKnown variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, default"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "nativeloader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 848875500
+        }
+      },
+      "message": "Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 852999000
+        }
+      },
+      "message": "Slow operation: 153ms so far, now at startProcess: done updating battery stats"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 853085400
+        }
+      },
+      "message": "Slow operation: 153ms so far, now at startProcess: building log message"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 853126900
+        }
+      },
+      "message": "Start proc 16410:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7/u0ai0 for  {com.android.chrome/org.chromium.content.app.SandboxedProcessService0:7}"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 853263300
+        }
+      },
+      "message": "Slow operation: 153ms so far, now at startProcess: starting to update pids map"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 1424,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 853393400
+        }
+      },
+      "message": "Slow operation: 154ms so far, now at startProcess: done updating pids map"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 845,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 854950500
+        }
+      },
+      "message": "Slow operation: 155ms so far, now at startProcess: returned from zygote!"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "CompatChangeReporter",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 865467500
+        }
+      },
+      "message": "Compat change id reported: 202956589; UID 90000; state: ENABLED"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "LoadedApk",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 875118800
+        }
+      },
+      "message": "No resource references to update in package com.google.android.trichromelibrary"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_SplitCompatApp",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 877013200
+        }
+      },
+      "message": "version\u003d134.0.6998.135 (699813538) minSdkVersion\u003d29 isBundle\u003dfalse processName\u003dcom.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7 isIsolatedProcess\u003dtrue"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 881535500
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16410,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_ChildProcessService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 890475300
+        }
+      },
+      "message": "Creating new ChildProcessService pid\u003d16410"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 6462,
+        "tid": 6462,
+        "applicationId": "com.google.android.gms.persistent",
+        "processName": "com.google.android.gms.persistent",
+        "tag": "BoundBrokerSvc",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 891730200
+        }
+      },
+      "message": "onRebind: Intent { act\u003dcom.google.android.gms.auth.aang.events.services.START dat\u003dchimera-action:/... xflg\u003d0x4 cmp\u003dcom.google.android.gms/.chimera.PersistentApiService }"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 894785400
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16425,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_LibraryLoader",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 905160400
+        }
+      },
+      "message": "Successfully loaded native library"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16410,
+        "tid": 16425,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "cr_CachingUmaRecorder",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 906734300
+        }
+      },
+      "message": "Flushed 3 samples from 3 histograms, 0 samples were dropped."
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 6536,
+        "tid": 13036,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "SyncManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 908612600
+        }
+      },
+      "message": "(REDACTED) Executing sync(type\u003d%s%s)"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 16410,
+        "tid": 16425,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "SystemServiceRegistry",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 913019700
+        }
+      },
+      "message": "No service published for: uimode"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 6536,
+        "tid": 13036,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "SyncManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 916874700
+        }
+      },
+      "message": "(REDACTED) Executing sync(type\u003d%s) finished in %s"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 6536,
+        "tid": 13036,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "SyncManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 938317000
+        }
+      },
+      "message": "(REDACTED) Executing sync(type\u003d%s%s)"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityTaskManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 940103200
+        }
+      },
+      "message": "Displayed com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity for user 0: +509ms"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 6536,
+        "tid": 13036,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "SyncManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 945381800
+        }
+      },
+      "message": "(REDACTED) Executing sync(type\u003d%s) finished in %s"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 6536,
+        "tid": 13036,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "SyncManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 949329900
+        }
+      },
+      "message": "(REDACTED) Executing sync(type\u003d%s%s)"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 6536,
+        "tid": 13036,
+        "applicationId": "com.google.android.gms",
+        "processName": "com.google.android.gms",
+        "tag": "SyncManager",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 952978600
+        }
+      },
+      "message": "(REDACTED) Executing sync(type\u003d%s) finished in %s"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16410,
+        "tid": 16425,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 969576600
+        }
+      },
+      "message": "readlink(/proc/self/fd/94) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16410,
+        "tid": 16425,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 976836300
+        }
+      },
+      "message": "readlink(/proc/self/fd/114) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16410,
+        "tid": 16425,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 976969200
+        }
+      },
+      "message": "readlink(/proc/self/fd/120) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16410,
+        "tid": 16431,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 977334800
+        }
+      },
+      "message": "readlink(/proc/self/fd/119) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "GoogleInputMethodService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 982988400
+        }
+      },
+      "message": "GoogleInputMethodService.onFinishInput():2057 "
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16410,
+        "tid": 16431,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 983661800
+        }
+      },
+      "message": "readlink(/proc/self/fd/116) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "Module",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 984056000
+        }
+      },
+      "message": "DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes \u003d 0, locked \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 984610800
+        }
+      },
+      "message": "system_server:68b64f1b: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16410,
+        "tid": 16431,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 984992200
+        }
+      },
+      "message": "readlink(/proc/self/fd/122) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 985501500
+        }
+      },
+      "message": "system_server:68b64f1b: onCancelled at PHASE_SERVER_SHOULD_HIDE"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "GoogleInputMethodService",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 985829200
+        }
+      },
+      "message": "GoogleInputMethodService.onStartInput():1318 onStartInput(EditorInfo{EditorInfo{packageName\u003dcom.android.chrome, inputType\u003d0, inputTypeString\u003dNULL, enableLearning\u003dfalse, autoCorrection\u003dfalse, autoComplete\u003dfalse, imeOptions\u003d12000000, privateImeOptions\u003dnull, actionName\u003dUNSPECIFIED, actionLabel\u003dnull, initialSelStart\u003d-1, initialSelEnd\u003d-1, initialCapsMode\u003d0, label\u003dnull, fieldId\u003d0, fieldName\u003dnull, extras\u003dnull, hintText\u003dnull, hintLocales\u003d[]}}, false)"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "Module",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 987754400
+        }
+      },
+      "message": "DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes \u003d 1, locked \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "PackageConfigPersister",
+        "timestamp": {
+          "seconds": 1766603393,
+          "nanos": 989194600
+        }
+      },
+      "message": "App-specific configuration not found for packageName: com.android.chrome and userId: 0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 220793400
+        }
+      },
+      "message": "Transition animation finished (aborted\u003dfalse), notifying core (#101) android.os.BinderProxy@41b80ce@0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 223969400
+        }
+      },
+      "message": "Finish Transition (#101): created at 12-24 14:09:53.436 collect-started\u003d0.067ms request-sent\u003d7.362ms started\u003d8.901ms ready\u003d175.324ms sent\u003d245.671ms commit\u003d23.061ms finished\u003d787.096ms"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 225062600
+        }
+      },
+      "message": "Track 0 became idle"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 225103500
+        }
+      },
+      "message": "All active transition animations finished"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "VRI[MainActivity]",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 226687200
+        }
+      },
+      "message": "visibilityChanged oldVisibility\u003dtrue newVisibility\u003dfalse"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "ContentCaptureHelper",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 229547300
+        }
+      },
+      "message": "Setting logging level to OFF"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 1308,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImageReader_JNI",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 229961100
+        }
+      },
+      "message": "Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 233952000
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 234007700
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 235800600
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 241215800
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 241246600
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "Capacitor",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 248019000
+        }
+      },
+      "message": "App stopped"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "Capacitor",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 248259300
+        }
+      },
+      "message": "Saving instance state!"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 262033000
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 379685600
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 0 task\u003dnull activity\u003dnull display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 task null, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 379721300
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d0 task\u003dnull activity\u003dnull display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "GrammaticalInflectionUtils",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 380065800
+        }
+      },
+      "message": "AttributionSource: android.content.AttributionSource@3e1f18cf does not have READ_SYSTEM_GRAMMATICAL_GENDER permission."
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 380527300
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 0 task\u003dnull activity\u003dActivityRecord{97308127 u0 com.ludo.game/.MainActivity display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 task null, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 380699600
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d0 task\u003dnull activity\u003dActivityRecord{97308127 u0 com.ludo.game/.MainActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 380845100
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{97308127 u0 com.ludo.game/.MainActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 380889800
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{97308127 u0 com.ludo.game/.MainActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 381120700
+        }
+      },
+      "message": "DesktopModeLaunchParamsModifier: phase\u003d 3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{97308127 u0 com.ludo.game/.MainActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 not entering desktop mode, skipping"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 381202600
+        }
+      },
+      "message": "TaskLaunchParamsModifier:phase\u003d3 task\u003dTask{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game} activity\u003dActivityRecord{97308127 u0 com.ludo.game/.MainActivity t-1} display-area-from-source\u003dDefaultTaskDisplayArea@257681268 display-id\u003d0 task-display-area-windowing-mode\u003d1 suggested-display-area\u003dDefaultTaskDisplayArea@257681268 inherit-from-source\u003dfullscreen non-freeform-task-display-area display-area\u003dDefaultTaskDisplayArea@257681268 skip-bounds-fullscreen"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "AppsFilter",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 381717500
+        }
+      },
+      "message": "interaction: PackageSetting{f7217e1 com.ludo.game/10219} -\u003e PackageSetting{5330900 com.android.chrome/10154} BLOCKED"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 656,
+        "tid": 786,
+        "applicationId": "surfaceflinger",
+        "processName": "surfaceflinger",
+        "tag": "libbinder.BpBinder",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 383374400
+        }
+      },
+      "message": "onLastStrongRef automatically unlinking death recipients for descriptor: \u0027(not cached)\u0027"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityTaskManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 385133300
+        }
+      },
+      "message": "START u0 {act\u003dandroid.intent.action.VIEW cat\u003d[android.intent.category.BROWSABLE] dat\u003dludo-game://login/... flg\u003d0x14000000 xflg\u003d0x4 cmp\u003dcom.ludo.game/.MainActivity (has extras)} with LAUNCH_SINGLE_TASK from uid 10154 (com.android.chrome) (sr\u003d157596986) (BAL_ALLOW_VISIBLE_WINDOW) result code\u003d2"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 791,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 386584100
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 791,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 386632400
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 386794600
+        }
+      },
+      "message": "Transition requested (#102): android.os.BinderProxy@e942665 TransitionRequestInfo { type \u003d OPEN, triggerTask \u003d TaskInfo{userId\u003d0 taskId\u003d27 effectiveUid\u003d10219 displayId\u003d0 isRunning\u003dtrue baseIntent\u003dIntent { act\u003dandroid.intent.action.MAIN cat\u003d[android.intent.category.LAUNCHER] flg\u003d0x10000000 cmp\u003dcom.ludo.game/.MainActivity } baseActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} topActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} origActivity\u003dnull realActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} numActivities\u003d1 lastActiveTime\u003d11904199 supportsMultiWindow\u003dtrue resizeMode\u003d1 isResizeable\u003dtrue minWidth\u003d-1 minHeight\u003d-1 defaultMinSize\u003d220 token\u003dWCT{android.os.BinderProxy@81e1fb4} topActivityType\u003d1 pictureInPictureParams\u003dnull shouldDockBigOverlays\u003dfalse launchIntoPipHostTaskId\u003d-1 lastParentTaskIdBeforePip\u003d-1 displayCutoutSafeInsets\u003dRect(0, 0 - 0, 0) topActivityInfo\u003dActivityInfo{fe54f3a com.ludo.game.MainActivity} launchCookies\u003d[] positionInParent\u003dPoint(0, 0) parentTaskId\u003d-1 isFocused\u003dfalse isVisible\u003dfalse isVisibleRequested\u003dfalse isTopActivityNoDisplay\u003dfalse isSleeping\u003dfalse locusId\u003dnull displayAreaFeatureId\u003d1 isTopActivityTransparent\u003dfalse isActivityStackTransparent\u003dfalse lastNonFullscreenBounds\u003dnull capturedLink\u003dnull capturedLinkTimestamp\u003d0 requestedVisibleTypes\u003d503 topActivityRequestOpenInBrowserEducationTimestamp\u003d0 appCompatTaskInfo\u003dAppCompatTaskInfo { topActivityInSizeCompat\u003dfalse isLeafTask\u003d true eligibleForLetterboxEducation\u003d false isLetterboxEducationEnabled\u003d true isLetterboxDoubleTapEnabled\u003d false eligibleForUserAspectRatioButton\u003d false topActivityBoundsLetterboxed\u003d false isFromLetterboxDoubleTap\u003d false topActivityLetterboxVerticalPosition\u003d -1 topActivityLetterboxHorizontalPosition\u003d -1 topActivityLetterboxWidth\u003d-1 topActivityLetterboxHeight\u003d-1 topActivityAppBounds\u003dRect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled\u003dfalse isSystemFullscreenOverrideEnabled\u003dfalse hasMinAspectRatioOverride\u003dfalse topActivityLetterboxBounds\u003dnull cameraCompatTaskInfo\u003dCameraCompatTaskInfo { cameraCompatMode\u003dinactive0} topNonResizableActivityAspectRatio\u003d-1.0} topActivityMainWindowFrame\u003dnull isAppBubble\u003dfalse}, pipChange \u003d null, remoteTransition \u003d null, displayChange \u003d null, requestedLocation \u003d null, userChange \u003d null, windowingLayerChange \u003d null, flags \u003d 0, debugId \u003d 102 }"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "ShellSplitScreen",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 386851700
+        }
+      },
+      "message": "logExit: no-op, mLoggerSessionId is null"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 389881300
+        }
+      },
+      "message": "onActivityRestartAttempt: topActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity}, wasVisible\u003dfalse, displayId\u003d0, pipDisplayLayoutState#displayId\u003d0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1569,
+        "tid": 1569,
+        "applicationId": "com.google.android.apps.nexuslauncher",
+        "processName": "com.google.android.apps.nexuslauncher",
+        "tag": "b/417220811",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 390241700
+        }
+      },
+      "message": "invalidateLoadedTasks - previous requestLoadId: -1"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1462,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 392987800
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda12@e492506"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 393504900
+        }
+      },
+      "message": "Window{de47a8a u0 Splash Screen com.ludo.game}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@79d5d18, mPriority\u003d0, mIsAnimationCallback\u003dfalse, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2357,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityTaskManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 396668600
+        }
+      },
+      "message": "moveTaskToBack: Task{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome}"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 399354500
+        }
+      },
+      "message": "Dismiss activity with reason 2"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 399647800
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): android.app.Activity$$ExternalSyntheticLambda0@d6f8f8e"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 399858700
+        }
+      },
+      "message": "Dismiss activity with reason 4"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2357,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 400027700
+        }
+      },
+      "message": "Window{cd4f78f u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@8ee2371, mPriority\u003d-1, mIsAnimationCallback\u003dfalse, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1462,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "VRI[game]",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 404777900
+        }
+      },
+      "message": "visibilityChanged oldVisibility\u003dfalse newVisibility\u003dtrue"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ActivityManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 410281300
+        }
+      },
+      "message": "Killing 16410:com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7/u0a154i-9000 (adj 0): isolated not needed"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "GoogleInputMethodService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 410643000
+        }
+      },
+      "message": "GoogleInputMethodService.onFinishInput():2057 "
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "Module",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 412082900
+        }
+      },
+      "message": "DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes \u003d 0, locked \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "GoogleInputMethodService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 413638600
+        }
+      },
+      "message": "GoogleInputMethodService.onStartInput():1318 onStartInput(EditorInfo{EditorInfo{packageName\u003dcom.android.chrome, inputType\u003d0, inputTypeString\u003dNULL, enableLearning\u003dfalse, autoCorrection\u003dfalse, autoComplete\u003dfalse, imeOptions\u003d0, privateImeOptions\u003dnull, actionName\u003dUNSPECIFIED, actionLabel\u003dnull, initialSelStart\u003d-1, initialSelEnd\u003d-1, initialCapsMode\u003d0, label\u003dnull, fieldId\u003d0, fieldName\u003dnull, extras\u003dnull, hintText\u003dnull, hintLocales\u003d[]}}, false)"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "Module",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 415101700
+        }
+      },
+      "message": "DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes \u003d 1, locked \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "PackageConfigPersister",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 417057800
+        }
+      },
+      "message": "App-specific configuration not found for packageName: com.android.chrome and userId: 0"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16397,
+        "tid": 16397,
+        "applicationId": "com.android.chrome_zygote",
+        "processName": "com.android.chrome_zygote",
+        "tag": "Zygote",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 428327300
+        }
+      },
+      "message": "Process 16410 exited cleanly (0)"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 846,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "libprocessgroup",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 429801800
+        }
+      },
+      "message": "Removed cgroup /sys/fs/cgroup/apps/uid_90000/pid_16410"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_SearchBoxContainer",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 436682700
+        }
+      },
+      "message": "SearchBoxContainerView.onFinishInflate before set typeface"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_SearchBoxContainer",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 436770100
+        }
+      },
+      "message": "SearchBoxContainerView.onFinishInflate after set typeface"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_VideoPersist",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 442265200
+        }
+      },
+      "message": "Attempted picture-in-picture with result: 7"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2788,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "ContentCaptureEvent",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 451598400
+        }
+      },
+      "message": "Text is not a SpannableString."
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 452693800
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 462297600
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 462686400
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 463657800
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 464810100
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "Capacitor",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 466811300
+        }
+      },
+      "message": "App restarted"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "Capacitor",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 467157000
+        }
+      },
+      "message": "App started"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "Capacitor",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 467507900
+        }
+      },
+      "message": "App resumed"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 12899,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 477851800
+        }
+      },
+      "message": "onTransitionReady(transaction\u003d3474628551235)"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 478233100
+        }
+      },
+      "message": "onTransitionReady (#102) android.os.BinderProxy@e942665: {id\u003d102 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[\n        {m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d27#1204)/@0x95a0e19 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},\n        {m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d23#936)/@0xbf9cede sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}\n    ]}"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 791,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 478292000
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 791,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 478310900
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 478355000
+        }
+      },
+      "message": "Playing animation for (#102) android.os.BinderProxy@e942665@0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "ShellRecents",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 478884200
+        }
+      },
+      "message": "RecentsTransitionHandler.startAnimation: no controller found"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 478997800
+        }
+      },
+      "message": "Transition doesn\u0027t have explicit remote, search filters for match for {id\u003d102 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[{m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d27#1204)/@0x95a0e19 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},{m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d23#936)/@0xbf9cede sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}]}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479051500
+        }
+      },
+      "message": " Checking filter Pair{{types\u003d[] flags\u003d0x0] notFlags\u003d0x0 checks\u003d[{atype\u003dundefined independent\u003dtrue modes\u003d[CLOSE,TO_BACK] flags\u003dIN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull taskFragmentToken\u003dandroid.os.BinderProxy@d812586 windowingMode\u003dundefined isCrossDisplayMove\u003dfalse}]} RemoteTransition { remoteTransition \u003d android.window.IRemoteTransition$Stub$Proxy@50ffe47, appThread \u003d android.app.IApplicationThread$Stub$Proxy@9331674, debugName \u003d overlayBackTransition }}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479099500
+        }
+      },
+      "message": " Checking filter Pair{{types\u003d[] flags\u003d0x0] notFlags\u003d0x0 checks\u003d[{atype\u003ddream independent\u003dtrue modes\u003d[OPEN,TO_FRONT] flags\u003dNONE mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse},{atype\u003dhome independent\u003dtrue modes\u003d[CLOSE,TO_BACK] flags\u003dNONE mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse}]} RemoteTransition { remoteTransition \u003d android.window.IRemoteTransition$Stub$Proxy@d50179d, appThread \u003d android.app.IApplicationThread$Stub$Proxy@2ba1412, debugName \u003d LauncherToDream }}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479459100
+        }
+      },
+      "message": " Checking filter Pair{{types\u003d[] flags\u003d0x0] notFlags\u003d0x100 checks\u003d[{atype\u003dhome independent\u003dtrue modes\u003d[OPEN,TO_FRONT] flags\u003dNONE mustBeTask\u003dfalse order\u003dTOP topActivity\u003dComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse},{atype\u003dstandard independent\u003dtrue modes\u003d[CLOSE,TO_BACK] flags\u003dNONE mustBeTask\u003dfalse order\u003dANY topActivity\u003dnull launchCookie\u003dnull windowingMode\u003dundefined isCrossDisplayMove\u003dfalse},{NOT atype\u003dundefined independent\u003dtrue modes\u003d[] flags\u003dNONE mustBeTask\u003dtrue order\u003dANY topActivity\u003dnull launchCookie\u003dnull customAnim\u003dtrue windowingMode\u003dundefined isCrossDisplayMove\u003dfalse}]} RemoteTransition { remoteTransition \u003d android.window.IRemoteTransition$Stub$Proxy@34437e3, appThread \u003d android.app.IApplicationThread$Stub$Proxy@9a525e0, debugName \u003d QuickstepLaunchHome }}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479466500
+        }
+      },
+      "message": " Delegate animation for (#102) to null"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479483900
+        }
+      },
+      "message": "start default transition animation, info \u003d {id\u003d102 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[{m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d27#1204)/@0x95a0e19 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},{m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d23#936)/@0xbf9cede sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}]}"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479661500
+        }
+      },
+      "message": "loadAnimation: anim\u003dandroid.view.animation.AnimationSet@83f7b8c animAttr\u003d0x9 type\u003dOPEN isEntrance\u003dfalse"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 479856800
+        }
+      },
+      "message": "loadAnimation: anim\u003dandroid.view.animation.AnimationSet@4f472d5 animAttr\u003d0x8 type\u003dOPEN isEntrance\u003dtrue"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 481476700
+        }
+      },
+      "message": " animated by com.android.wm.shell.transition.DefaultTransitionHandler@eb94072"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 492501800
+        }
+      },
+      "message": "Sent Transition (#102) createdAt\u003d12-24 14:09:54.380 via request\u003dTransitionRequestInfo { type \u003d OPEN, triggerTask \u003d TaskInfo{userId\u003d0 taskId\u003d27 effectiveUid\u003d10219 displayId\u003d0 isRunning\u003dtrue baseIntent\u003dIntent { act\u003dandroid.intent.action.MAIN cat\u003d[android.intent.category.LAUNCHER] flg\u003d0x10000000 cmp\u003dcom.ludo.game/.MainActivity } baseActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} topActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} origActivity\u003dnull realActivity\u003dComponentInfo{com.ludo.game/com.ludo.game.MainActivity} numActivities\u003d1 lastActiveTime\u003d11904199 supportsMultiWindow\u003dtrue resizeMode\u003d1 isResizeable\u003dtrue minWidth\u003d-1 minHeight\u003d-1 defaultMinSize\u003d220 token\u003dWCT{RemoteToken{67973af Task{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game}}} topActivityType\u003d1 pictureInPictureParams\u003dnull shouldDockBigOverlays\u003dfalse launchIntoPipHostTaskId\u003d-1 lastParentTaskIdBeforePip\u003d-1 displayCutoutSafeInsets\u003dRect(0, 0 - 0, 0) topActivityInfo\u003dActivityInfo{b4fc3bc com.ludo.game.MainActivity} launchCookies\u003d[] positionInParent\u003dPoint(0, 0) parentTaskId\u003d-1 isFocused\u003dfalse isVisible\u003dfalse isVisibleRequested\u003dfalse isTopActivityNoDisplay\u003dfalse isSleeping\u003dfalse locusId\u003dnull displayAreaFeatureId\u003d1 isTopActivityTransparent\u003dfalse isActivityStackTransparent\u003dfalse lastNonFullscreenBounds\u003dnull capturedLink\u003dnull capturedLinkTimestamp\u003d0 requestedVisibleTypes\u003d503 topActivityRequestOpenInBrowserEducationTimestamp\u003d0 appCompatTaskInfo\u003dAppCompatTaskInfo { topActivityInSizeCompat\u003dfalse isLeafTask\u003d true eligibleForLetterboxEducation\u003d false isLetterboxEducationEnabled\u003d true isLetterboxDoubleTapEnabled\u003d false eligibleForUserAspectRatioButton\u003d false topActivityBoundsLetterboxed\u003d false isFromLetterboxDoubleTap\u003d false topActivityLetterboxVerticalPosition\u003d -1 topActivityLetterboxHorizontalPosition\u003d -1 topActivityLetterboxWidth\u003d-1 topActivityLetterboxHeight\u003d-1 topActivityAppBounds\u003dRect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled\u003dfalse isSystemFullscreenOverrideEnabled\u003dfalse hasMinAspectRatioOverride\u003dfalse topActivityLetterboxBounds\u003dnull cameraCompatTaskInfo\u003dCameraCompatTaskInfo { cameraCompatMode\u003dinactive0} topNonResizableActivityAspectRatio\u003d-1.0} topActivityMainWindowFrame\u003dnull isAppBubble\u003dfalse}, pipChange \u003d null, remoteTransition \u003d null, displayChange \u003d null, requestedLocation \u003d null, userChange \u003d null, windowingLayerChange \u003d null, flags \u003d 0, debugId \u003d 102 }"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 492655500
+        }
+      },
+      "message": "    startWCT\u003dWindowContainerTransaction { changes\u003d {} hops\u003d [] errorCallbackToken\u003dnull taskFragmentOrganizer\u003dnull }"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 492730500
+        }
+      },
+      "message": "    info\u003d{id\u003d102 t\u003dOPEN f\u003d0x0 trk\u003d0 r\u003d[0@Point(0, 0)] c\u003d[\n        {WCT{RemoteToken{67973af Task{cc8d33a #27 type\u003dstandard A\u003d10219:com.ludo.game}}} m\u003dTO_FRONT f\u003dMOVE_TO_TOP leash\u003dSurface(name\u003dTask\u003d27#1204)/@0x840d553 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0},\n        {WCT{RemoteToken{d23609a Task{b517306 #23 type\u003dstandard A\u003d10154:com.android.chrome}}} m\u003dTO_BACK f\u003dNONE leash\u003dSurface(name\u003dTask\u003d23#936)/@0x9e2a9b6 sb\u003dRect(0, 0 - 1080, 2400) eb\u003dRect(0, 0 - 1080, 2400) epz\u003dPoint(1080, 2400) d\u003d0 taskParent\u003d-1 winMode\u003d1 userId\u003d0}\n    ]}"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 499151600
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): Fz3@5ad490"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1710,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 499929800
+        }
+      },
+      "message": "Window{cd4f78f u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@a62006, mPriority\u003d0, mIsAnimationCallback\u003dtrue, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 502359300
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 521130900
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 531338700
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 543315900
+        }
+      },
+      "message": "readlink(/proc/self/fd/71) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 543638700
+        }
+      },
+      "message": "readlink(/proc/self/fd/112) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 544277000
+        }
+      },
+      "message": "readlink(/proc/self/fd/113) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 549563300
+        }
+      },
+      "message": "readlink(/proc/self/fd/115) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1569,
+        "tid": 1569,
+        "applicationId": "com.google.android.apps.nexuslauncher",
+        "processName": "com.google.android.apps.nexuslauncher",
+        "tag": "b/417220811",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 558626200
+        }
+      },
+      "message": "invalidateLoadedTasks - previous requestLoadId: -1"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 956,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 634231000
+        }
+      },
+      "message": "com.ludo.game:1ceeab8b: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 635477600
+        }
+      },
+      "message": "com.android.chrome:f20d139a: onRequestHide at ORIGIN_CLIENT reason HIDE_WINDOW_LOST_FOCUS fromUser false"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "InsetsController",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 635545300
+        }
+      },
+      "message": "hide(ime())"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 635626700
+        }
+      },
+      "message": "com.android.chrome:f20d139a: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "GoogleInputMethodService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 637356300
+        }
+      },
+      "message": "GoogleInputMethodService.onFinishInput():2057 "
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "Module",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 638254200
+        }
+      },
+      "message": "DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes \u003d 0, locked \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 638721300
+        }
+      },
+      "message": "system_server:644417d2: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 837,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 639162900
+        }
+      },
+      "message": "system_server:644417d2: onCancelled at PHASE_SERVER_SHOULD_HIDE"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "GoogleInputMethodService",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 639758400
+        }
+      },
+      "message": "GoogleInputMethodService.onStartInput():1318 onStartInput(EditorInfo{EditorInfo{packageName\u003dcom.ludo.game, inputType\u003d0, inputTypeString\u003dNULL, enableLearning\u003dfalse, autoCorrection\u003dfalse, autoComplete\u003dfalse, imeOptions\u003d12000000, privateImeOptions\u003dnull, actionName\u003dUNSPECIFIED, actionLabel\u003dnull, initialSelStart\u003d-1, initialSelEnd\u003d-1, initialCapsMode\u003d0, label\u003dnull, fieldId\u003d0, fieldName\u003dnull, extras\u003dnull, hintText\u003dnull, hintLocales\u003d[]}}, false)"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 7161,
+        "tid": 7161,
+        "applicationId": "com.google.android.inputmethod.latin",
+        "processName": "com.google.android.inputmethod.latin",
+        "tag": "Module",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 641709900
+        }
+      },
+      "message": "DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes \u003d 1, locked \u003d false"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "InsetsController",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 643535100
+        }
+      },
+      "message": "hide(ime())"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 16193,
+        "tid": 16193,
+        "applicationId": "com.ludo.game",
+        "processName": "com.ludo.game",
+        "tag": "ImeTracker",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 643608000
+        }
+      },
+      "message": "com.ludo.game:1ceeab8b: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "PackageConfigPersister",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 643665700
+        }
+      },
+      "message": "App-specific configuration not found for packageName: com.ludo.game and userId: 0"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 824026300
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): android.app.Activity$$ExternalSyntheticLambda0@d6f8f8e"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2358,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 825133300
+        }
+      },
+      "message": "Window{cd4f78f u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback\u003dandroid.window.IOnBackInvokedCallback$Stub$Proxy@386a7bf, mPriority\u003d-1, mIsAnimationCallback\u003dfalse, mOverrideBehavior\u003d0}"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 826501500
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 842059600
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 842102400
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 1332,
+        "tid": 1462,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowOnBackDispatcher",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 845339400
+        }
+      },
+      "message": "setTopOnBackInvokedCallback (unwrapped): null"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 2339,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "CoreBackPreview",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 845479400
+        }
+      },
+      "message": "Window{de47a8a u0 Splash Screen com.ludo.game EXITING}: Setting back callback null"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603394,
+          "nanos": 876155500
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 4215800
+        }
+      },
+      "message": "Transition animation finished (aborted\u003dfalse), notifying core (#102) android.os.BinderProxy@e942665@0"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 809,
+        "tid": 834,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "WindowManager",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 6982400
+        }
+      },
+      "message": "Finish Transition (#102): created at 12-24 14:09:54.380 collect-started\u003d0.032ms request-sent\u003d4.495ms started\u003d8.965ms ready\u003d74.899ms sent\u003d95.571ms commit\u003d13.325ms finished\u003d625.988ms"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "VRI[ChromeTabbedActivity]",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 8455500
+        }
+      },
+      "message": "visibilityChanged oldVisibility\u003dtrue newVisibility\u003dfalse"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 8590900
+        }
+      },
+      "message": "Track 0 became idle"
+    },
+    {
+      "header": {
+        "logLevel": "VERBOSE",
+        "pid": 1332,
+        "tid": 1403,
+        "applicationId": "com.android.systemui",
+        "processName": "com.android.systemui",
+        "tag": "WindowManagerShell",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 8663000
+        }
+      },
+      "message": "All active transition animations finished"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 809,
+        "tid": 1308,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "ImageReader_JNI",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 13594000
+        }
+      },
+      "message": "Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 16495200
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 693,
+        "tid": 693,
+        "applicationId": "cameraserver",
+        "processName": "cameraserver",
+        "tag": "libbinder.IPCThreadState",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 16545200
+        }
+      },
+      "message": "Sending oneway calls to frozen process."
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 14977,
+        "tid": 14977,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_CompositorSurfaceMgr",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 23007900
+        }
+      },
+      "message": "surfaceDestroyed format : -3"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 14977,
+        "tid": 15016,
+        "applicationId": "com.android.chrome",
+        "processName": "com.android.chrome",
+        "tag": "cr_BindingManager",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 49904000
+        }
+      },
+      "message": "onTrimMemory: level\u003d20, size\u003d0"
+    },
+    {
+      "header": {
+        "logLevel": "WARN",
+        "pid": 2007,
+        "tid": 2007,
+        "applicationId": "com.google.android.as",
+        "processName": "com.google.android.as",
+        "tag": "AiAiVC",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 51396600
+        }
+      },
+      "message": "Unexpected capture event type: 11"
+    },
+    {
+      "header": {
+        "logLevel": "DEBUG",
+        "pid": 809,
+        "tid": 1286,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "BackgroundInstallControlService",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 78282400
+        }
+      },
+      "message": "Package event received: 0"
+    },
+    {
+      "header": {
+        "logLevel": "INFO",
+        "pid": 809,
+        "tid": 1232,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "HalDevMgr",
+        "timestamp": {
+          "seconds": 1766603395,
+          "nanos": 528298500
+        }
+      },
+      "message": "bestIfaceCreationProposal is null, requestIface\u003dSTA, existingIface\u003d[name\u003dwlan0 type\u003dSTA]"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603396,
+          "nanos": 955887100
+        }
+      },
+      "message": "readlink(/proc/self/fd/71) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 16223,
+        "tid": 16264,
+        "applicationId": "webview_zygote",
+        "processName": "webview_zygote",
+        "tag": "ashmem",
+        "timestamp": {
+          "seconds": 1766603396,
+          "nanos": 956041200
+        }
+      },
+      "message": "readlink(/proc/self/fd/113) failed: Operation not permitted"
+    },
+    {
+      "header": {
+        "logLevel": "ERROR",
+        "pid": 809,
+        "tid": 3910,
+        "applicationId": "system_server",
+        "processName": "system_server",
+        "tag": "TaskPersister",
+        "timestamp": {
+          "seconds": 1766603397,
+          "nanos": 97804300
+        }
+      },
+      "message": "File error accessing recents directory (directory doesn\u0027t exist?)."
+    }
+  ]
+}

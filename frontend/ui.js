@@ -200,7 +200,7 @@ function createRoomCard(room) {
 /**
  * Handle room card click
  */
-function handleRoomClick(room) {
+async function handleRoomClick(room) {
     const playerName = document.getElementById('playerNameInput').value.trim();
 
     if (!playerName) {
@@ -208,8 +208,34 @@ function handleRoomClick(room) {
         return;
     }
 
-    // Join the room (backend will determine if player or spectator)
-    joinRoom(room.roomId, playerName);
+    try {
+        const response = await joinRoom(room.roomId, playerName);
+        console.log('Joined room from list:', response);
+
+        // Update UI based on game state
+        if (response.gameState.gameStarted) {
+            showScreen('gameScreen');
+            updateGameState(response.gameState);
+
+            if (response.isSpectator) {
+                document.getElementById('spectatorBadge').style.display = 'flex';
+                const rollBtn = document.getElementById('centralRollBtn');
+                if (rollBtn) {
+                    rollBtn.disabled = true;
+                    rollBtn.textContent = 'Spectating';
+                }
+            }
+        } else {
+            document.getElementById('roomCodeDisplay').textContent = response.roomId;
+            updateLobbyPlayers(response.gameState);
+            showScreen('lobbyScreen');
+        }
+
+        showNotification(response.isSpectator ? 'Spectating game... 👁️' : 'Joined room successfully! 🎉');
+    } catch (error) {
+        console.error('Error joining room:', error);
+        showNotification(error || 'Failed to join room', 'error');
+    }
 }
 
 /**
@@ -340,8 +366,10 @@ async function handleCreateRoom() {
         return;
     }
 
+    const teamMode = document.getElementById('teamModeToggle').checked;
+
     try {
-        const response = await createRoom(playerName);
+        const response = await createRoom(playerName, teamMode);
         console.log('Room created:', response);
 
         // Update UI
@@ -374,14 +402,31 @@ async function handleJoinRoom() {
 
     try {
         const response = await joinRoom(roomCode, playerName);
-        console.log('Joined room:', response);
+        console.log('Joined room via code:', response);
 
         // Update UI
-        hideModal('joinRoomModal');
-        document.getElementById('roomCodeDisplay').textContent = response.roomId;
-        updateLobbyPlayers(response.gameState);
-        showScreen('lobbyScreen');
-        showNotification('Joined room successfully! 🎉');
+        const joinModal = document.getElementById('joinRoomModal');
+        if (joinModal) hideModal('joinRoomModal');
+
+        if (response.gameState.gameStarted) {
+            showScreen('gameScreen');
+            updateGameState(response.gameState);
+
+            if (response.isSpectator) {
+                document.getElementById('spectatorBadge').style.display = 'flex';
+                const rollBtn = document.getElementById('centralRollBtn');
+                if (rollBtn) {
+                    rollBtn.disabled = true;
+                    rollBtn.textContent = 'Spectating';
+                }
+            }
+        } else {
+            document.getElementById('roomCodeDisplay').textContent = response.roomId;
+            updateLobbyPlayers(response.gameState);
+            showScreen('lobbyScreen');
+        }
+
+        showNotification(response.isSpectator ? 'Spectating game... 👁️' : 'Joined room successfully! 🎉');
     } catch (error) {
         console.error('Error joining room:', error);
         showNotification(error || 'Failed to join room', 'error');
@@ -515,6 +560,12 @@ function updateLobbyPlayers(gameState) {
 
     playerCount.textContent = gameState.players.length;
 
+    // Show/hide team mode badge
+    const teamModeBadge = document.getElementById('lobbyTeamModeBadge');
+    if (teamModeBadge) {
+        teamModeBadge.style.display = gameState.teamMode ? 'inline-block' : 'none';
+    }
+
     playersList.innerHTML = '';
 
     gameState.players.forEach(player => {
@@ -582,6 +633,12 @@ function updateGameState(gameState) {
     if (currentPlayer) {
         currentPlayerName.textContent = `${currentPlayer.name}'s Turn`;
         currentPlayerIndicator.style.background = `var(--color-${currentPlayer.color})`;
+    }
+
+    // Show/hide team mode badge
+    const teamModeBadge = document.getElementById('gameTeamModeBadge');
+    if (teamModeBadge) {
+        teamModeBadge.style.display = gameState.teamMode ? 'inline-block' : 'none';
     }
 
     // Update player dice displays

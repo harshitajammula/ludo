@@ -60,6 +60,14 @@
             <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off">
           </div>
 
+          <div class="team-mode-selection">
+            <label class="toggle-container">
+              <input type="checkbox" id="teamModeToggle">
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">Teams Mode (2v2)</span>
+            </label>
+          </div>
+
           <div class="button-group">
             <button id="createRoomBtn" class="btn btn-primary">
               <span class="btn-icon">➕</span>
@@ -110,6 +118,7 @@
         </div>
 
         <div class="room-info">
+          <div id="lobbyTeamModeBadge" class="team-mode-badge" style="display: none;">Teams Mode (2v2)</div>
           <div class="room-code-display">
             <span class="label">Room Code:</span>
             <span id="roomCodeDisplay" class="room-code">------</span>
@@ -138,6 +147,8 @@
           <div class="current-player-info">
             <span id="currentPlayerName">Waiting...</span>
             <span id="currentPlayerIndicator" class="turn-indicator"></span>
+            <div id="gameTeamModeBadge" class="team-mode-badge"
+              style="display: none; margin-bottom: 0; margin-left: 10px;">Teams Mode</div>
           </div>
           <button id="leaveGameBtn" class="btn btn-danger btn-sm">Leave Game</button>
         </div>
@@ -255,6 +266,9 @@
 
   </div>
 
+  <!-- Capacitor Core -->
+  <script src="capacitor.js"></script>
+
   <!-- Application Configuration -->
   <script src="config.js"></script>
 
@@ -274,12 +288,55 @@
     window.addEventListener('DOMContentLoaded', async () => {
       console.log('🎲 Ludo Game Loaded!');
 
+      // Handle custom URL schemes (Mobile Auth)
+      if (window.Capacitor && window.Capacitor.Plugins.App) {
+        window.Capacitor.Plugins.App.addListener('appUrlOpen', async (data) => {
+          console.log('App opened with URL:', data.url);
+          const url = new URL(data.url);
+          const token = url.searchParams.get('token');
+
+          if (token) {
+            await handleTokenLogin(token);
+          }
+        });
+      }
+
+      // Check for token in standard URL params as well
+      const urlParams = new URLSearchParams(window.location.search);
+      const tokenFromUrl = urlParams.get('token');
+      if (tokenFromUrl) {
+        await handleTokenLogin(tokenFromUrl);
+      }
+
       // Load user authentication status
       await loadUserProfile();
 
       // Initialize the game
       initializeApp();
     });
+
+    // Handle token-based login
+    async function handleTokenLogin(token) {
+      try {
+        const baseUrl = window.APP_CONFIG ? window.APP_CONFIG.API_URL : '';
+        const response = await fetch(`${baseUrl}/auth/token-login?token=${token}`, {
+          credentials: 'include'
+        });
+
+        if (response.ok) {
+          console.log('✅ Token login successful');
+          // Clear token from URL
+          const newUrl = new URL(window.location);
+          newUrl.searchParams.delete('token');
+          window.history.replaceState({}, '', newUrl);
+
+          // Refresh profile
+          await loadUserProfile();
+        }
+      } catch (error) {
+        console.error('❌ Token login failed:', error);
+      }
+    }
 
     // Load and display user profile
     async function loadUserProfile() {

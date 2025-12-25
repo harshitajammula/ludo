@@ -13,10 +13,10 @@ function setupSocketHandlers(io) {
         /**
          * Create a new game room
          */
-        socket.on('createRoom', ({ playerName, roomName }, callback) => {
+        socket.on('createRoom', ({ playerName, roomName, teamMode }, callback) => {
             try {
                 const playerId = socket.id;
-                const { success, roomId, game } = gameStateManager.createRoom(roomName || `${playerName}'s Room`);
+                const { success, roomId, game } = gameStateManager.createRoom(roomName || `${playerName}'s Room`, teamMode);
 
                 if (success) {
                     const joinResult = gameStateManager.joinRoom(roomId, playerId, playerName, socket.id);

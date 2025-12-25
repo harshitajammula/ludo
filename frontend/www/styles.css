@@ -104,7 +104,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  /* Better for scrolling content than center */
+  overflow-y: auto;
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
+}
+
+/* For larger screens we can center if we want, but flex-start is safer for mobile */
+@media (min-height: 800px) {
+  .screen.active {
+    justify-content: center;
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+  }
 }
 
 @keyframes fadeIn {
@@ -1365,9 +1378,28 @@ input[type="text"]::placeholder {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--spacing-lg);
-  max-height: 500px;
+  max-height: 400px;
+  /* Reduced for mobile */
   overflow-y: auto;
   padding: var(--spacing-sm);
+
+  /* Custom scrollbar for better visibility */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.05);
+}
+
+.rooms-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.rooms-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+}
+
+.rooms-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: var(--radius-full);
 }
 
 /* Loading State */
@@ -1594,9 +1626,19 @@ input[type="text"]::placeholder {
 @media (max-width: 768px) {
   .rooms-list {
     grid-template-columns: 1fr;
+    max-height: 300px;
+    /* Even smaller for mobile devices */
   }
 
   .active-rooms-section {
     margin-top: var(--spacing-lg);
+  }
+
+  .game-title {
+    font-size: 2.25rem;
+  }
+
+  .logo {
+    font-size: 4rem;
   }
 }

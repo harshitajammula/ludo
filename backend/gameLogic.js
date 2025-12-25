@@ -131,9 +131,6 @@ class LudoGame {
         return false;
     }
 
-    /**
-     * Start the game
-     */
     startGame() {
         if (this.players.length < 2) {
             return { success: false, error: 'Need at least 2 players to start' };
@@ -141,6 +138,10 @@ class LudoGame {
 
         this.gameStarted = true;
         this.currentPlayerIndex = 0;
+
+        if (this.teamMode) {
+            this.initializeTeams();
+        }
 
         return { success: true };
     }
@@ -192,32 +193,44 @@ class LudoGame {
     getMovableTokens(player, diceValue) {
         const movableTokens = [];
 
-        for (let i = 0; i < player.tokens.length; i++) {
-            const token = player.tokens[i];
+        // Determine which player's tokens we are checking
+        let targetPlayer = player;
 
-            // Token in starting area - can only move with a 6
-            if (token.position === -1) {
-                if (diceValue === 6) {
-                    movableTokens.push(i);
+        // In team mode, if player is finished, they move teammate's tokens
+        if (this.teamMode && this.isPlayerFinished(player.id)) {
+            const teammateColor = this.getTeammateColor(player.color);
+            targetPlayer = this.players.find(p => p.color === teammateColor) || player;
+        }
+
+        // Only allow moving tokens if the target player is not finished
+        if (!this.isPlayerFinished(targetPlayer.id)) {
+            for (let i = 0; i < targetPlayer.tokens.length; i++) {
+                const token = targetPlayer.tokens[i];
+
+                // Token in starting area - can only move with a 6
+                if (token.position === -1) {
+                    if (diceValue === 6) {
+                        movableTokens.push(i);
+                    }
+                    continue;
                 }
-                continue;
-            }
 
-            // Token finished - can't move
-            if (token.finished) {
-                continue;
-            }
-
-            // Token in home stretch
-            if (token.inHomeStretch) {
-                if (token.homeStretchPosition + diceValue <= this.HOME_STRETCH_LENGTH) {
-                    movableTokens.push(i);
+                // Token finished - can't move
+                if (token.finished) {
+                    continue;
                 }
-                continue;
-            }
 
-            // Token on main board - can always move
-            movableTokens.push(i);
+                // Token in home stretch
+                if (token.inHomeStretch) {
+                    if (token.homeStretchPosition + diceValue <= this.HOME_STRETCH_LENGTH) {
+                        movableTokens.push(i);
+                    }
+                    continue;
+                }
+
+                // Token on main board - can always move
+                movableTokens.push(i);
+            }
         }
 
         return movableTokens;
@@ -240,7 +253,14 @@ class LudoGame {
             return { success: false, error: 'Roll dice first' };
         }
 
-        const token = currentPlayer.tokens[tokenIndex];
+        // Determine which player's token is being moved
+        let movingPlayer = currentPlayer;
+        if (this.teamMode && this.isPlayerFinished(currentPlayer.id)) {
+            const teammateColor = this.getTeammateColor(currentPlayer.color);
+            movingPlayer = this.players.find(p => p.color === teammateColor) || currentPlayer;
+        }
+
+        const token = movingPlayer.tokens[tokenIndex];
         const diceValue = this.lastDiceRoll;
         const movableTokens = this.getMovableTokens(currentPlayer, diceValue);
 
@@ -252,14 +272,14 @@ class LudoGame {
 
         // Move token from starting area
         if (token.position === -1) {
-            token.position = this.START_POSITIONS[currentPlayer.color];
+            token.position = this.START_POSITIONS[movingPlayer.color];
         }
         // Move token in home stretch
         else if (token.inHomeStretch) {
             token.homeStretchPosition += diceValue;
             if (token.homeStretchPosition === this.HOME_STRETCH_LENGTH) {
                 token.finished = true;
-                currentPlayer.finishedTokens++;
+                movingPlayer.finishedTokens++;
             }
         }
         // Move token on main board
@@ -267,7 +287,7 @@ class LudoGame {
             const newPosition = (token.position + diceValue) % this.BOARD_SIZE;
 
             // Check if entering home stretch
-            const homeEntrance = this.HOME_ENTRANCE[currentPlayer.color];
+            const homeEntrance = this.HOME_ENTRANCE[movingPlayer.color];
             if (this.willEnterHomeStretch(token.position, diceValue, homeEntrance)) {
                 token.inHomeStretch = true;
                 const stepsIntoHome = this.calculateHomeStretchSteps(token.position, diceValue, homeEntrance);
@@ -275,21 +295,19 @@ class LudoGame {
 
                 if (token.homeStretchPosition === this.HOME_STRETCH_LENGTH) {
                     token.finished = true;
-                    currentPlayer.finishedTokens++;
+                    movingPlayer.finishedTokens++;
                 }
             } else {
                 token.position = newPosition;
 
                 // Check for captures
-                captured = this.checkCapture(currentPlayer, token.position);
+                captured = this.checkCapture(movingPlayer, token.position);
             }
         }
 
-        // Check if player finished all tokens
-        let playerFinished = false;
-        if (currentPlayer.finishedTokens === this.TOKENS_PER_PLAYER) {
-            this.markPlayerFinished(currentPlayer.id);
-            playerFinished = true;
+        // Check if players finished
+        if (movingPlayer.finishedTokens === this.TOKENS_PER_PLAYER) {
+            this.markPlayerFinished(movingPlayer.id);
         }
 
         // Check for win (solo mode) or team victory (team mode)
@@ -316,13 +334,13 @@ class LudoGame {
 
         return {
             success: true,
-            token: { ...token, index: tokenIndex },
+            token: { ...token, index: tokenIndex, playerColor: movingPlayer.color },
             captured,
             anotherTurn,
             gameOver: this.gameOver,
             winner: this.winner,
             autoPlay,
-            playerFinished,
+            playerFinished: movingPlayer.finishedTokens === this.TOKENS_PER_PLAYER,
             teamVictory
         };
     }
@@ -381,7 +399,7 @@ class LudoGame {
     }
 
     /**
-     * Check if a token captures another player's token
+     * Check if a token captures another player's tokens
      */
     checkCapture(currentPlayer, position) {
         // Can't capture on safe positions
@@ -389,25 +407,32 @@ class LudoGame {
             return null;
         }
 
+        const capturedList = [];
+        const teammateColor = this.getTeammateColor(currentPlayer.color);
+
         for (let player of this.players) {
+            // Can't capture own tokens
             if (player.id === currentPlayer.id) continue;
+
+            // In team mode, can't capture teammate's tokens
+            if (this.teamMode && player.color === teammateColor) continue;
 
             for (let i = 0; i < player.tokens.length; i++) {
                 const token = player.tokens[i];
                 if (token.position === position && !token.inHomeStretch && !token.finished) {
                     // Capture! Send token back to start
                     token.position = -1;
-                    return {
+                    capturedList.push({
                         playerId: player.id,
                         playerName: player.name,
                         playerColor: player.color,
                         tokenIndex: i
-                    };
+                    });
                 }
             }
         }
 
-        return null;
+        return capturedList.length > 0 ? capturedList : null;
     }
 
     /**
@@ -607,7 +632,18 @@ class LudoGame {
     // ==================== Team Play Methods ====================
 
     /**
-     * Set team assignments
+     * Initialize teams with default diagonal pairings
+     */
+    initializeTeams() {
+        // Standard team assignment: Red & Yellow (diagonal) vs Blue & Green (diagonal)
+        this.teams = {
+            team1: ['red', 'yellow'],
+            team2: ['blue', 'green']
+        };
+    }
+
+    /**
+     * Set team assignments manually
      */
     setTeams(team1Colors, team2Colors) {
         if (!this.teamMode) return;

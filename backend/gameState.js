@@ -20,9 +20,9 @@ class GameStateManager {
     /**
      * Create a new game room
      */
-    createRoom(roomName = 'Game Room') {
+    createRoom(roomName = 'Game Room', teamMode = false) {
         const roomId = this.generateRoomCode();
-        const game = new LudoGame(roomId);
+        const game = new LudoGame(roomId, teamMode);
         this.rooms.set(roomId, game);
         this.spectators.set(roomId, new Set());
 
@@ -30,7 +30,8 @@ class GameStateManager {
         this.roomMetadata.set(roomId, {
             name: roomName,
             createdAt: Date.now(),
-            status: 'waiting' // waiting, in_progress, finished
+            status: 'waiting', // waiting, in_progress, finished
+            teamMode
         });
 
         return {
@@ -253,7 +254,8 @@ class GameStateManager {
                     color: p.color
                 })),
                 spectatorCount,
-                gameStarted: game.gameStarted
+                gameStarted: game.gameStarted,
+                teamMode: metadata?.teamMode || false
             });
         }
 

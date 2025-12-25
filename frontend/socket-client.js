@@ -151,9 +151,9 @@ function attemptSessionReconnect() {
 /**
  * Create a new room
  */
-function createRoom(playerName) {
+function createRoom(playerName, teamMode = false) {
     return new Promise((resolve, reject) => {
-        socket.emit('createRoom', { playerName }, (response) => {
+        socket.emit('createRoom', { playerName, teamMode }, (response) => {
             if (response.success) {
                 currentPlayerId = response.playerId;
                 currentRoomId = response.roomId;
@@ -366,7 +366,13 @@ function handleTokenMoved(data) {
     console.log('Token moved:', data);
 
     if (data.captured) {
-        showNotification(`${data.captured.playerName}'s token was captured! 💥`);
+        if (Array.isArray(data.captured)) {
+            data.captured.forEach(c => {
+                showNotification(`${c.playerName}'s token was captured! 💥`);
+            });
+        } else {
+            showNotification(`${data.captured.playerName}'s token was captured! 💥`);
+        }
     }
 
     updateGameState(data.gameState);

@@ -342,6 +342,12 @@
                 Authentication failed. Please try again.
             </div>
 
+            <!-- Loading overlay for deep links -->
+            <div id="loginLoading" style="display: none; text-align: center; margin-bottom: 20px;">
+                <div class="spinner" style="margin: 0 auto 10px;"></div>
+                <p style="color: #667eea; font-weight: 500;">Logging you in...</p>
+            </div>
+
             <!-- Google Sign-In Button -->
             <a href="/auth/google" id="googleLoginBtn" class="google-btn">
                 <svg class="google-icon" viewBox="0 0 24 24">
@@ -386,6 +392,9 @@
         </div>
     </div>
 
+    <!-- Capacitor Core -->
+    <script src="capacitor.js"></script>
+
     <!-- Application Configuration -->
     <script src="config.js"></script>
     <script>
@@ -403,14 +412,101 @@
             googleLoginBtn.href = loginUrl;
         }
 
+        // Handle custom URL schemes (Mobile Auth)
+        if (window.Capacitor) {
+            console.log('Capacitor object exists');
+            const { App } = window.Capacitor.Plugins;
+
+            if (App) {
+                // Background opens
+                App.addListener('appUrlOpen', (data) => {
+                    console.log('App opened with URL:', data.url);
+                    handleDeepLink(data.url);
+                });
+
+                // Cold starts
+                App.getLaunchUrl().then((data) => {
+                    if (data && data.url) {
+                        console.log('App launched with URL:', data.url);
+                        handleDeepLink(data.url);
+                    }
+                });
+            }
+        }
+
+        function handleDeepLink(urlString) {
+            console.log('Processing link:', urlString);
+            try {
+                // If the standard URL parser fails, we do a manual string split
+                if (urlString.indexOf('token=') !== -1) {
+                    const parts = urlString.split('token=');
+                    if (parts.length > 1) {
+                        const token = parts[1].split('&')[0];
+                        console.log('Manually extracted token:', token);
+                        handleTokenLogin(token);
+                    }
+                }
+            } catch (e) {
+                console.error('Deep link process error:', e);
+            }
+        }
+
+        // Handle token-based login
+        async function handleTokenLogin(token) {
+            console.log('--- MOBILE AUTH HANDSHAKE START ---');
+            console.log('Token received:', token);
+
+            try {
+                // Show loading UI
+                if (document.getElementById('loginLoading')) {
+                    document.getElementById('loginLoading').style.display = 'block';
+                }
+                if (document.getElementById('googleLoginBtn')) {
+                    document.getElementById('googleLoginBtn').style.display = 'none';
+                }
+
+                const baseUrl = window.APP_CONFIG ? window.APP_CONFIG.API_URL : '';
+                const fetchUrl = `${baseUrl}/auth/token-login?token=${token}`;
+                console.log('Fetching:', fetchUrl);
+
+                const response = await fetch(fetchUrl, {
+                    credentials: 'include'
+                });
+
+                console.log('Server response status:', response.status);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('✅ Token login successful:', data);
+                    window.location.href = 'index.html';
+                } else {
+                    const errorText = await response.text();
+                    console.error('❌ Server rejected token:', errorText);
+                    throw new Error('Invalid token');
+                }
+            } catch (error) {
+                console.error('❌ Token login request failed:', error);
+                if (document.getElementById('loginLoading')) {
+                    document.getElementById('loginLoading').style.display = 'none';
+                }
+                if (document.getElementById('googleLoginBtn')) {
+                    document.getElementById('googleLoginBtn').style.display = 'flex';
+                }
+                const errorEl = document.getElementById('errorMessage');
+                if (errorEl) {
+                    errorEl.textContent = 'Login failed. ' + error.message;
+                    errorEl.classList.add('show');
+                }
+            }
+        }
+
         // Check for error in URL
         const urlParams = new URLSearchParams(window.location.search);
         const error = urlParams.get('error');
 
         if (error === 'auth_failed') {
-            document.getElementById('errorMessage').classList.add('show');
-
-            // Remove error from URL
+            const errorEl = document.getElementById('errorMessage');
+            if (errorEl) errorEl.classList.add('show');
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     </script>
