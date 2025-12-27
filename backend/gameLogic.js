@@ -88,7 +88,8 @@ class LudoGame {
             name: playerName,
             color: availableColor,
             tokens: this.initializeTokens(availableColor),
-            finishedTokens: 0
+            finishedTokens: 0,
+            online: true
         };
 
         this.players.push(player);

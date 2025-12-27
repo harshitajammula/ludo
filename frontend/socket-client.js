@@ -21,8 +21,41 @@ function initializeSocket() {
         console.log('✅ Connected to server');
         showNotification('Connected to server');
 
-        // Try to reconnect to existing session
-        attemptSessionReconnect();
+        // Try to reconnect to existing session if not already reconnected by server
+        if (!currentRoomId) {
+            attemptSessionReconnect();
+        }
+    });
+
+    socket.on('reconnected', (data) => {
+        console.log('🔄 Server restored session:', data);
+        currentPlayerId = data.playerId;
+        currentRoomId = data.roomId;
+        currentPlayerName = data.player ? data.player.name : data.spectatorName;
+        window.isSpectator = data.isSpectator;
+
+        if (data.gameState.gameStarted) {
+            showScreen('gameScreen');
+            updateGameState(data.gameState);
+            renderGameBoard(data.gameState);
+        } else {
+            showScreen('lobbyScreen');
+            updateLobbyPlayers(data.gameState);
+        }
+
+        showNotification('Session restored! 🎮');
+    });
+
+    socket.on('playerDisconnected', (data) => {
+        console.log('Player offline:', data.playerName);
+        showNotification(`${data.playerName} is offline`, 'warning');
+        updatePlayerOnlineStatus(data.playerId, false);
+    });
+
+    socket.on('playerOnline', (data) => {
+        console.log('Player online:', data.playerName);
+        showNotification(`${data.playerName} is back online! ✨`);
+        updatePlayerOnlineStatus(data.playerId, true);
     });
 
     socket.on('disconnect', () => {

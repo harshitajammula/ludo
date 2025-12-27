@@ -73,7 +73,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Session configuration
-app.use(session({
+const sessionMiddleware = session({
     secret: process.env.SESSION_SECRET || 'ludo-game-secret-change-in-production',
     resave: false,
     saveUninitialized: false,
@@ -83,7 +83,8 @@ app.use(session({
         sameSite: 'none', // Allow cross-site cookies for the mobile app
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
-}));
+});
+app.use(sessionMiddleware);
 
 // Initialize Passport
 app.use(passport.initialize());
@@ -120,8 +121,8 @@ app.get('*', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Setup Socket.IO handlers with authentication
-setupSocketHandlers(io);
+// Setup Socket.IO handlers with authentication and session support
+setupSocketHandlers(io, sessionMiddleware, passport);
 
 // Start server
 const PORT = process.env.PORT || 3000;

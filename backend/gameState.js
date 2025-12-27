@@ -75,6 +75,15 @@ class GameStateManager {
             return { success: false, error: 'Room not found' };
         }
 
+        // Check if player is already in the room (reconnection)
+        const existingPlayer = game.players.find(p => p.id === playerId);
+
+        if (existingPlayer) {
+            this.playerRooms.set(playerId, roomId);
+            this.playerSockets.set(playerId, socketId);
+            return { success: true, player: existingPlayer, reconnected: true };
+        }
+
         const result = game.addPlayer(playerId, playerName);
 
         if (result.success) {

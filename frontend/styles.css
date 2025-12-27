@@ -1028,6 +1028,19 @@ input[type="text"]::placeholder {
   border: 1px solid var(--primary-color);
 }
 
+.game-player-item.offline {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.game-player-item.offline .player-color-dot {
+  background: #666 !important;
+}
+
+.game-player-item.offline span[style*="font-size: 0.75rem"] {
+  display: none;
+}
+
 .player-color-dot {
   width: 16px;
   height: 16px;

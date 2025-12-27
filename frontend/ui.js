@@ -9,7 +9,27 @@ const DEBUG_MODE = false;
 /**
  * Initialize the application
  */
-function initializeApp() {
+async function initializeApp() {
+    // Check authentication first so socket connection has the session
+    if (window.authClient) {
+        try {
+            const authStatus = await authClient.checkAuth();
+            console.log('Auth status:', authStatus);
+
+            if (authStatus.authenticated) {
+                window.currentUser = authStatus.user;
+                // Set name in input if available - default to first name for 'short name'
+                const nameInput = document.getElementById('playerNameInput');
+                if (nameInput && authStatus.user.name) {
+                    const firstName = authStatus.user.name.split(' ')[0];
+                    nameInput.value = firstName;
+                }
+            }
+        } catch (error) {
+            console.error('Initial auth check failed:', error);
+        }
+    }
+
     initializeSocket();
     setupEventListeners();
 
@@ -578,7 +598,7 @@ function updateLobbyPlayers(gameState) {
       </div>
       <div class="player-info">
         <div class="player-name">${player.name}</div>
-        <div class="player-status">${player.color}</div>
+        <div class="player-status">${player.color.charAt(0).toUpperCase() + player.color.slice(1)} Player</div>
       </div>
     `;
 
@@ -601,15 +621,20 @@ function updateGamePlayers(gameState) {
 
     gameState.players.forEach((player, index) => {
         const isCurrentPlayer = index === gameState.currentPlayerIndex;
+        const isOffline = player.online === false;
+        const playerIdentifier = (player.id && player.id.includes('@')) ? player.id : '';
 
         const playerItem = document.createElement('div');
-        playerItem.className = `game-player-item ${isCurrentPlayer ? 'active' : ''}`;
+        playerItem.className = `game-player-item ${isCurrentPlayer ? 'active' : ''} ${isOffline ? 'offline' : ''}`;
         playerItem.dataset.playerId = player.id;
 
         playerItem.innerHTML = `
       <div class="player-color-dot ${player.color}"></div>
       <div style="flex: 1;">
-        <div style="font-weight: 600; font-size: 0.875rem;">${player.name}</div>
+        <div style="font-weight: 600; font-size: 0.875rem;">
+            ${player.name} ${isOffline ? '(Offline)' : ''} 
+            ${player.id === currentPlayerId ? '<span style="color: var(--primary-light); font-size: 0.7rem; font-weight: normal; margin-left: 4px;">(You)</span>' : ''}
+        </div>
         <div style="font-size: 0.75rem; color: var(--text-muted);">
           ${player.finishedTokens}/4 finished
         </div>
@@ -619,6 +644,32 @@ function updateGamePlayers(gameState) {
 
         gamePlayersList.appendChild(playerItem);
     });
+}
+
+/**
+ * Update a specific player's online status in the UI
+ */
+function updatePlayerOnlineStatus(playerId, isOnline) {
+    const playerItem = document.querySelector(`.game-player-item[data-player-id="${playerId}"]`);
+    if (playerItem) {
+        if (isOnline) {
+            playerItem.classList.remove('offline');
+        } else {
+            playerItem.classList.add('offline');
+        }
+
+        // Find the name container and update the offline text without destroying other spans
+        const nameEl = playerItem.querySelector('div[style*="font-weight: 600"]');
+        if (nameEl) {
+            // Remove any existing "(Offline)" text
+            let content = nameEl.innerHTML.replace(/\s*\(Offline\)\s*/g, '');
+            if (!isOnline) {
+                // Add it back at the end of the name if offline
+                content = content.replace(/([^<]+)/, `$1 (Offline)`);
+            }
+            nameEl.innerHTML = content;
+        }
+    }
 }
 
 /**

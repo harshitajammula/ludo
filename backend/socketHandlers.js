@@ -6,16 +6,62 @@
 const gameStateManager = require('./gameState');
 const { coinManager } = require('./coinManager');
 
-function setupSocketHandlers(io) {
+function setupSocketHandlers(io, sessionMiddleware, passport) {
+    // Middleware to use Express session in Socket.io
+    io.use((socket, next) => {
+        sessionMiddleware(socket.request, {}, next);
+    });
+
+    // Middleware to use Passport in Socket.io
+    io.use((socket, next) => {
+        passport.initialize()(socket.request, {}, () => {
+            passport.session()(socket.request, {}, next);
+        });
+    });
+
     io.on('connection', (socket) => {
-        console.log(`Client connected: ${socket.id}`);
+        const user = socket.request.user;
+        const socketUserId = user ? user.email : socket.id;
+
+        console.log(`Client connected: ${socket.id} (User: ${user ? user.name : 'Guest'})`);
+
+        // Check if user is already in a game (reconnection support)
+        const existingRoomId = gameStateManager.getPlayerRoom(socketUserId);
+        if (existingRoomId) {
+            console.log(`User ${socketUserId} reconnected to room ${existingRoomId}`);
+            socket.join(existingRoomId);
+            gameStateManager.updatePlayerSocket(socketUserId, socket.id);
+
+            const game = gameStateManager.getRoom(existingRoomId);
+            if (game) {
+                // Determine if player or spectator
+                const player = game.players.find(p => p.id === socketUserId);
+                if (player) {
+                    player.online = true;
+                    // Notify others
+                    io.to(existingRoomId).emit('playerOnline', {
+                        playerId: socketUserId,
+                        playerName: player.name
+                    });
+                }
+
+                socket.emit('reconnected', {
+                    roomId: existingRoomId,
+                    playerId: socketUserId,
+                    player: player,
+                    isSpectator: !player,
+                    gameState: game.getGameState()
+                });
+            }
+        }
+
 
         /**
          * Create a new game room
          */
         socket.on('createRoom', ({ playerName, roomName, teamMode }, callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const { success, roomId, game } = gameStateManager.createRoom(roomName || `${playerName}'s Room`, teamMode);
 
                 if (success) {
@@ -57,7 +103,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('joinRoom', ({ roomId, playerName }, callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
 
                 if (!gameStateManager.roomExists(roomId)) {
                     return callback({ success: false, error: 'Room not found' });
@@ -147,7 +193,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('startGame', (callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const roomId = gameStateManager.getPlayerRoom(playerId);
 
                 if (!roomId) {
@@ -187,7 +233,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('rollDice', (callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const roomId = gameStateManager.getPlayerRoom(playerId);
 
                 if (!roomId) {
@@ -229,7 +275,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('moveToken', ({ tokenIndex }, callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const roomId = gameStateManager.getPlayerRoom(playerId);
 
                 if (!roomId) {
@@ -302,7 +348,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('chatMessage', ({ message }, callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const roomId = gameStateManager.getPlayerRoom(playerId);
 
                 if (!roomId) {
@@ -339,7 +385,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('sendEmoji', ({ emoji }, callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const roomId = gameStateManager.getPlayerRoom(playerId);
 
                 if (!roomId) {
@@ -376,7 +422,7 @@ function setupSocketHandlers(io) {
          */
         socket.on('getGameState', (callback) => {
             try {
-                const playerId = socket.id;
+                const playerId = socketUserId;
                 const roomId = gameStateManager.getPlayerRoom(playerId);
 
                 if (!roomId) {
@@ -398,9 +444,9 @@ function setupSocketHandlers(io) {
          * Handle disconnection
          */
         socket.on('disconnect', () => {
-            console.log(`Client disconnected: ${socket.id}`);
+            console.log(`Client disconnected: ${socket.id} (User: ${user ? user.name : 'Guest'})`);
 
-            const playerId = socket.id;
+            const playerId = socketUserId;
             const roomId = gameStateManager.getPlayerRoom(playerId);
 
             if (roomId) {
@@ -408,17 +454,53 @@ function setupSocketHandlers(io) {
 
                 if (game) {
                     const player = game.players.find(p => p.id === playerId);
+                    if (player) {
+                        player.online = false;
+                    }
 
-                    // Remove player from game
+                    // IMPORTANT: We do NOT remove the player from the game on disconnect
+                    // this allows them to rejoin later.
+                    // Instead, we just notify other players that they are offline.
+
+                    io.to(roomId).emit('playerDisconnected', {
+                        playerId,
+                        playerName: player ? player.name : 'Unknown'
+                    });
+
+                    // Note: The timer system will still work, and auto-play will
+                    // kick in if they don't reconnect in time.
+                }
+            }
+        });
+
+        /**
+         * Explicitly leave a room
+         */
+        socket.on('leaveRoom', (callback) => {
+            try {
+                const playerId = socketUserId;
+                const roomId = gameStateManager.getPlayerRoom(playerId);
+
+                if (roomId) {
+                    const game = gameStateManager.getRoom(roomId);
+                    const player = game.players.find(p => p.id === playerId);
+
                     gameStateManager.leaveRoom(playerId);
 
                     // Notify other players
                     io.to(roomId).emit('playerLeft', {
                         playerId,
                         playerName: player ? player.name : 'Unknown',
-                        gameState: game.getGameState()
+                        gameState: game ? game.getGameState() : null
                     });
+
+                    socket.leave(roomId);
                 }
+
+                if (callback) callback({ success: true });
+            } catch (error) {
+                console.error('Error leaving room:', error);
+                if (callback) callback({ success: false, error: 'Server error' });
             }
         });
     });
