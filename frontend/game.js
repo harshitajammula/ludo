@@ -668,10 +668,10 @@ function drawPlayerTokens(player, scale) {
             drawPin(visualPos.x, visualPos.y, pinWidth, pinHeight, player.color, scale);
 
             // Highlight if movable (own or teammate's if finished)
-            const isOurTurn = currentGameState.currentPlayer && currentGameState.currentPlayer.id === currentPlayerId;
-            const myColor = currentGameState.players.find(p => p.id === currentPlayerId)?.color;
+            const isOurTurn = currentGameState.currentPlayer && currentGameState.currentPlayer.id === window.currentPlayerId;
+            const myColor = currentGameState.players.find(p => p.id === window.currentPlayerId)?.color;
             const isTeammate = isTeammateOf(player.color, myColor, currentGameState);
-            const canPlayerControl = player.id === currentPlayerId || (isTeammate && isPlayerFinished(currentPlayerId, currentGameState));
+            const canPlayerControl = player.id === window.currentPlayerId || (isTeammate && isPlayerFinished(window.currentPlayerId, currentGameState));
 
             if (isOurTurn && canPlayerControl && canMoveToken(player, index)) {
                 ctx.shadowColor = '#FFD700';
@@ -986,7 +986,7 @@ function canMoveToken(player, tokenIndex) {
  */
 window.handleTokenClick = function (event) {
     if (!currentGameState || !currentGameState.lastDiceRoll) return;
-    if (currentGameState.currentPlayer.id !== currentPlayerId) return;
+    if (currentGameState.currentPlayer.id !== window.currentPlayerId) return;
 
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
@@ -1007,10 +1007,10 @@ window.handleTokenClick = function (event) {
 
     // Check all players we can control
     const victims = currentGameState.players.filter(p => {
-        const isSelf = p.id === currentPlayerId;
-        const myColor = currentGameState.players.find(pl => pl.id === currentPlayerId)?.color;
+        const isSelf = p.id === window.currentPlayerId;
+        const myColor = currentGameState.players.find(pl => pl.id === window.currentPlayerId)?.color;
         const isTeammate = isTeammateOf(p.color, myColor, currentGameState);
-        return isSelf || (isTeammate && isPlayerFinished(currentPlayerId, currentGameState));
+        return isSelf || (isTeammate && isPlayerFinished(window.currentPlayerId, currentGameState));
     });
 
     for (let player of victims) {

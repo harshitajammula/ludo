@@ -166,12 +166,14 @@ class LudoGame {
         // Track consecutive sixes (3 sixes in a row = lose turn)
         if (diceValue === 6) {
             this.consecutiveSixes++;
+            console.log(`[GAME] Player ${currentPlayer.name} (${currentPlayer.color}) rolled a 6. Consecutive sixes: ${this.consecutiveSixes}`);
         } else {
             this.consecutiveSixes = 0;
         }
 
         // Rule: 3 sixes in a row means you lose your turn
         if (this.consecutiveSixes === 3) {
+            console.log(`[GAME] 3 SIXES! Player ${currentPlayer.name} loses turn.`);
             this.lastDiceRoll = null;
             this.nextTurn();
             return {
@@ -346,8 +348,12 @@ class LudoGame {
         // Determine if player gets another turn (rolled a 6 OR captured a token)
         const anotherTurn = (diceValue === 6 || captured !== null) && !this.gameOver;
 
+        console.log(`[GAME] Player ${currentPlayer.name} moved. DiceValue: ${diceValue}, Captured: ${captured !== null}, AnotherTurn: ${anotherTurn}`);
+
         if (!anotherTurn) {
             this.nextTurn();
+        } else {
+            console.log(`[GAME] Player ${currentPlayer.name} gets another turn.`);
         }
 
         this.lastDiceRoll = null; // Reset dice roll

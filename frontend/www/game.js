@@ -7,6 +7,7 @@ let canvas = null;
 let ctx = null;
 let currentGameState = null;
 let selectedTokenIndex = null;
+let currentBoardRotation = 0; // Current rotation in radians
 
 // Board configuration - Classic Ludo style
 const BOARD_CONFIG = {
@@ -197,14 +198,41 @@ function animateBoard() {
     const size = canvas.width;
     const scale = size / BOARD_CONFIG.size;
 
+    // Clear board first
+    ctx.clearRect(0, 0, size, size);
     ctx.fillStyle = BOARD_CONFIG.boardBg;
     ctx.fillRect(0, 0, size, size);
+
+    ctx.save();
+
+    // Determine rotation based on current player's color
+    // We want the player's home base to be in the bottom-left corner
+    const myPlayer = currentGameState.players.find(p => p.id === currentPlayerId);
+    if (myPlayer) {
+        switch (myPlayer.color) {
+            case 'red': currentBoardRotation = 0; break;
+            case 'blue': currentBoardRotation = Math.PI / 2; break;      // 90 deg CW
+            case 'yellow': currentBoardRotation = Math.PI; break;       // 180 deg CW
+            case 'green': currentBoardRotation = 3 * Math.PI / 2; break; // 270 deg CW
+            default: currentBoardRotation = 0;
+        }
+    } else {
+        currentBoardRotation = 0;
+    }
+
+    // Apply rotation around center
+    const center = size / 2;
+    ctx.translate(center, center);
+    ctx.rotate(currentBoardRotation);
+    ctx.translate(-center, -center);
 
     drawClassicBoard(scale);
 
     currentGameState.players.forEach(player => {
         drawPlayerTokens(player, scale);
     });
+
+    ctx.restore();
 
     requestAnimationFrame(animateBoard);
 }
@@ -215,10 +243,12 @@ function drawClassicBoard(scale) {
 
     // Draw home bases with proper spacing (starting at 0,0 for each corner)
     // Each home base is 6x6 cells
-    drawHomeBase(0, 0, 'green', scale);
-    drawHomeBase(size - cellSize * 6, 0, 'yellow', scale);
-    drawHomeBase(0, size - cellSize * 6, 'red', scale);
-    drawHomeBase(size - cellSize * 6, size - cellSize * 6, 'blue', scale);
+    const getPlayerByColor = (color) => currentGameState?.players.find(p => p.color === color);
+
+    drawHomeBase(0, 0, 'green', scale, getPlayerByColor('green')?.name);
+    drawHomeBase(size - cellSize * 6, 0, 'yellow', scale, getPlayerByColor('yellow')?.name);
+    drawHomeBase(0, size - cellSize * 6, 'red', scale, getPlayerByColor('red')?.name);
+    drawHomeBase(size - cellSize * 6, size - cellSize * 6, 'blue', scale, getPlayerByColor('blue')?.name);
 
     drawCrossPath(scale);
     drawHomeStretch(scale, 'green', 'top');
@@ -242,7 +272,7 @@ function drawClassicBoard(scale) {
 /**
  * Draw a home base with classic Ludo styling
  */
-function drawHomeBase(x, y, color, scale) {
+function drawHomeBase(x, y, color, scale, playerName) {
     const cellSize = BOARD_CONFIG.cellSize * scale;
     const baseSize = cellSize * 6;
 
@@ -254,6 +284,31 @@ function drawHomeBase(x, y, color, scale) {
     ctx.strokeStyle = '#000000';
     ctx.lineWidth = 3 * scale;
     ctx.strokeRect(x, y, baseSize, baseSize);
+
+    // Draw player name at the top or bottom of the base
+    if (playerName) {
+        ctx.save();
+        const centerX = x + baseSize / 2;
+        const centerY = y + cellSize * 0.8;
+
+        ctx.translate(centerX, centerY);
+        // Counter-rotate text so it stays upright for the viewer
+        ctx.rotate(-currentBoardRotation);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = `bold ${cellSize * 0.6}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Add subtle shadow for readability
+        ctx.shadowColor = 'rgba(0,0,0,0.6)';
+        ctx.shadowBlur = 4 * scale;
+
+        // Use first name if too long
+        const displayName = playerName.length > 8 ? playerName.split(' ')[0] : playerName;
+        ctx.fillText(displayName, 0, 0);
+        ctx.restore();
+    }
 
     // Draw white boxes for token positions
     const boxSize = cellSize * 1.5;
@@ -934,8 +989,19 @@ window.handleTokenClick = function (event) {
     if (currentGameState.currentPlayer.id !== currentPlayerId) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    // Inverse transform mouse coordinates from rotated canvas to board coordinates
+    const size = canvas.width;
+    const center = size / 2;
+    const a = currentBoardRotation;
+
+    // x = C + (mx-C)cos(a) + (my-C)sin(a)
+    // y = C - (mx-C)sin(a) + (my-C)cos(a)
+    const x = center + (mouseX - center) * Math.cos(a) + (mouseY - center) * Math.sin(a);
+    const y = center - (mouseX - center) * Math.sin(a) + (mouseY - center) * Math.cos(a);
+
     const scale = canvas.width / BOARD_CONFIG.size;
     const tokenRadius = BOARD_CONFIG.tokenRadius * scale;
 

@@ -3,10 +3,11 @@
  * Handles all real-time communication with the server
  */
 
-let socket = null;
-let currentPlayerId = null;
-let currentRoomId = null;
-let currentPlayerName = null;
+// Shared global state (attached to window for cross-file consistency)
+window.currentPlayerId = null;
+window.currentRoomId = null;
+window.currentPlayerName = null;
+window.isSpectator = false;
 
 /**
  * Initialize socket connection
@@ -15,6 +16,7 @@ function initializeSocket() {
     // Connect to server (uses APP_CONFIG.API_URL if available)
     const serverUrl = window.APP_CONFIG ? window.APP_CONFIG.API_URL : '';
     socket = io(serverUrl);
+    window.socket = socket; // Make socket available to other files
 
     // Connection events
     socket.on('connect', () => {
@@ -29,9 +31,9 @@ function initializeSocket() {
 
     socket.on('reconnected', (data) => {
         console.log('🔄 Server restored session:', data);
-        currentPlayerId = data.playerId;
-        currentRoomId = data.roomId;
-        currentPlayerName = data.player ? data.player.name : data.spectatorName;
+        window.currentPlayerId = data.playerId;
+        window.currentRoomId = data.roomId;
+        window.currentPlayerName = data.player ? data.player.name : data.spectatorName;
         window.isSpectator = data.isSpectator;
 
         if (data.gameState.gameStarted) {
@@ -188,9 +190,9 @@ function createRoom(playerName, teamMode = false) {
     return new Promise((resolve, reject) => {
         socket.emit('createRoom', { playerName, teamMode }, (response) => {
             if (response.success) {
-                currentPlayerId = response.playerId;
-                currentRoomId = response.roomId;
-                currentPlayerName = playerName;
+                window.currentPlayerId = response.playerId;
+                window.currentRoomId = response.roomId;
+                window.currentPlayerName = playerName;
 
                 // Save session
                 saveSession(response.roomId, response.playerId, playerName);
@@ -210,9 +212,9 @@ function joinRoom(roomId, playerName) {
     return new Promise((resolve, reject) => {
         socket.emit('joinRoom', { roomId, playerName }, (response) => {
             if (response.success) {
-                currentPlayerId = response.playerId;
-                currentRoomId = response.roomId;
-                currentPlayerName = playerName;
+                window.currentPlayerId = response.playerId;
+                window.currentRoomId = response.roomId;
+                window.currentPlayerName = playerName;
 
                 // Check if joined as spectator
                 if (response.isSpectator) {
