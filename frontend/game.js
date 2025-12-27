@@ -665,7 +665,12 @@ function drawPlayerTokens(player, scale) {
             const pinWidth = BOARD_CONFIG.tokenRadius * scale * 0.6 * visualPos.scaleDown;
             const pinHeight = BOARD_CONFIG.tokenRadius * scale * 2.5 * visualPos.scaleDown;
 
-            drawPin(visualPos.x, visualPos.y, pinWidth, pinHeight, player.color, scale);
+            ctx.save();
+            ctx.translate(visualPos.x, visualPos.y);
+            // Counter-rotate tokens so they always stay upright
+            ctx.rotate(-currentBoardRotation);
+
+            drawPin(0, 0, pinWidth, pinHeight, player.color, scale);
 
             // Highlight if movable (own or teammate's if finished)
             const isOurTurn = currentGameState.currentPlayer && currentGameState.currentPlayer.id === window.currentPlayerId;
@@ -680,10 +685,12 @@ function drawPlayerTokens(player, scale) {
                 ctx.lineWidth = 3 * scale;
 
                 ctx.beginPath();
-                ctx.ellipse(visualPos.x, visualPos.y + pinHeight * 0.15, pinWidth * 1.3, pinWidth * 0.8, 0, 0, Math.PI * 2);
+                // Draw highlight relative to the upright pin (origin 0,0)
+                ctx.ellipse(0, pinHeight * 0.15, pinWidth * 1.3, pinWidth * 0.8, 0, 0, Math.PI * 2);
                 ctx.stroke();
                 ctx.shadowBlur = 0;
             }
+            ctx.restore();
         }
     });
 }

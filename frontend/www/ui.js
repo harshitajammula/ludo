@@ -647,7 +647,7 @@ function updateGamePlayers(gameState) {
       <div style="flex: 1;">
         <div style="font-weight: 600; font-size: 0.875rem;">
             ${player.name} ${isOffline ? '(Offline)' : ''} 
-            ${player.id === currentPlayerId ? '<span style="color: var(--primary-light); font-size: 0.7rem; font-weight: normal; margin-left: 4px;">(You)</span>' : ''}
+            ${player.id === window.currentPlayerId ? '<span style="color: var(--primary-light); font-size: 0.7rem; font-weight: normal; margin-left: 4px;">(You)</span>' : ''}
         </div>
         <div style="font-size: 0.75rem; color: var(--text-muted);">
           ${player.finishedTokens}/4 finished
@@ -729,7 +729,7 @@ function updatePlayerDice(gameState) {
     if (!rollBtn) return;
 
     // Check if it's our turn
-    const isOurTurn = gameState.currentPlayer && gameState.currentPlayer.id === currentPlayerId;
+    const isOurTurn = gameState.currentPlayer && gameState.currentPlayer.id === window.currentPlayerId;
     const hasRolled = gameState.lastDiceRoll !== null;
 
     // Update dice display

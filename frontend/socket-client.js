@@ -166,13 +166,14 @@ function attemptSessionReconnect() {
 
     const roomId = roomFromUrl || session?.roomId;
     const playerName = session?.playerName;
+    const playerId = session?.playerId;
 
     if (!roomId || !playerName) return;
 
     console.log('🔄 Attempting to reconnect to room:', roomId);
 
     // Try to rejoin the room
-    joinRoom(roomId, playerName)
+    joinRoom(roomId, playerName, playerId)
         .then(() => {
             console.log('✅ Successfully reconnected to game');
             showNotification('Reconnected to game! 🎮');
@@ -208,9 +209,9 @@ function createRoom(playerName, teamMode = false) {
 /**
  * Join an existing room
  */
-function joinRoom(roomId, playerName) {
+function joinRoom(roomId, playerName, playerId = null) {
     return new Promise((resolve, reject) => {
-        socket.emit('joinRoom', { roomId, playerName }, (response) => {
+        socket.emit('joinRoom', { roomId, playerName, playerId }, (response) => {
             if (response.success) {
                 window.currentPlayerId = response.playerId;
                 window.currentRoomId = response.roomId;
