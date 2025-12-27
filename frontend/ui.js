@@ -505,11 +505,25 @@ function handleCopyRoomCode() {
  */
 function handleLeaveGame() {
     if (confirm('Are you sure you want to leave the game?')) {
-        if (window.clearSession) {
-            clearSession();
+        // Explicitly tell server we are leaving
+        if (window.socket && window.socket.connected) {
+            window.socket.emit('leaveRoom', () => {
+                cleanupAndLeave();
+            });
+
+            // Fallback in case server doesn't respond
+            setTimeout(cleanupAndLeave, 1000);
+        } else {
+            cleanupAndLeave();
         }
-        location.reload();
     }
+}
+
+function cleanupAndLeave() {
+    if (window.clearSession) {
+        clearSession();
+    }
+    location.reload();
 }
 
 /**

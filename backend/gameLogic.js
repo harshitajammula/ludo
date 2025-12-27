@@ -163,21 +163,40 @@ class LudoGame {
         const diceValue = Math.floor(Math.random() * 6) + 1;
         this.lastDiceRoll = diceValue;
 
-        // Track consecutive sixes (optional rule: 3 sixes in a row = lose turn)
+        // Track consecutive sixes (3 sixes in a row = lose turn)
         if (diceValue === 6) {
             this.consecutiveSixes++;
         } else {
             this.consecutiveSixes = 0;
         }
 
-        const canMove = this.getMovableTokens(currentPlayer, diceValue).length > 0;
-
-        // If player can't move, automatically pass turn
-        let turnSkipped = false;
-        if (!canMove) {
+        // Rule: 3 sixes in a row means you lose your turn
+        if (this.consecutiveSixes === 3) {
             this.lastDiceRoll = null;
             this.nextTurn();
-            turnSkipped = true;
+            return {
+                success: true,
+                diceValue,
+                canMove: false,
+                turnSkipped: true,
+                extraMessage: 'Three sixes! Turn lost.'
+            };
+        }
+
+        const canMove = this.getMovableTokens(currentPlayer, diceValue).length > 0;
+
+        // If player can't move, determine if they get another roll (if they rolled a 6)
+        let turnSkipped = false;
+        if (!canMove) {
+            if (diceValue === 6) {
+                // Rolled a 6 but can't move. They still get another roll.
+                this.lastDiceRoll = null; // Clear roll to allow next roll
+                turnSkipped = false;
+            } else {
+                this.lastDiceRoll = null;
+                this.nextTurn();
+                turnSkipped = true;
+            }
         }
 
         return {
@@ -348,31 +367,15 @@ class LudoGame {
 
     /**
      * Check if token will enter home stretch
-     * Token enters home stretch when it lands on or passes the home entrance position
      */
     willEnterHomeStretch(currentPos, diceValue, homeEntrance) {
-        // Check each step of the move
         for (let i = 1; i <= diceValue; i++) {
             const nextPos = (currentPos + i) % this.BOARD_SIZE;
-
-            // If we land exactly on the home entrance, we enter
-            if (nextPos === homeEntrance) {
-                return true;
-            }
-
-            // If we pass through the home entrance
-            // Need to handle wrap-around carefully
+            if (nextPos === homeEntrance) return true;
             if (currentPos < homeEntrance) {
-                // Normal case: moving forward without wrap
-                if (nextPos > currentPos && nextPos >= homeEntrance) {
-                    return true;
-                }
+                if (nextPos > currentPos && nextPos >= homeEntrance) return true;
             } else {
-                // Wrap-around case: currentPos > homeEntrance
-                // We enter if we've wrapped around and reached/passed entrance
-                if (nextPos < currentPos && nextPos >= homeEntrance) {
-                    return true;
-                }
+                if (nextPos < currentPos && nextPos >= homeEntrance) return true;
             }
         }
         return false;
@@ -380,22 +383,16 @@ class LudoGame {
 
     /**
      * Calculate how many steps into home stretch
-     * Returns how far into the home stretch the token should be
      */
     calculateHomeStretchSteps(currentPos, diceValue, homeEntrance) {
-        // Find how many steps it takes to reach the home entrance
         for (let i = 1; i <= diceValue; i++) {
             const nextPos = (currentPos + i) % this.BOARD_SIZE;
-
-            // If we land on or pass the home entrance
             if (nextPos === homeEntrance ||
                 (currentPos < homeEntrance && nextPos >= homeEntrance) ||
                 (currentPos > homeEntrance && nextPos < currentPos && nextPos >= homeEntrance)) {
-                // Remaining steps go into home stretch
                 return diceValue - i;
             }
         }
-
         return 0;
     }
 
@@ -403,25 +400,15 @@ class LudoGame {
      * Check if a token captures another player's tokens
      */
     checkCapture(currentPlayer, position) {
-        // Can't capture on safe positions
-        if (this.SAFE_POSITIONS.includes(position)) {
-            return null;
-        }
-
+        if (this.SAFE_POSITIONS.includes(position)) return null;
         const capturedList = [];
         const teammateColor = this.getTeammateColor(currentPlayer.color);
-
         for (let player of this.players) {
-            // Can't capture own tokens
             if (player.id === currentPlayer.id) continue;
-
-            // In team mode, can't capture teammate's tokens
             if (this.teamMode && player.color === teammateColor) continue;
-
             for (let i = 0; i < player.tokens.length; i++) {
                 const token = player.tokens[i];
                 if (token.position === position && !token.inHomeStretch && !token.finished) {
-                    // Capture! Send token back to start
                     token.position = -1;
                     capturedList.push({
                         playerId: player.id,
@@ -432,7 +419,6 @@ class LudoGame {
                 }
             }
         }
-
         return capturedList.length > 0 ? capturedList : null;
     }
 
@@ -450,13 +436,7 @@ class LudoGame {
     getGameState() {
         return {
             roomId: this.roomId,
-            players: this.players.map(p => ({
-                id: p.id,
-                name: p.name,
-                color: p.color,
-                tokens: p.tokens,
-                finishedTokens: p.finishedTokens
-            })),
+            players: this.players,
             currentPlayerIndex: this.currentPlayerIndex,
             currentPlayer: this.players[this.currentPlayerIndex],
             gameStarted: this.gameStarted,
@@ -464,200 +444,28 @@ class LudoGame {
             winner: this.winner,
             lastDiceRoll: this.lastDiceRoll,
             teamMode: this.teamMode,
-            teams: this.teams,
-            eliminatedPlayers: this.eliminatedPlayers,
-            finishedPlayers: this.finishedPlayers,
-            playerMissedTurns: this.playerMissedTurns
+            teams: this.teams
         };
     }
 
-    // ==================== Timer System Methods ====================
-
-    /**
-     * Start turn timer
-     */
-    startTurnTimer() {
-        this.turnStartTime = Date.now();
-    }
-
-    /**
-     * Get remaining time for current turn
-     */
-    getRemainingTime() {
-        if (!this.turnStartTime) return this.turnTimeLimit;
-        const elapsed = Math.floor((Date.now() - this.turnStartTime) / 1000);
-        return Math.max(0, this.turnTimeLimit - elapsed);
-    }
-
-    /**
-     * Reset missed turns for a player (called on manual action)
-     */
-    resetMissedTurns(playerId) {
-        this.playerMissedTurns[playerId] = 0;
-    }
-
-    /**
-     * Increment missed turns and check for elimination
-     */
-    incrementMissedTurns(playerId) {
-        if (!this.playerMissedTurns[playerId]) {
-            this.playerMissedTurns[playerId] = 0;
-        }
-        this.playerMissedTurns[playerId]++;
-
-        // Eliminate player after 3 missed turns
-        if (this.playerMissedTurns[playerId] >= 3) {
-            this.eliminatePlayer(playerId);
-            return true; // Player eliminated
-        }
-        return false; // Not eliminated yet
-    }
-
-    /**
-     * Eliminate a player from the game
-     */
-    eliminatePlayer(playerId) {
-        if (!this.eliminatedPlayers.includes(playerId)) {
-            this.eliminatedPlayers.push(playerId);
-        }
-    }
-
-    /**
-     * Check if player is eliminated
-     */
-    isPlayerEliminated(playerId) {
-        return this.eliminatedPlayers.includes(playerId);
-    }
-
-    /**
-     * Auto-roll dice for inactive player
-     */
-    autoRollDice(playerId) {
-        const diceValue = Math.floor(Math.random() * 6) + 1;
-        this.lastDiceRoll = diceValue;
-
-        if (diceValue === 6) {
-            this.consecutiveSixes++;
-        } else {
-            this.consecutiveSixes = 0;
-        }
-
-        const currentPlayer = this.players.find(p => p.id === playerId);
-        const canMove = this.getMovableTokens(currentPlayer, diceValue).length > 0;
-
-        return {
-            success: true,
-            diceValue,
-            canMove,
-            autoPlay: true
-        };
-    }
-
-    /**
-     * Auto-move token (selects token closest to home)
-     */
-    autoMoveToken(playerId) {
-        const currentPlayer = this.players.find(p => p.id === playerId);
-        if (!currentPlayer || !this.lastDiceRoll) {
-            return { success: false, error: 'Cannot auto-move' };
-        }
-
-        const movableTokens = this.getMovableTokens(currentPlayer, this.lastDiceRoll);
-        if (movableTokens.length === 0) {
-            // No movable tokens, turn passes
-            this.lastDiceRoll = null;
-            this.nextTurn();
-            return { success: true, noMove: true, autoPlay: true };
-        }
-
-        // Find token closest to home
-        const tokenIndex = this.getTokenClosestToHome(currentPlayer, movableTokens);
-
-        // Move the token
-        return this.moveToken(playerId, tokenIndex, true); // true = autoPlay flag
-    }
-
-    /**
-     * Get token closest to home from movable tokens
-     */
-    getTokenClosestToHome(player, movableTokenIndices) {
-        let closestIndex = movableTokenIndices[0];
-        let minDistanceToHome = Infinity;
-
-        movableTokenIndices.forEach(index => {
-            const token = player.tokens[index];
-            const distance = this.calculateDistanceToHome(player.color, token);
-
-            if (distance < minDistanceToHome) {
-                minDistanceToHome = distance;
-                closestIndex = index;
-            }
-        });
-
-        return closestIndex;
-    }
-
-    /**
-     * Calculate distance from token to home
-     */
-    calculateDistanceToHome(color, token) {
-        // If token is finished, distance is 0
-        if (token.finished) return 0;
-
-        // If token is in home stretch
-        if (token.inHomeStretch) {
-            return this.HOME_STRETCH_LENGTH - token.homeStretchPosition;
-        }
-
-        // If token is in starting area, distance is very large
-        if (token.position === -1) {
-            return 1000;
-        }
-
-        // Calculate distance on main board
-        const homeEntrance = this.HOME_ENTRANCE[color];
-        const currentPos = token.position;
-
-        // Distance to home entrance + home stretch length
-        let distance;
-        if (currentPos <= homeEntrance) {
-            distance = homeEntrance - currentPos + this.HOME_STRETCH_LENGTH;
-        } else {
-            // Need to wrap around
-            distance = (this.BOARD_SIZE - currentPos) + homeEntrance + this.HOME_STRETCH_LENGTH;
-        }
-
-        return distance;
-    }
-
-    // ==================== Team Play Methods ====================
-
-    /**
-     * Initialize teams with default diagonal pairings
-     */
+    // --- Team Mode Helpers ---
     initializeTeams() {
-        // Standard team assignment: Red & Yellow (diagonal) vs Blue & Green (diagonal)
-        this.teams = {
-            team1: ['red', 'yellow'],
-            team2: ['blue', 'green']
-        };
+        if (this.players.length === 2) {
+            this.teams.team1 = ['red'];
+            this.teams.team2 = ['yellow'];
+        } else if (this.players.length === 4) {
+            this.teams.team1 = ['red', 'yellow'];
+            this.teams.team2 = ['blue', 'green'];
+        }
     }
 
-    /**
-     * Set team assignments manually
-     */
-    setTeams(team1Colors, team2Colors) {
-        if (!this.teamMode) return;
-        this.teams.team1 = team1Colors;
-        this.teams.team2 = team2Colors;
+    isPlayerFinished(playerId) {
+        const player = this.players.find(p => p.id === playerId);
+        return player && player.finishedTokens === this.TOKENS_PER_PLAYER;
     }
 
-    /**
-     * Get teammate color
-     */
     getTeammateColor(color) {
         if (!this.teamMode) return null;
-
         if (this.teams.team1.includes(color)) {
             return this.teams.team1.find(c => c !== color);
         }
@@ -667,68 +475,66 @@ class LudoGame {
         return null;
     }
 
-    /**
-     * Check if player has finished all tokens
-     */
-    isPlayerFinished(playerId) {
-        return this.finishedPlayers.includes(playerId);
-    }
-
-    /**
-     * Mark player as finished
-     */
     markPlayerFinished(playerId) {
         if (!this.finishedPlayers.includes(playerId)) {
             this.finishedPlayers.push(playerId);
         }
     }
 
-    /**
-     * Check if player can control a color (own or teammate's)
-     */
-    canPlayerControlColor(playerId, color) {
-        const player = this.players.find(p => p.id === playerId);
-        if (!player) return false;
+    checkTeamVictory() {
+        if (!this.teamMode) return null;
+        const t1Finished = this.teams.team1.every(c => {
+            const p = this.players.find(pl => pl.color === c);
+            return p && p.finishedTokens === this.TOKENS_PER_PLAYER;
+        });
+        if (t1Finished) return { team: 'team1', players: this.teams.team1 };
+        const t2Finished = this.teams.team2.every(c => {
+            const p = this.players.find(pl => pl.color === c);
+            return p && p.finishedTokens === this.TOKENS_PER_PLAYER;
+        });
+        if (t2Finished) return { team: 'team2', players: this.teams.team2 };
+        return null;
+    }
 
-        // Can always control own color
-        if (player.color === color) return true;
+    // --- Timer/AutoPlay Helpers ---
+    resetMissedTurns(playerId) {
+        this.playerMissedTurns[playerId] = 0;
+    }
 
-        // In team mode, finished players can control teammate
-        if (this.teamMode && this.isPlayerFinished(playerId)) {
-            const teammateColor = this.getTeammateColor(player.color);
-            return teammateColor === color;
+    incrementMissedTurns(playerId) {
+        this.playerMissedTurns[playerId] = (this.playerMissedTurns[playerId] || 0) + 1;
+        if (this.playerMissedTurns[playerId] >= 3) {
+            this.eliminatePlayer(playerId);
+            return true;
         }
-
         return false;
     }
 
-    /**
-     * Check team victory
-     */
-    checkTeamVictory() {
-        if (!this.teamMode) return null;
-
-        // Check if all players in team1 have finished
-        const team1Finished = this.teams.team1.every(color => {
-            const player = this.players.find(p => p.color === color);
-            return player && player.finishedTokens === this.TOKENS_PER_PLAYER;
-        });
-
-        if (team1Finished) {
-            return { team: 'team1', players: this.teams.team1 };
+    eliminatePlayer(playerId) {
+        if (!this.eliminatedPlayers.includes(playerId)) {
+            this.eliminatedPlayers.push(playerId);
         }
+    }
 
-        // Check if all players in team2 have finished
-        const team2Finished = this.teams.team2.every(color => {
-            const player = this.players.find(p => p.color === color);
-            return player && player.finishedTokens === this.TOKENS_PER_PLAYER;
-        });
+    isPlayerEliminated(playerId) {
+        return this.eliminatedPlayers.includes(playerId);
+    }
 
-        if (team2Finished) {
-            return { team: 'team2', players: this.teams.team2 };
+    autoRollDice(playerId) {
+        return this.rollDice(playerId);
+    }
+
+    autoMoveToken(playerId) {
+        const player = this.players.find(p => p.id === playerId);
+        if (!player || !this.lastDiceRoll) return { success: false };
+        const movable = this.getMovableTokens(player, this.lastDiceRoll);
+        if (movable.length === 0) {
+            this.lastDiceRoll = null;
+            this.nextTurn();
+            return { success: true, noMove: true };
         }
-
-        return null;
+        const index = movable[0]; // Simple AI: pick first
+        return this.moveToken(playerId, index, true);
     }
 }
 

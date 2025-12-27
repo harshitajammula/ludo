@@ -261,6 +261,9 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
                         turnSkipped: result.turnSkipped,
                         gameState: game.getGameState()
                     });
+
+                    // Restart timer for next action (either selecting a token or next player's roll)
+                    gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
                 } else {
                     callback(result);
                 }
@@ -330,8 +333,8 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
 
                         // Broadcast updated rooms list
                         io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
-                    } else if (!result.anotherTurn) {
-                        // Start timer for next player
+                    } else {
+                        // Restart timer for next action (either same player or next)
                         gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
                     }
                 } else {
