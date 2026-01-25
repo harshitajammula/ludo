@@ -729,8 +729,13 @@ function updatePlayerDice(gameState) {
     if (!rollBtn) return;
 
     // Check if it's our turn
-    const isOurTurn = gameState.currentPlayer && gameState.currentPlayer.id === window.currentPlayerId;
-    const hasRolled = gameState.lastDiceRoll !== null;
+    const isOurTurn = gameState.currentPlayer && String(gameState.currentPlayer.id) === String(window.currentPlayerId);
+    const hasRolled = gameState.lastDiceRoll !== null && gameState.lastDiceRoll !== undefined;
+
+    if (DEBUG_MODE) {
+        console.log(`[DICE] OurTurn: ${isOurTurn}, HasRolled: ${hasRolled}, Spectator: ${window.isSpectator}`);
+        console.log(`[DICE] Current Player ID: ${gameState.currentPlayer?.id}, Local Player ID: ${window.currentPlayerId}`);
+    }
 
     // Update dice display
     if (diceValue) {
@@ -742,7 +747,16 @@ function updatePlayerDice(gameState) {
     }
 
     // Update button state (only active for current player and if not rolled yet)
-    rollBtn.disabled = !isOurTurn || hasRolled || window.isSpectator;
+    // IMPORTANT: Ensure window.isSpectator is treated as a boolean
+    const isSpectating = window.isSpectator === true || window.isSpectator === 'true';
+    rollBtn.disabled = !isOurTurn || hasRolled || isSpectating;
+
+    // Update button text if spectating
+    if (isSpectating) {
+        rollBtn.textContent = 'Spectating';
+    } else {
+        rollBtn.textContent = '🎲 Roll Dice';
+    }
 
     // Update button color/feel based on current player
     if (gameState.currentPlayer) {

@@ -114,9 +114,11 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
                 }
 
                 const game = gameStateManager.getRoom(roomId);
+                const existingPlayer = game.players.find(p => p.id === playerId);
 
                 // If game has started or room is full, join as spectator
-                if (game.gameStarted || game.players.length >= 4) {
+                // UNLESS the player is already in the game (reconnection)
+                if ((game.gameStarted || game.players.length >= 4) && !existingPlayer) {
                     const spectatorResult = gameStateManager.addSpectator(roomId, playerId, playerName, socket.id);
 
                     if (spectatorResult.success) {

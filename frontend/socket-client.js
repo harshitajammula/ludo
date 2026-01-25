@@ -24,9 +24,7 @@ function initializeSocket() {
         showNotification('Connected to server');
 
         // Try to reconnect to existing session if not already reconnected by server
-        if (!currentRoomId) {
-            attemptSessionReconnect();
-        }
+        attemptSessionReconnect();
     });
 
     socket.on('reconnected', (data) => {
@@ -174,9 +172,19 @@ function attemptSessionReconnect() {
 
     // Try to rejoin the room
     joinRoom(roomId, playerName, playerId)
-        .then(() => {
+        .then((response) => {
             console.log('✅ Successfully reconnected to game');
             showNotification('Reconnected to game! 🎮');
+
+            // Update UI based on game state
+            if (response.gameState && response.gameState.gameStarted) {
+                showScreen('gameScreen');
+                updateGameState(response.gameState);
+            } else if (response.gameState) {
+                document.getElementById('roomCodeDisplay').textContent = response.roomId;
+                updateLobbyPlayers(response.gameState);
+                showScreen('lobbyScreen');
+            }
         })
         .catch((error) => {
             console.log('❌ Could not reconnect:', error);
@@ -384,7 +392,7 @@ function handleDiceRolled(data) {
 
     updateGameState(data.gameState);
 
-    if (data.playerId === currentPlayerId) {
+    if (data.playerId === window.currentPlayerId) {
         if (data.canMove) {
             // Notification removed as per user request (too frequent)
         } else {
@@ -466,7 +474,7 @@ function handleTimerTick(data) {
  */
 function handleInactivityWarning(data) {
     const { playerName, playerId } = data;
-    if (playerId === currentPlayerId) {
+    if (playerId === window.currentPlayerId) {
         showNotification('Hurry up! ⚠️ Only 10 seconds left to move.', 'warning');
     } else {
         showNotification(`${playerName} is inactive. Turn will auto-pass in 10s.`, 'info');
@@ -492,7 +500,7 @@ function handlePlayerMissedTurn(data) {
     }
 
     // Show notification
-    if (playerId === currentPlayerId) {
+    if (playerId === window.currentPlayerId) {
         showNotification(`You missed your turn! (${missedTurns}/3)`, 'error');
     } else {
         showNotification(`${player.name} missed their turn (${missedTurns}/3)`);
@@ -517,7 +525,7 @@ function handlePlayerEliminated(data) {
     }
 
     // Show notification
-    if (playerId === currentPlayerId) {
+    if (playerId === window.currentPlayerId) {
         showNotification('You have been eliminated from the game! 💀', 'error');
     } else {
         showNotification(`${playerName} has been eliminated!`);
@@ -538,7 +546,7 @@ function handlePlayerFinished(data) {
     showNotification(`${player.name} finished all tokens! 🎉`);
 
     // If this is the current player, show they can help teammate
-    if (playerId === currentPlayerId) {
+    if (playerId === window.currentPlayerId) {
         showNotification(`You can now help your teammate!`, 'info');
     }
 }

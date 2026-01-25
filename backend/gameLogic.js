@@ -434,6 +434,7 @@ class LudoGame {
     nextTurn() {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
         this.consecutiveSixes = 0;
+        this.lastDiceRoll = null; // Always reset dice roll when turn changes
     }
 
     /**
