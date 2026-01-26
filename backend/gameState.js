@@ -122,8 +122,11 @@ class GameStateManager {
                 }
             }
 
-            // If room is empty, delete it
-            if (game.players.length === 0) {
+            // If no human players remain (only robots or empty), delete the room
+            const humanPlayers = game.players.filter(p => !p.isRobot);
+            if (humanPlayers.length === 0) {
+                console.log(`Closing room ${roomId} - no human players left.`);
+                this.clearRoomTimer(roomId);
                 this.rooms.delete(roomId);
                 this.roomMetadata.delete(roomId);
                 this.spectators.delete(roomId);
@@ -186,7 +189,8 @@ class GameStateManager {
         const emptyRooms = [];
 
         for (const [roomId, game] of this.rooms.entries()) {
-            if (game.players.length === 0) {
+            const hasOnlineHuman = game.players.some(p => !p.isRobot && p.online);
+            if (!hasOnlineHuman) {
                 emptyRooms.push(roomId);
             }
         }

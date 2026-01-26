@@ -75,6 +75,7 @@ function initializeSocket() {
     socket.on('diceRolled', handleDiceRolled);
     socket.on('tokenMoved', handleTokenMoved);
     socket.on('gameOver', handleGameOver);
+    socket.on('roomClosed', handleRoomClosed);
     socket.on('chatMessage', handleChatMessage);
     socket.on('emojiReceived', handleEmojiReceived);
 
@@ -434,6 +435,21 @@ function handleTokenMoved(data) {
 function handleGameOver(data) {
     console.log('Game over:', data.winner);
     showGameOverModal(data.winner);
+}
+
+/**
+ * Handle room closed event
+ */
+function handleRoomClosed(data) {
+    console.log('Room closed:', data.reason);
+    showNotification(data.reason || 'Room closed: No human players remaining', 'info');
+
+    // Clear room state
+    window.currentRoomId = null;
+    window.isSpectator = false;
+
+    // Go to welcome screen
+    showScreen('welcomeScreen');
 }
 
 /**

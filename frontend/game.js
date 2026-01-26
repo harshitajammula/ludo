@@ -9,6 +9,9 @@ let currentGameState = null;
 let selectedTokenIndex = null;
 let currentBoardRotation = 0; // Current rotation in radians
 
+// Animation state for sliding tokens
+let tokenVisualPositions = {}; // key: "color_index" -> {x, y, scaleDown}
+
 // Board configuration - Classic Ludo style
 const BOARD_CONFIG = {
     size: 600,
@@ -658,10 +661,34 @@ function drawPlayerTokens(player, scale) {
     const cellSize = BOARD_CONFIG.cellSize * scale;
 
     player.tokens.forEach((token, index) => {
-        // Use getVisualPosition to account for overlapping tokens
-        const visualPos = getVisualPosition(player.color, index, currentGameState, cellSize);
+        const key = `${player.color}_${index}`;
+        // Target visual position from game state
+        const targetPos = getVisualPosition(player.color, index, currentGameState, cellSize);
 
-        if (visualPos) {
+        if (targetPos) {
+            // Initialize or interpolate visual position
+            if (!tokenVisualPositions[key]) {
+                tokenVisualPositions[key] = { ...targetPos };
+            } else {
+                const current = tokenVisualPositions[key];
+
+                const lerpFactor = 0.22; // Faster for better game feel
+
+                const dx = targetPos.x - current.x;
+                const dy = targetPos.y - current.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                // Snap if the distance is too large (like initial load or finishing)
+                if (dist > cellSize * 8) {
+                    tokenVisualPositions[key] = { ...targetPos };
+                } else {
+                    current.x += dx * lerpFactor;
+                    current.y += dy * lerpFactor;
+                    current.scaleDown += (targetPos.scaleDown - current.scaleDown) * lerpFactor;
+                }
+            }
+
+            const visualPos = tokenVisualPositions[key];
             const pinWidth = BOARD_CONFIG.tokenRadius * scale * 0.6 * visualPos.scaleDown;
             const pinHeight = BOARD_CONFIG.tokenRadius * scale * 2.5 * visualPos.scaleDown;
 
@@ -676,16 +703,15 @@ function drawPlayerTokens(player, scale) {
             const isOurTurn = currentGameState.currentPlayer && currentGameState.currentPlayer.id === window.currentPlayerId;
             const myColor = currentGameState.players.find(p => p.id === window.currentPlayerId)?.color;
             const isTeammate = isTeammateOf(player.color, myColor, currentGameState);
-            const canPlayerControl = player.id === window.currentPlayerId || (isTeammate && isPlayerFinished(window.currentPlayerId, currentGameState));
+            const canControl = player.id === window.currentPlayerId || (isTeammate && isPlayerFinished(window.currentPlayerId, currentGameState));
 
-            if (isOurTurn && canPlayerControl && canMoveToken(player, index)) {
+            if (isOurTurn && canControl && canMoveToken(player, index)) {
                 ctx.shadowColor = '#FFD700';
                 ctx.shadowBlur = 15 * scale;
                 ctx.strokeStyle = '#FFD700';
                 ctx.lineWidth = 3 * scale;
 
                 ctx.beginPath();
-                // Draw highlight relative to the upright pin (origin 0,0)
                 ctx.ellipse(0, pinHeight * 0.15, pinWidth * 1.3, pinWidth * 0.8, 0, 0, Math.PI * 2);
                 ctx.stroke();
                 ctx.shadowBlur = 0;

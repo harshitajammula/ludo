@@ -553,6 +553,13 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
                         gameState: game ? game.getGameState() : null
                     });
 
+                    // If no human players remain, notify survivors/spectators
+                    if (game && !game.players.some(p => !p.isRobot)) {
+                        io.to(roomId).emit('roomClosed', {
+                            reason: 'No human players remaining'
+                        });
+                    }
+
                     socket.leave(roomId);
                 }
 
