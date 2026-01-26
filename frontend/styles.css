@@ -288,8 +288,15 @@ body {
 }
 
 /* ==================== Team Mode Toggle ==================== */
-.team-mode-selection {
+.modes-selection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
   margin-bottom: var(--spacing-lg);
+}
+
+.team-mode-selection,
+.robo-mode-selection {
   display: flex;
   justify-content: flex-start;
 }
@@ -720,6 +727,18 @@ input[type="text"]::placeholder {
 .player-status {
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+.robot-tag {
+  font-size: 0.65rem;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  margin-left: 6px;
+  font-weight: 700;
+  vertical-align: middle;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ==================== Game Screen ==================== */

@@ -53,6 +53,7 @@ function setupEventListeners() {
     // Lobby screen
     document.getElementById('leaveLobbyBtn').addEventListener('click', handleLeaveLobby);
     document.getElementById('startGameBtn').addEventListener('click', handleStartGame);
+    document.getElementById('addRobotBtn').addEventListener('click', handleAddRobot);
     document.getElementById('copyRoomCodeBtn').addEventListener('click', handleCopyRoomCode);
 
     // Game screen
@@ -387,6 +388,7 @@ async function handleCreateRoom() {
     }
 
     const teamMode = document.getElementById('teamModeToggle').checked;
+    const playWithRobots = document.getElementById('roboModeToggle').checked;
 
     try {
         const response = await createRoom(playerName, teamMode);
@@ -397,6 +399,15 @@ async function handleCreateRoom() {
         updateLobbyPlayers(response.gameState);
         showScreen('lobbyScreen');
         showNotification('Room created successfully! 🎉');
+
+        // If playing with robots, add them automatically
+        if (playWithRobots) {
+            for (let i = 0; i < 3; i++) {
+                socket.emit('addRobot', (res) => {
+                    if (!res.success) console.error('Failed to auto-add robot:', res.error);
+                });
+            }
+        }
     } catch (error) {
         console.error('Error creating room:', error);
         showNotification(error || 'Failed to create room', 'error');
@@ -473,6 +484,25 @@ async function handleStartGame() {
     } catch (error) {
         console.error('Error starting game:', error);
         showNotification(error || 'Failed to start game', 'error');
+    }
+}
+
+/**
+ * Handle add robot
+ */
+async function handleAddRobot() {
+    try {
+        if (!socket) return;
+        socket.emit('addRobot', (response) => {
+            if (response.success) {
+                showNotification('Robot added! 🤖');
+            } else {
+                showNotification(response.error || 'Failed to add robot', 'error');
+            }
+        });
+    } catch (error) {
+        console.error('Error adding robot:', error);
+        showNotification('Failed to add robot', 'error');
     }
 }
 
@@ -591,6 +621,7 @@ function updateLobbyPlayers(gameState) {
     const playersList = document.getElementById('playersList');
     const playerCount = document.getElementById('playerCount');
     const startGameBtn = document.getElementById('startGameBtn');
+    const addRobotBtn = document.getElementById('addRobotBtn');
 
     playerCount.textContent = gameState.players.length;
 
@@ -606,12 +637,14 @@ function updateLobbyPlayers(gameState) {
         const playerCard = document.createElement('div');
         playerCard.className = 'player-card';
 
+        const isRobot = player.isRobot === true;
+
         playerCard.innerHTML = `
       <div class="player-avatar ${player.color}">
-        ${player.name.charAt(0).toUpperCase()}
+        ${isRobot ? '🤖' : player.name.charAt(0).toUpperCase()}
       </div>
       <div class="player-info">
-        <div class="player-name">${player.name}</div>
+        <div class="player-name">${player.name} ${isRobot ? '<span class="robot-tag">AI</span>' : ''}</div>
         <div class="player-status">${player.color.charAt(0).toUpperCase() + player.color.slice(1)} Player</div>
       </div>
     `;
@@ -626,10 +659,19 @@ function updateLobbyPlayers(gameState) {
         startGameBtn.disabled = gameState.players.length < 2;
         startGameBtn.textContent = 'Start Game';
         startGameBtn.style.opacity = '1';
+
+        // Show add robot button if room is not full
+        if (addRobotBtn) {
+            addRobotBtn.style.display = gameState.players.length < 4 ? 'block' : 'none';
+        }
     } else {
         startGameBtn.disabled = true;
         startGameBtn.textContent = 'Waiting for Host...';
         startGameBtn.style.opacity = '0.7';
+
+        if (addRobotBtn) {
+            addRobotBtn.style.display = 'none';
+        }
     }
 }
 
@@ -649,6 +691,7 @@ function updateGamePlayers(gameState) {
         const playerIdentifier = (player.id && player.id.includes('@')) ? player.id : '';
 
         const playerItem = document.createElement('div');
+        const isRobot = player.isRobot === true;
         playerItem.className = `game-player-item ${isCurrentPlayer ? 'active' : ''} ${isOffline ? 'offline' : ''}`;
         playerItem.dataset.playerId = player.id;
 
@@ -656,7 +699,7 @@ function updateGamePlayers(gameState) {
       <div class="player-color-dot ${player.color}"></div>
       <div style="flex: 1;">
         <div style="font-weight: 600; font-size: 0.875rem;">
-            ${player.name} ${isOffline ? '(Offline)' : ''} 
+            ${isRobot ? '🤖 ' : ''}${player.name} ${isOffline ? '(Offline)' : ''} 
             ${player.id === window.currentPlayerId ? '<span style="color: var(--primary-light); font-size: 0.7rem; font-weight: normal; margin-left: 4px;">(You)</span>' : ''}
         </div>
         <div style="font-size: 0.75rem; color: var(--text-muted);">

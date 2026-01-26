@@ -3,6 +3,8 @@
  * Handles all game rules, token movement, and win conditions
  */
 
+const { v4: uuidv4 } = require('uuid');
+
 class LudoGame {
     constructor(roomId, teamMode = false, creatorId = null) {
         this.roomId = roomId;
@@ -113,6 +115,39 @@ class LudoGame {
             });
         }
         return tokens;
+    }
+
+    /**
+     * Add a robot player to the game
+     */
+    addRobot() {
+        if (this.players.length >= 4) {
+            return { success: false, error: 'Game is full' };
+        }
+
+        if (this.gameStarted) {
+            return { success: false, error: 'Game already started' };
+        }
+
+        const robotId = `robot-${uuidv4().substring(0, 8)}`;
+        const robotName = `Robo ${this.players.length + 1}`;
+
+        const colors = ['red', 'yellow', 'blue', 'green'];
+        const takenColors = this.players.map(p => p.color);
+        let availableColor = colors.find(c => !takenColors.includes(c));
+
+        const robot = {
+            id: robotId,
+            name: robotName,
+            color: availableColor,
+            tokens: this.initializeTokens(availableColor),
+            finishedTokens: 0,
+            online: true,
+            isRobot: true
+        };
+
+        this.players.push(robot);
+        return { success: true, player: robot };
     }
 
     /**

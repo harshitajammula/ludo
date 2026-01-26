@@ -60,12 +60,22 @@
             <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off">
           </div>
 
-          <div class="team-mode-selection">
-            <label class="toggle-container">
-              <input type="checkbox" id="teamModeToggle">
-              <span class="toggle-slider"></span>
-              <span class="toggle-label">Teams Mode (2v2)</span>
-            </label>
+          <div class="modes-selection">
+            <div class="team-mode-selection">
+              <label class="toggle-container">
+                <input type="checkbox" id="teamModeToggle">
+                <span class="toggle-slider"></span>
+                <span class="toggle-label">Teams Mode (2v2)</span>
+              </label>
+            </div>
+
+            <div class="robo-mode-selection">
+              <label class="toggle-container">
+                <input type="checkbox" id="roboModeToggle">
+                <span class="toggle-slider"></span>
+                <span class="toggle-label">Play with Robots</span>
+              </label>
+            </div>
           </div>
 
           <div class="button-group">
@@ -132,9 +142,14 @@
           <div id="playersList" class="players-list"></div>
         </div>
 
-        <button id="startGameBtn" class="btn btn-primary btn-block" disabled>
-          Start Game
-        </button>
+        <div class="lobby-actions">
+          <button id="addRobotBtn" class="btn btn-outline btn-block" style="display: none; margin-bottom: 0.5rem;">
+            🤖 Add Robot
+          </button>
+          <button id="startGameBtn" class="btn btn-primary btn-block" disabled>
+            Start Game
+          </button>
+        </div>
       </div>
     </div>
 
