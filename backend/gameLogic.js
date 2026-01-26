@@ -585,6 +585,22 @@ class LudoGame {
         const index = movable[0]; // Simple AI: pick first
         return this.moveToken(playerId, index, true);
     }
+
+    /**
+     * Start the turn timer
+     */
+    startTurnTimer() {
+        this.turnStartTime = Date.now();
+    }
+
+    /**
+     * Get remaining time for current turn (in seconds)
+     */
+    getRemainingTime() {
+        if (!this.turnStartTime) return this.turnTimeLimit;
+        const elapsed = Math.floor((Date.now() - this.turnStartTime) / 1000);
+        return Math.max(0, this.turnTimeLimit - elapsed);
+    }
 }
 
 module.exports = LudoGame;
