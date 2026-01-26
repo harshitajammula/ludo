@@ -222,7 +222,8 @@ class LudoGame {
             };
         }
 
-        const canMove = this.getMovableTokens(currentPlayer, diceValue).length > 0;
+        const movableTokens = this.getMovableTokens(currentPlayer, diceValue);
+        const canMove = movableTokens.length > 0;
 
         // If player can't move, determine if they get another roll (if they rolled a 6)
         let turnSkipped = false;
@@ -242,7 +243,8 @@ class LudoGame {
             success: true,
             diceValue,
             canMove,
-            turnSkipped
+            turnSkipped,
+            movableTokens // Return for potential auto-move logic
         };
     }
 
@@ -472,7 +474,11 @@ class LudoGame {
      * Move to next player's turn
      */
     nextTurn() {
-        this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        const startIndex = this.currentPlayerIndex;
+        do {
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        } while (this.isPlayerEliminated(this.players[this.currentPlayerIndex].id) && this.currentPlayerIndex !== startIndex);
+
         this.consecutiveSixes = 0;
         this.lastDiceRoll = null; // Always reset dice roll when turn changes
         console.log(`[LOGIC] Turn moved to: ${this.players[this.currentPlayerIndex].name} (Robot: ${this.players[this.currentPlayerIndex].isRobot})`);
@@ -551,8 +557,13 @@ class LudoGame {
     }
 
     incrementMissedTurns(playerId) {
+        const player = this.players.find(p => p.id === playerId);
+        // Only track missed turns for human players
+        if (!player || player.isRobot) return false;
+
         this.playerMissedTurns[playerId] = (this.playerMissedTurns[playerId] || 0) + 1;
-        if (this.playerMissedTurns[playerId] >= 3) {
+        if (this.playerMissedTurns[playerId] >= 5) {
+            console.log(`[LOGIC] Player ${player.name} forfeited due to 5 missed turns.`);
             this.eliminatePlayer(playerId);
             return true;
         }
@@ -562,6 +573,15 @@ class LudoGame {
     eliminatePlayer(playerId) {
         if (!this.eliminatedPlayers.includes(playerId)) {
             this.eliminatedPlayers.push(playerId);
+            // Remove their tokens from the board so they don't block others
+            const player = this.players.find(p => p.id === playerId);
+            if (player) {
+                player.tokens.forEach(token => {
+                    token.position = -1;
+                    token.inHomeStretch = false;
+                    token.finished = true; // Mark as "out"
+                });
+            }
         }
     }
 

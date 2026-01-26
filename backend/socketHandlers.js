@@ -316,6 +316,53 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
                         gameState: game.getGameState()
                     });
 
+                    // Check for Auto-Move (Single movable token, and not a 6 that could start new tokens)
+                    if (result.canMove && result.movableTokens && result.movableTokens.length === 1 && !result.turnSkipped) {
+                        const tokenIndex = result.movableTokens[0];
+                        console.log(`[AUTO-MOVE] Triggered for ${playerId} in room ${roomId}, token ${tokenIndex}`);
+
+                        // Execute move after a brief delay so user sees the dice roll
+                        setTimeout(() => {
+                            try {
+                                // Re-verify it's still this player's turn (could have disconnected or timed out)
+                                const freshGame = gameStateManager.getRoom(roomId);
+                                if (!freshGame || freshGame.gameOver || freshGame.players[freshGame.currentPlayerIndex]?.id !== playerId) return;
+
+                                const moveResult = freshGame.moveToken(playerId, tokenIndex, true);
+                                if (moveResult.success) {
+                                    io.to(roomId).emit('tokenMoved', {
+                                        playerId,
+                                        tokenIndex,
+                                        token: moveResult.token,
+                                        captured: moveResult.captured,
+                                        anotherTurn: moveResult.anotherTurn,
+                                        playerFinished: moveResult.playerFinished,
+                                        teamVictory: moveResult.teamVictory,
+                                        autoPlay: true,
+                                        gameState: freshGame.getGameState()
+                                    });
+
+                                    if (moveResult.gameOver) {
+                                        gameStateManager.clearRoomTimer(roomId);
+                                        io.to(roomId).emit('gameOver', {
+                                            winner: moveResult.winner,
+                                            teamVictory: moveResult.teamVictory,
+                                            gameState: freshGame.getGameState()
+                                        });
+                                        gameStateManager.updateRoomStatus(roomId, 'finished');
+                                        io.emit('roomsListUpdate', gameStateManager.getActiveRooms());
+                                    } else {
+                                        gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                                        checkAndProcessRobotTurn(roomId);
+                                    }
+                                }
+                            } catch (err) {
+                                console.error('[AUTO-MOVE] Error:', err);
+                            }
+                        }, 800);
+                        return; // Skip standard timer restart since auto-move handles it
+                    }
+
                     // Restart timer for next action (either selecting a token or next player's roll)
                     gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
                     checkAndProcessRobotTurn(roomId);
