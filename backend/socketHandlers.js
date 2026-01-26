@@ -672,78 +672,90 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
      * Check if it's a robot's turn and process it
      */
     async function checkAndProcessRobotTurn(roomId) {
-        const game = gameStateManager.getRoom(roomId);
-        if (!game || !game.gameStarted || game.gameOver) return;
+        try {
+            console.log(`[ROBO] checkAndProcessRobotTurn triggered for room: ${roomId}`);
+            const game = gameStateManager.getRoom(roomId);
+            if (!game || !game.gameStarted || game.gameOver) return;
 
-        const currentPlayer = game.players[game.currentPlayerIndex];
-        if (!currentPlayer || !currentPlayer.isRobot) return;
+            const currentPlayer = game.players[game.currentPlayerIndex];
+            if (!currentPlayer || !currentPlayer.isRobot) return;
 
-        console.log(`[ROBO] processing ${currentPlayer.name}'s turn in room ${roomId}`);
+            console.log(`[ROBO] confirmed ${currentPlayer.name}'s turn in room ${roomId}`);
 
-        // 1. Wait a bit before rolling (simulated thinking)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+            // 1. Wait a bit before rolling (simulated thinking)
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-        // Re-check game state after delay
-        if (!game.gameStarted || game.gameOver || game.players[game.currentPlayerIndex].id !== currentPlayer.id) return;
-
-        // 2. Roll Dice
-        const rollResult = game.autoRollDice(currentPlayer.id);
-        gameStateManager.clearRoomTimer(roomId);
-
-        io.to(roomId).emit('diceRolled', {
-            playerId: currentPlayer.id,
-            diceValue: rollResult.diceValue,
-            canMove: rollResult.canMove,
-            turnSkipped: rollResult.turnSkipped,
-            autoPlay: true,
-            gameState: game.getGameState()
-        });
-
-        if (rollResult.turnSkipped) {
-            // Start timer for next player and check for robot
-            gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
-            checkAndProcessRobotTurn(roomId);
-            return;
-        }
-
-        // 3. If can move, weigh options and move
-        if (rollResult.canMove) {
-            // Simulated thinking before moving
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
+            // Re-check game state after delay
             if (!game.gameStarted || game.gameOver || game.players[game.currentPlayerIndex].id !== currentPlayer.id) return;
 
-            const moveResult = game.autoMoveToken(currentPlayer.id);
+            // 2. Roll Dice
+            const rollResult = game.autoRollDice(currentPlayer.id);
+            gameStateManager.clearRoomTimer(roomId);
 
-            io.to(roomId).emit('tokenMoved', {
+            io.to(roomId).emit('diceRolled', {
                 playerId: currentPlayer.id,
-                tokenIndex: moveResult.token?.index,
-                token: moveResult.token,
-                captured: moveResult.captured,
-                anotherTurn: moveResult.anotherTurn,
-                playerFinished: moveResult.playerFinished,
-                teamVictory: moveResult.teamVictory,
+                diceValue: rollResult.diceValue,
+                canMove: rollResult.canMove,
+                turnSkipped: rollResult.turnSkipped,
                 autoPlay: true,
                 gameState: game.getGameState()
             });
 
-            if (moveResult.gameOver) {
-                io.to(roomId).emit('gameOver', {
-                    winner: moveResult.winner,
-                    teamVictory: moveResult.teamVictory,
-                    gameState: game.getGameState()
-                });
-                gameStateManager.updateRoomStatus(roomId, 'finished');
+            if (rollResult.turnSkipped) {
+                // Start timer for next player and check for robot
+                gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                setTimeout(() => checkAndProcessRobotTurn(roomId), 500);
                 return;
             }
 
-            // Start timer and check if robot gets another turn or next player is robot
-            gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
-            checkAndProcessRobotTurn(roomId);
-        } else {
-            // Should have been handled by turnSkipped but safety first
-            gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
-            checkAndProcessRobotTurn(roomId);
+            // 3. If can move, weigh options and move
+            if (rollResult.canMove) {
+                // Simulated thinking before moving
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                if (!game.gameStarted || game.gameOver || game.players[game.currentPlayerIndex].id !== currentPlayer.id) return;
+
+                const moveResult = game.autoMoveToken(currentPlayer.id);
+
+                io.to(roomId).emit('tokenMoved', {
+                    playerId: currentPlayer.id,
+                    tokenIndex: moveResult.token?.index,
+                    token: moveResult.token,
+                    captured: moveResult.captured,
+                    anotherTurn: moveResult.anotherTurn,
+                    playerFinished: moveResult.playerFinished,
+                    teamVictory: moveResult.teamVictory,
+                    autoPlay: true,
+                    gameState: game.getGameState()
+                });
+
+                if (moveResult.gameOver) {
+                    io.to(roomId).emit('gameOver', {
+                        winner: moveResult.winner,
+                        teamVictory: moveResult.teamVictory,
+                        gameState: game.getGameState()
+                    });
+                    gameStateManager.updateRoomStatus(roomId, 'finished');
+                    return;
+                }
+
+                // Start timer and check if robot gets another turn or next player is robot
+                gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                setTimeout(() => checkAndProcessRobotTurn(roomId), 500);
+            } else {
+                // Should have been handled by turnSkipped but safety first
+                gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                setTimeout(() => checkAndProcessRobotTurn(roomId), 500);
+            }
+        } catch (error) {
+            console.error('[ROBO] Critical error:', error);
+            // Error recovery: move to next player if possible
+            const game = gameStateManager.getRoom(roomId);
+            if (game) {
+                game.nextTurn();
+                gameStateManager.startRoomTimer(roomId, io, handleTimerTimeout);
+                setTimeout(() => checkAndProcessRobotTurn(roomId), 500);
+            }
         }
     }
 }

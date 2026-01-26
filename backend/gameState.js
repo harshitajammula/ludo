@@ -110,14 +110,15 @@ class GameStateManager {
         if (game) {
             game.removePlayer(playerId);
 
-            // If the leaving player was the creator, transfer leadership to the next player
+            // If the leaving player was the creator, transfer leadership to the next human player
             const metadata = this.roomMetadata.get(roomId);
             if (metadata && metadata.creatorId === playerId) {
-                if (game.players.length > 0) {
-                    const newCreatorId = game.players[0].id;
+                const nextHuman = game.players.find(p => !p.isRobot);
+                if (nextHuman) {
+                    const newCreatorId = nextHuman.id;
                     metadata.creatorId = newCreatorId;
                     game.creatorId = newCreatorId; // Sync with LudoGame instance
-                    console.log(`Leadership transferred in room ${roomId} to ${game.players[0].name}`);
+                    console.log(`Leadership transferred in room ${roomId} to ${nextHuman.name}`);
                 }
             }
 

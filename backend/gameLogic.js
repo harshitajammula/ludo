@@ -187,6 +187,7 @@ class LudoGame {
      * Roll the dice
      */
     rollDice(playerId) {
+        console.log(`[LOGIC] rollDice called for ${playerId}`);
         if (!this.gameStarted || this.gameOver) {
             return { success: false, error: 'Game not in progress' };
         }
@@ -298,16 +299,19 @@ class LudoGame {
      * Move a token
      */
     moveToken(playerId, tokenIndex, autoPlay = false) {
+        console.log(`[LOGIC] moveToken called for ${playerId}, index: ${tokenIndex}`);
         if (!this.gameStarted || this.gameOver) {
             return { success: false, error: 'Game not in progress' };
         }
 
         const currentPlayer = this.players[this.currentPlayerIndex];
+        console.log(`[LOGIC] current player is ${currentPlayer.id}, comparing with ${playerId}`);
         if (currentPlayer.id !== playerId) {
             return { success: false, error: 'Not your turn' };
         }
 
         if (!this.lastDiceRoll) {
+            console.log(`[LOGIC] moveToken failed: lastDiceRoll is ${this.lastDiceRoll}`);
             return { success: false, error: 'Roll dice first' };
         }
 
@@ -471,6 +475,7 @@ class LudoGame {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
         this.consecutiveSixes = 0;
         this.lastDiceRoll = null; // Always reset dice roll when turn changes
+        console.log(`[LOGIC] Turn moved to: ${this.players[this.currentPlayerIndex].name} (Robot: ${this.players[this.currentPlayerIndex].isRobot})`);
     }
 
     /**
