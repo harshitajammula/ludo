@@ -619,8 +619,18 @@ function updateLobbyPlayers(gameState) {
         playersList.appendChild(playerCard);
     });
 
-    // Enable start button if we have at least 2 players
-    startGameBtn.disabled = gameState.players.length < 2;
+    // Only the creator of the room has the permission to start the game
+    const isCreator = String(gameState.creatorId) === String(window.currentPlayerId);
+
+    if (isCreator) {
+        startGameBtn.disabled = gameState.players.length < 2;
+        startGameBtn.textContent = 'Start Game';
+        startGameBtn.style.opacity = '1';
+    } else {
+        startGameBtn.disabled = true;
+        startGameBtn.textContent = 'Waiting for Host...';
+        startGameBtn.style.opacity = '0.7';
+    }
 }
 
 /**

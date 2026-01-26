@@ -20,9 +20,9 @@ class GameStateManager {
     /**
      * Create a new game room
      */
-    createRoom(roomName = 'Game Room', teamMode = false) {
+    createRoom(roomName = 'Game Room', teamMode = false, creatorId = null) {
         const roomId = this.generateRoomCode();
-        const game = new LudoGame(roomId, teamMode);
+        const game = new LudoGame(roomId, teamMode, creatorId);
         this.rooms.set(roomId, game);
         this.spectators.set(roomId, new Set());
 
@@ -31,7 +31,8 @@ class GameStateManager {
             name: roomName,
             createdAt: Date.now(),
             status: 'waiting', // waiting, in_progress, finished
-            teamMode
+            teamMode,
+            creatorId
         });
 
         return {
@@ -109,9 +110,22 @@ class GameStateManager {
         if (game) {
             game.removePlayer(playerId);
 
+            // If the leaving player was the creator, transfer leadership to the next player
+            const metadata = this.roomMetadata.get(roomId);
+            if (metadata && metadata.creatorId === playerId) {
+                if (game.players.length > 0) {
+                    const newCreatorId = game.players[0].id;
+                    metadata.creatorId = newCreatorId;
+                    game.creatorId = newCreatorId; // Sync with LudoGame instance
+                    console.log(`Leadership transferred in room ${roomId} to ${game.players[0].name}`);
+                }
+            }
+
             // If room is empty, delete it
             if (game.players.length === 0) {
                 this.rooms.delete(roomId);
+                this.roomMetadata.delete(roomId);
+                this.spectators.delete(roomId);
             }
         }
 
@@ -264,7 +278,8 @@ class GameStateManager {
                 })),
                 spectatorCount,
                 gameStarted: game.gameStarted,
-                teamMode: metadata?.teamMode || false
+                teamMode: metadata?.teamMode || false,
+                creatorId: metadata?.creatorId || null
             });
         }
 

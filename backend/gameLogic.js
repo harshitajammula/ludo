@@ -4,8 +4,9 @@
  */
 
 class LudoGame {
-    constructor(roomId, teamMode = false) {
+    constructor(roomId, teamMode = false, creatorId = null) {
         this.roomId = roomId;
+        this.creatorId = creatorId;
         this.players = [];
         this.currentPlayerIndex = 0;
         this.gameStarted = false;
@@ -345,8 +346,8 @@ class LudoGame {
             this.winner = currentPlayer;
         }
 
-        // Determine if player gets another turn (rolled a 6 OR captured a token)
-        const anotherTurn = (diceValue === 6 || captured !== null) && !this.gameOver;
+        // Determine if player gets another turn (rolled a 6 OR captured a token OR finished a token)
+        const anotherTurn = (diceValue === 6 || captured !== null || token.finished) && !this.gameOver;
 
         console.log(`[GAME] Player ${currentPlayer.name} moved. DiceValue: ${diceValue}, Captured: ${captured !== null}, AnotherTurn: ${anotherTurn}`);
 
@@ -451,7 +452,8 @@ class LudoGame {
             winner: this.winner,
             lastDiceRoll: this.lastDiceRoll,
             teamMode: this.teamMode,
-            teams: this.teams
+            teams: this.teams,
+            creatorId: this.creatorId
         };
     }
 

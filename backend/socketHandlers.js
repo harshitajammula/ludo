@@ -62,7 +62,7 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
         socket.on('createRoom', ({ playerName, roomName, teamMode }, callback) => {
             try {
                 const playerId = socket.userId;
-                const { success, roomId, game } = gameStateManager.createRoom(roomName || `${playerName}'s Room`, teamMode);
+                const { success, roomId, game } = gameStateManager.createRoom(roomName || `${playerName}'s Room`, teamMode, playerId);
 
                 if (success) {
                     const joinResult = gameStateManager.joinRoom(roomId, playerId, playerName, socket.id);
@@ -207,6 +207,12 @@ function setupSocketHandlers(io, sessionMiddleware, passport) {
                 }
 
                 const game = gameStateManager.getRoom(roomId);
+                const metadata = gameStateManager.roomMetadata.get(roomId);
+
+                if (metadata && metadata.creatorId !== playerId) {
+                    return callback({ success: false, error: 'Only the room creator can start the game' });
+                }
+
                 const result = game.startGame();
 
                 if (result.success) {

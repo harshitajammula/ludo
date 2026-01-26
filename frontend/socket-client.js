@@ -419,6 +419,11 @@ function handleTokenMoved(data) {
         }
     }
 
+    if (data.token && data.token.finished) {
+        const color = data.token.playerColor.charAt(0).toUpperCase() + data.token.playerColor.slice(1);
+        showNotification(`${color} token reached home! 🏠 Extra roll granted!`, 'info');
+    }
+
     updateGameState(data.gameState);
     renderGameBoard(data.gameState);
 }
